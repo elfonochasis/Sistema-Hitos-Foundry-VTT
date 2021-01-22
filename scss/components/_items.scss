@@ -1,0 +1,168 @@
+.item-list {
+  list-style: none;
+  margin: 7px 0;
+  padding: 0;
+  overflow-y: auto;
+
+  .item-header {
+    font-weight: bold;
+  }
+
+  .item {
+    height: 30px;
+    line-height: 24px;
+    padding: 3px 0;
+    border-bottom: 1px solid #BBB;
+
+    .item-image {
+      flex: 0 0 24px;
+      margin-right: 5px;
+    }
+
+    .item-buttons {
+      flex: 0 0 68px;
+
+      .item-toggle {
+        &.false i {
+          color: #b5b3a4;
+        }
+
+        &.true i {
+          color: #4b4a44;
+        }
+      }
+    }
+
+    img {
+      display: block;
+    }
+  }
+
+  .item-name {
+    margin: 0;
+  }
+
+  .item-controls {
+    flex: 0 0 86px;
+    text-align: right;
+  }
+}
+
+.spent-concept {
+  align-self: center;
+}
+
+img {
+  border: none !important;
+  object-fit: contain;
+}
+
+.stat-row {
+  align-content: center;
+  align-items: center;
+
+  .concept-body {
+    background-color: rgba(76, 175, 80, 0.15);
+    mix-blend-mode: multiply;
+    /* opacity: 30%; */
+    margin-left: 10px;
+    border-radius: 5px;
+  }
+}
+
+
+.input-row{
+  @extend .row-nw;
+  @extend .align-center;
+
+  .label-body{
+    @extend .col;
+    @extend .col-xs-9;
+
+  }
+  .input-body{
+    @extend .col;
+    @extend .col-xs-3;
+  }
+}
+
+
+
+
+
+
+.input-body,
+.input-header {
+  text-align: center !important;
+}
+
+.input-body:read-only{
+  background-color: transparent;
+  border: none;
+  font-size: 14px;
+}
+
+.input-header {
+  background-color: rgba(76, 175, 80, 0.15);
+  mix-blend-mode: multiply;
+  /* opacity: 30%; */
+  margin-left: 10px;
+  border-radius: 5px;
+}
+
+.input-header-disabled {
+  background-color: rgba(231, 94, 52, 0.15) !important;
+  mix-blend-mode: multiply;
+  /* opacity: 30%; */
+  margin-left: 10px;
+  border-radius: 5px;
+}
+
+.label-header {
+  font-family: $font-section;
+  font-size: 18px;
+}
+
+.section-title {
+  font-family: $font-section;
+  font-size: 20px;
+}
+
+.chat-message-title {
+  background-image: url(../assets/header.svg);
+  min-height: 24px;
+  /* background-position: center right; */
+  background-position-x: -20%;
+  background-position-y: center;
+  background-size: unset;
+  background-blend-mode: hard-light;
+  font-size: 24px;
+  font-family: $font-section;
+
+  span {
+    margin-left: 22%;
+  }
+}
+
+.section-header {
+  background-image: url(../assets/header.svg);
+  min-height: 30px;
+
+  /* background-position: center right; */
+  background-position-x: -40%;
+  background-position-y: center;
+  background-size: unset;
+  background-blend-mode: hard-light;
+  font-size: 30px;
+  font-family: $font-section;
+
+  span {
+    margin-left: 22%;
+  }
+}
+
+.atributos-grid {
+  .label-body {
+    padding-left: 0px;
+  }
+}

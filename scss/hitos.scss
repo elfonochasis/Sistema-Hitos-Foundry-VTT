@@ -1,0 +1,26 @@
+// Import utilities.
+@import 'utils/typography';
+@import 'utils/colors';
+@import 'utils/mixins';
+@import 'utils/variables';
+
+/* Global styles */
+@import 'global/window';
+@import 'global/grid';
+@import 'global/flex';
+
+
+/* Grid system */
+@import "flexgrid/variables/grid-variables";
+@import "flexgrid/mixins/grid-mixins";
+@import "flexgrid/mixins/visibility-mixins";
+@import "flexgrid/grid";
+@import "flexgrid/visibility"; // Visibility last for precedence
+
+/* Styles limited to hitos sheets */
+.hitos {
+  @import 'components/forms';
+  @import 'components/resource';
+  @import 'components/tabs';
+  @import 'components/items';
+}

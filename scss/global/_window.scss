@@ -1,0 +1,19 @@
+.window-app {
+  font-family: $font-primary;
+}
+.window-content{
+  padding: 10px 25px  !important;
+}
+.window-content, .chat-message{
+  background-image: url("../assets/background.jpg") !important;
+  background-size: contain;
+}
+
+[class*="rollable-"] {
+  &:hover,
+  &:focus {
+    color: #000;
+    text-shadow: 0 0 10px red;
+    cursor: pointer;
+  }
+}

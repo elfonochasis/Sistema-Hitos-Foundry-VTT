@@ -1,0 +1,361 @@
+{
+  "Actor": {
+    "types": ["character", "npc", "vehicle", "organization"],
+    "templates": {
+      "bio": {
+        "concepto": "",
+        "biografia": "",
+        "descripcion": "",
+        "cita": "",
+        "drama": {
+          "value": 1,
+          "min": 0,
+          "max": 5
+        }
+      },
+      "combate": {
+        "iniciativa": 0,
+        "rd": 0,
+        "defensa": {
+          "normal": 0,
+          "des": 0
+        },
+        "danio": {
+          "cuerpo": 0,
+          "distancia": 0
+        }
+      },
+      "salud": {
+        "aguante": {
+          "label": "Hitos.Aguante",
+          "value": ""
+        },
+        "resistencia": {
+          "label": "Hitos.HP",
+          "value": 0,
+          "max": 10,
+          "min": 0,
+          "consolidated": 0,
+          "status": "",
+          "mod":0
+        },
+        "secuelas": {
+          "value": ""
+        }
+      },
+      "cordura": {
+        "estabilidadMental": {
+          "label": "Hitos.MP",
+          "value": 0,
+          "max": 10,
+          "min": 0,
+          "consolidated": 0,
+          "status": "",
+          "mod":0,
+          "degeneracion": {
+            "value": 0,
+            "description": ""
+          }
+        },
+        "entereza": {
+          "label": "Hitos.Entereza",
+          "value": ""
+        },
+        "transtornos": {
+          "value": ""
+        }
+      },
+
+      "hitos": {
+        "hito1": {
+          "value": "",
+          "spent": false
+        },
+        "hito2": {
+          "value": "",
+          "spent": false
+        },
+        "hito3": {
+          "value": "",
+          "spent": false
+        },
+        "hito4": {
+          "value": "",
+          "spent": false
+        }
+      },
+      "complicacion": {
+        "value": "",
+        "spent": false
+      },
+      "caracteristicas": {
+        "atributos": {
+          "for": {
+            "label": "Hitos.FOR",
+            "concept": "",
+            "value": 0,
+            "min": 0,
+            "max": 12,
+            "spent": false
+          },
+          "ref": {
+            "label": "Hitos.REF",
+            "concept": "",
+            "value": 0,
+            "min": 0,
+            "max": 12,
+            "spent": false
+          },
+          "vol": {
+            "label": "Hitos.VOL",
+            "concept": "",
+            "value": 0,
+            "min": 0,
+            "max": 12,
+            "spent": false
+          },
+          "int": {
+            "label": "Hitos.INT",
+            "concept": "",
+            "value": 0,
+            "min": 0,
+            "max": 12,
+            "spent": false
+          }
+        },
+        "habilidades": {
+          "ffisica": {
+            "label": "Hitos.FFisica",
+            "concept": "",
+            "value": 0,
+            "min": 0,
+            "max": 12,
+            "spent": false,
+            "available": true
+          },
+          "combate": {
+            "label": "Hitos.Combate",
+            "concept": "",
+            "value": 0,
+            "min": 0,
+            "max": 12,
+            "spent": false,
+            "available": true
+          },
+          "interaccion": {
+            "label": "Hitos.Interaccion",
+            "concept": "",
+            "value": 0,
+            "min": 0,
+            "max": 12,
+            "spent": false,
+            "available": true
+          },
+          "percepcion": {
+            "label": "Hitos.Percepcion",
+            "concept": "",
+            "value": 0,
+            "min": 0,
+            "max": 12,
+            "spent": false,
+            "available": true
+          },
+          "subterfugio": {
+            "label": "Hitos.Subterfugio",
+            "concept": "",
+            "value": 0,
+            "min": 0,
+            "max": 12,
+            "spent": false,
+            "available": true
+          },
+          "cultura": {
+            "label": "Hitos.Cultura",
+            "concept": "",
+            "value": 0,
+            "min": 0,
+            "max": 12,
+            "spent": false,
+            "available": true
+          },
+          "profesion": {
+            "label": "Hitos.Profesion",
+            "concept": "",
+            "value": 0,
+            "min": 0,
+            "max": 12,
+            "spent": false,
+            "available": true
+          },
+          "psiquico": {
+            "label": "Hitos.Psiquico",
+            "concept": "",
+            "value": 0,
+            "min": 0,
+            "max": 12,
+            "spent": false,
+            "available": true
+          },
+          "ocultismo": {
+            "label": "Hitos.Ocultismo",
+            "concept": "",
+            "value": 0,
+            "min": 0,
+            "max": 12,
+            "spent": false,
+            "available": true
+          },
+          "brujeria": {
+            "label": "Hitos.Brujeria",
+            "concept": "",
+            "value": 0,
+            "min": 0,
+            "max": 12,
+            "spent": false,
+            "available": true
+          },
+          "arcanas": {
+            "label": "Hitos.Arcanas",
+            "concept": "",
+            "value": 0,
+            "min": 0,
+            "max": 12,
+            "spent": false,
+            "available": true
+          },
+          "adicional1": {
+            "label": "",
+            "concept": "",
+            "value": 0,
+            "min": 0,
+            "max": 12,
+            "spent": false,
+            "available": true
+          },
+          "adicional2": {
+            "label": "",
+            "concept": "",
+            "value": 0,
+            "min": 0,
+            "max": 12,
+            "spent": false,
+            "available": true
+          },
+          "adicional3": {
+            "label": "",
+            "concept": "",
+            "value": 0,
+            "min": 0,
+            "max": 12,
+            "spent": false,
+            "available": true
+          },
+          "adicional4": {
+            "label": "",
+            "concept": "",
+            "value": 0,
+            "min": 0,
+            "max": 12,
+            "spent": false,
+            "available": true
+          }
+        }
+      }
+    },
+    "character": {
+      "templates": [
+        "bio",
+        "combate",
+        "complicacion",
+        "hitos",
+        "drama",
+        "salud",
+        "cordura",
+        "caracteristicas"
+      ]
+    },
+    "npc": {
+      "templates": ["base", "caracteristicas", "combate"]
+    },
+    "vehicle": {
+      "templates": ["base", "hitos"],
+      "atributos": {
+        "est": {
+          "label": "Hitos.EST",
+          "concept": "",
+          "value": 0,
+          "min": 0,
+          "max": 12,
+          "spent": false
+        },
+        "tam": {
+          "label": "Hitos.TAM",
+          "concept": "",
+          "value": 0,
+          "min": 0,
+          "max": 12,
+          "spent": false
+        },
+        "man": {
+          "label": "Hitos.MAN",
+          "concept": "",
+          "value": 0,
+          "min": 0,
+          "max": 12,
+          "spent": false
+        },
+        "tec": {
+          "label": "Hitos.TEC",
+          "concept": "",
+          "value": 0,
+          "min": 0,
+          "max": 12,
+          "spent": false
+        }
+      },
+      "caracteristicas": {
+        "blindaje": 0,
+        "defensa": 0,
+        "armamento": 0,
+        "aguante": 0,
+        "resistencais": 0
+      },
+      "especial": ""
+    },
+    "organization": {
+      "templates": ["base", "hitos", "atributos"],
+      "motivacion": "",
+      "notas": ""
+    }
+  },
+  "Item": {
+    "types": ["item","weapon","armor"],
+    "templates": {
+      "base": {
+        "description": "",
+        "price":""
+      },
+      "armor":{
+        "rd": 0,
+        "equipped": false
+      },
+      "weapon":{
+        "kind":"",
+        "damage": ""
+      }
+  },
+  "item": {
+    "templates": ["base"],
+    "quantity": 1,
+    "weight": 0
+  },
+  "weapon": {
+    "templates": ["base","weapon"]
+
+  },
+  "armor": {
+    "templates": ["base","armor"]
+
+  }
+}
+}

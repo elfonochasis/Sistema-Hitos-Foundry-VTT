@@ -1,0 +1,16 @@
+<form>
+    <div class="form-group">
+        <label>{{ localize "Hitos.Roll.Mod" }}</label>
+        <input type="text" class="bonus" name="bonus" value="0" placeholder="0"/>
+    </div>
+    <div class="form-group">
+        <label>{{ localize "Hitos.Roll.Atributo" }}</label>
+        <select class="atributo" name="atributo">
+            {{#select atributo}}
+            {{#each data.atributos as |atributo key|}}
+            <option value="{{atributo.value}}">{{localize atributo.label}}</option>
+        {{/each}}
+        {{/select}}
+        </select>
+    </div>
+</form>
