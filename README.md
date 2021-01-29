@@ -16,8 +16,8 @@ La implementación se encuentra en sus primeras versiones y todavía hay aspecto
 - Tiradas automatizadas para habilidades y combate. 
 - Daño calculado según la fórmula introducida en el arma (C+1, mCM, 1,...).
 - Actualización del valor de protección RD al equipar piezas de armadura.
-- Posibilidad de agotar aspectos.
-- Varias habilidades personalizables.
+- Posibilidad de agotar aspectos (click derecho).
+- Varias habilidades personalizables (se desbloquean los títulos haciendo click en los iconos de cada una de ellas).
  
 ## Pendiente de implementar
 En futuras versiones, se añadirán:
