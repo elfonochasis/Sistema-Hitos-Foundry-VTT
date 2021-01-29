@@ -275,7 +275,7 @@
       ]
     },
     "npc": {
-      "templates": ["base", "caracteristicas", "combate"]
+      "templates": ["base", "caracteristicas", "combate","salud","cordura"]
     },
     "vehicle": {
       "templates": ["base", "hitos"],
@@ -320,11 +320,46 @@
         "aguante": 0,
         "resistencais": 0
       },
-      "especial": ""
+      "especial": "",
+      "tripulantes":""
     },
     "organization": {
       "templates": ["base", "hitos", "atributos"],
       "motivacion": "",
+      "atributos": {
+        "rec": {
+          "label": "Hitos.REC",
+          "concept": "",
+          "value": 0,
+          "min": 0,
+          "max": 12,
+          "spent": false
+        },
+        "inf": {
+          "label": "Hitos.INF",
+          "concept": "",
+          "value": 0,
+          "min": 0,
+          "max": 12,
+          "spent": false
+        },
+        "pod": {
+          "label": "Hitos.POD",
+          "concept": "",
+          "value": 0,
+          "min": 0,
+          "max": 12,
+          "spent": false
+        },
+        "tam": {
+          "label": "Hitos.TAM",
+          "concept": "",
+          "value": 0,
+          "min": 0,
+          "max": 12,
+          "spent": false
+        }
+      },      
       "notas": ""
     }
   },

@@ -15,8 +15,9 @@ export class HitosActor extends Actor {
 
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
+    if(actorData.type === "npc" || actorData.type === "character"){
     this._prepareCharacterData(actorData);
-    this._calculateRD(actorData)
+    this._calculateRD(actorData)}
   }
 
   /**

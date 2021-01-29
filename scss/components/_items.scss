@@ -22,15 +22,6 @@
     .item-buttons {
       flex: 0 0 68px;
 
-      .item-toggle {
-        &.false i {
-          color: #b5b3a4;
-        }
-
-        &.true i {
-          color: #4b4a44;
-        }
-      }
     }
 
     img {
@@ -45,6 +36,16 @@
   .item-controls {
     flex: 0 0 86px;
     text-align: right;
+
+    .item-toggle {
+      &.false i {
+        color: #b5b3a4;
+      }
+
+      &.true i {
+        color: #4b4a44;
+      }
+    }
   }
 }
 
@@ -71,16 +72,17 @@ img {
 }
 
 
-.input-row{
+.input-row {
   @extend .row-nw;
   @extend .align-center;
 
-  .label-body{
+  .label-body {
     @extend .col;
     @extend .col-xs-9;
 
   }
-  .input-body{
+
+  .input-body {
     @extend .col;
     @extend .col-xs-3;
   }
@@ -96,7 +98,7 @@ img {
   text-align: center !important;
 }
 
-.input-body:read-only{
+.input-body:read-only {
   background-color: transparent;
   border: none;
   font-size: 14px;

@@ -1,0 +1,89 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+    {{!-- Sheet Header --}}
+    <header class="sheet-header">
+        <div class="row-nw">
+            <div class="col col-xs-3">
+                <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+            </div>
+            <div class="col col-xs-9 padding-t-0 padding-b-0">
+                <div class="row-nw align-center">
+                    <h1 class="charname col col-xs-12">
+                        <input name="name" type="text" value="{{actor.name}}" placeholder="Name" />
+                    </h1>
+                </div>
+                <div class="row-nw padding-t-10">
+                    <label class="col col-xs-2 label-header" for="data.concepto">{{localize "Hitos.Concepto"}}</label>
+                    <div class="col col-xs-10 input-header" data-edit="data.concepto" contenteditable>
+                        {{data.concepto}}
+                    </div>
+                </div>
+                <div class="row-nw padding-t-10">
+                    <label class="col col-xs-2 label-header" for="data.cita">{{localize "Hitos.Motivacion"}}</label>
+                    <div class="col col-xs-10 input-header" data-edit="data.motivacion" contenteditable>
+                        {{data.cita}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs tabs-actor" data-group="primary">
+        <a class="item" data-tab="bio">{{localize "Hitos.Bio"}}</a>
+        <a class="item" data-tab="stats">{{localize "Hitos.Estadisticas"}}</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+        {{!-- Biography Tab --}}
+        <div class="tab bio" data-group="primary" data-tab="bio">
+            <div class="section-header">
+                <span>{{localize "Hitos.Biografia"}}</span>
+            </div>
+            {{editor content=data.biography target="data.biography" button=true
+      owner=owner editable=editable}}
+        </div>
+
+        {{!-- Stats Tab --}}
+        <div class="tab stats" data-group="primary" data-tab="stats">
+            <div class="section-header">
+                <span>{{localize "Hitos.HitosComplicaciones"}}</span>
+            </div>
+            <div class="grid-2col">
+                <input class="input-header hito-disable" name="data.hito1.value" value="{{data.hito1.value}}"
+                    type="text" placeholder="" />
+                <input class="input-header hito-disable" name="data.hito2.value" value="{{data.hito2.value}}"
+                    type="text" placeholder="" />
+                <input class="input-header hito-disable" name="data.hito3.value" value="{{data.hito3.value}}"
+                    type="text" placeholder="" />
+                <input class="input-header hito-disable" name="data.hito4.value" value="{{data.hito4.value}}"
+                    type="text" placeholder="" />
+            </div>
+            <div class="section-header">
+                <span>{{localize "Hitos.Atributos"}}</span>
+            </div>
+            <div class="grid-2col atributos-grid">
+                {{#each data.atributos as |atributo key| }}
+                <div class="row-nw stat-row align-center">
+                    <!-- <a class="spent-concept hide"><span class="fa fa-ban" data-atributo={{atributo}}></span></a> -->
+                    <span class="label-body col col-xs-3 rollable"
+                        data-atributo="{{key}}">{{localize atributo.label}}</span>
+                    <input class="input-body col-xs-1" name="data.atributos.{{key}}.value" type="number"
+                        value="{{atributo.value}}" />
+                    <div class="hito-disable concept-body col col-xs-8" data-edit="data.atributos.{{key}}.concept"
+                        contenteditable>
+                        {{atributo.concept}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+
+
+            <div class="section-header">
+                <span>{{localize "Hitos.Notas"}}</span>
+            </div>
+                {{editor content=data.notas target="data.notas" button=true
+      owner=owner editable=editable}}
+        </div>
+    </section>
+</form>

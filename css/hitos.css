@@ -2119,14 +2119,6 @@ div[class*='grid-'] .column-nw {
   flex: 0 0 68px;
 }
 
-.hitos .item-list .item .item-buttons .item-toggle.false i {
-  color: #b5b3a4;
-}
-
-.hitos .item-list .item .item-buttons .item-toggle.true i {
-  color: #4b4a44;
-}
-
 .hitos .item-list .item img {
   display: block;
 }
@@ -2140,6 +2132,14 @@ div[class*='grid-'] .column-nw {
   -ms-flex: 0 0 86px;
   flex: 0 0 86px;
   text-align: right;
+}
+
+.hitos .item-list .item-controls .item-toggle.false i {
+  color: #b5b3a4;
+}
+
+.hitos .item-list .item-controls .item-toggle.true i {
+  color: #4b4a44;
 }
 
 .hitos .spent-concept {
