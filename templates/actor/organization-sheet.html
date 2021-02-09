@@ -5,7 +5,7 @@
             <div class="col col-xs-3">
                 <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
             </div>
-            <div class="col col-xs-9 padding-t-0 padding-b-0">
+            <div class="col col-xs-9 padding-0">
                 <div class="row-nw align-center">
                     <h1 class="charname col col-xs-12">
                         <input name="name" type="text" value="{{actor.name}}" placeholder="Name" />
@@ -31,6 +31,7 @@
     <nav class="sheet-tabs tabs tabs-actor" data-group="primary">
         <a class="item" data-tab="bio">{{localize "Hitos.Bio"}}</a>
         <a class="item" data-tab="stats">{{localize "Hitos.Estadisticas"}}</a>
+        <a class="item" data-tab="items">{{localize "Hitos.Inventario"}}</a>
     </nav>
 
     {{!-- Sheet Body --}}
@@ -40,7 +41,7 @@
             <div class="section-header">
                 <span>{{localize "Hitos.Biografia"}}</span>
             </div>
-            {{editor content=data.biography target="data.biography" button=true
+            {{editor content=data.biografia target="data.biografia" button=true
       owner=owner editable=editable}}
         </div>
 
@@ -82,8 +83,64 @@
             <div class="section-header">
                 <span>{{localize "Hitos.Notas"}}</span>
             </div>
-                {{editor content=data.notas target="data.notas" button=true
-      owner=owner editable=editable}}
+            <div class="col input-header" data-edit="data.notas" contenteditable>
+                {{data.notas}}
+            </div>
+        </div>
+        {{!-- Owned Items Tab --}}
+        <div class="tab items" data-group="primary" data-tab="items">
+            <ol class="gear-list item-list">
+                <ol class="gear-list item-list">
+                    <div class="row-nw section-header col-xs-12">
+                        <span class="">{{localize "Hitos.Armas"}}</span>
+                    </div>
+                    {{#each actor.weapon as |item id|}}
+                    <li class="item row-nw" data-item-id="{{item._id}}">
+                        <img class="item-image" src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
+                        <h4 class="item-name" data-itemID="{{item._id}}">{{item.name}}</h4>
+                        <div class="item-controls"></div>
+                        <div class="item-controls">
+                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ol>
+                <ol class="gear-list item-list">
+                    <div class="row-nw section-header col-xs-12">
+                        <span class="">{{localize "Hitos.Armaduras"}}</span>
+                    </div>
+                    {{#each actor.armor as |item id|}}
+                    <li class="item row-nw" data-item-id="{{item._id}}">
+                        <img class="item-image" src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
+                        <h4 class="item-name" data-itemID="{{item._id}}">{{item.name}}</h4>
+                        <div class="item-controls"></div>
+                        <div class="item-controls">
+                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ol>
+                <div class="row-nw section-header col-xs-12">
+                    <span class="">{{localize "Hitos.Inventario"}}</span>
+                </div>
+                {{#each actor.gear as |item id|}}
+                <li class="item row-nw padding-0" data-item-id="{{item._id}}">
+                    <img class="item-image" src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
+                    <h4 class="item-name" data-itemID="{{item._id}}">{{item.name}}</h4>
+                    <div class="item-controls">
+                        <a class="item-control item-quantity-plus" title="Edit Item" data-itemID='{{item._id}}'><i class="fas fa-plus"></i></a>
+                        <span name="item.data.quantity">{{item.data.quantity}}</span>
+                        <a class="item-control item-quantity-minus" title="Delete Item" data-itemID='{{item._id}}'><i class="fas fa-minus"></i></a>
+                    </div>
+                    <div class="item-controls">
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </div>
+                </li>
+                {{/each}}
+            </ol>
         </div>
     </section>
 </form>

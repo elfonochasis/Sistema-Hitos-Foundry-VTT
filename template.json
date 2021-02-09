@@ -25,6 +25,16 @@
           "distancia": 0
         }
       },
+      "adicional":{
+        "campoadicional1":{
+          "label":"",
+          "value": 0
+        },
+        "campoadicional2":{
+          "label":"",
+          "value": 0
+        }
+      },
       "salud": {
         "aguante": {
           "label": "Hitos.Aguante",
@@ -271,14 +281,15 @@
         "drama",
         "salud",
         "cordura",
-        "caracteristicas"
+        "caracteristicas",
+        "adicional"
       ]
     },
     "npc": {
-      "templates": ["base", "caracteristicas", "combate","salud","cordura"]
+      "templates": ["bio", "caracteristicas", "combate","salud","cordura","adicional"]
     },
     "vehicle": {
-      "templates": ["base", "hitos"],
+      "templates": ["bio", "hitos","adicional"],
       "atributos": {
         "est": {
           "label": "Hitos.EST",
@@ -324,7 +335,7 @@
       "tripulantes":""
     },
     "organization": {
-      "templates": ["base", "hitos", "atributos"],
+      "templates": ["bio", "hitos", "atributos","adicional"],
       "motivacion": "",
       "atributos": {
         "rec": {

@@ -189,7 +189,7 @@ div[class*='grid-'] .column-nw {
   flex-direction: column;
 }
 
-.col, .hitos .input-row .label-body, .hitos .input-row .input-body {
+.col, .hitos .item-list .item-name, .hitos .item-list .item-image, .hitos .item-list .item-controls, .hitos .input-row .label-body, .hitos .input-row .input-body {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   -webkit-box-flex: 1;
@@ -215,7 +215,7 @@ div[class*='grid-'] .column-nw {
   flex-wrap: nowrap;
 }
 
-.col.reverse, .hitos .input-row .reverse.label-body, .hitos .input-row .reverse.input-body {
+.col.reverse, .hitos .item-list .reverse.item-name, .hitos .item-list .reverse.item-image, .hitos .item-list .reverse.item-controls, .hitos .input-row .reverse.label-body, .hitos .input-row .reverse.input-body {
   -webkit-box-orient: vertical;
   -webkit-box-direction: reverse;
   -ms-flex-direction: column-reverse;
@@ -279,7 +279,7 @@ div[class*='grid-'] .column-nw {
   justify-content: center;
 }
 
-.padding-0 {
+.padding-0, .hitos .item-list .item-name, .hitos .item-list .item-image, .hitos .item-list .item-controls {
   padding: 0px;
 }
 
@@ -980,7 +980,7 @@ div[class*='grid-'] .column-nw {
   margin-left: 8.33333%;
 }
 
-.col-xs-2 {
+.col-xs-2, .hitos .item-list .item-image, .hitos .item-list .item-controls {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   max-width: 16.66667%;
@@ -1040,7 +1040,7 @@ div[class*='grid-'] .column-nw {
   margin-left: 58.33333%;
 }
 
-.col-xs-8 {
+.col-xs-8, .hitos .item-list .item-name {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   max-width: 66.66667%;
@@ -2127,6 +2127,10 @@ div[class*='grid-'] .column-nw {
   margin: 0;
 }
 
+.hitos .item-list .item-image {
+  margin: 0;
+}
+
 .hitos .item-list .item-controls {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 86px;
@@ -2190,7 +2194,7 @@ div[class*='grid-'] .column-nw {
   background-color: rgba(76, 175, 80, 0.15);
   mix-blend-mode: multiply;
   /* opacity: 30%; */
-  margin-left: 10px;
+  /*margin-left: 10px;*/
   border-radius: 5px;
 }
 
