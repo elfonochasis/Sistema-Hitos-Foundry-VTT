@@ -68,6 +68,24 @@ export class HitosActorSheet extends ActorSheet {
       li.slideUp(200, () => this.render(false));
     });
 
+    // Increment item quantity
+    html.find(".item-quantity-plus").click((ev) => {
+      ev.preventDefault();
+      let item = this.actor.getOwnedItem(ev.currentTarget.dataset.itemid);    
+      console.log(item);
+      event.preventDefault();
+      item.update({ "data.quantity":  item.data.data.quantity += 1 });
+    });
+
+    // Decrease item quantity
+    html.find(".item-quantity-minus").click((ev) => {
+      ev.preventDefault();
+      let item = this.actor.getOwnedItem(ev.currentTarget.dataset.itemid);    
+      console.log(item);
+      event.preventDefault();
+      item.update({ "data.quantity":  item.data.data.quantity -= 1 });
+    });
+
     // Rollable abilities.
     html.find(".rollable-check").click((ev) => {
       ev.preventDefault();
@@ -168,7 +186,6 @@ export class HitosActorSheet extends ActorSheet {
    * @return {undefined}
    */
   _prepareCharacterItems(sheetData) {
-    console.log(sheetData)
     const actorData = sheetData.actor;
 
     // Initialize containers.

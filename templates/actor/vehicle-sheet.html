@@ -5,19 +5,11 @@
             <div class="col col-xs-3">
                 <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
             </div>
-            <div class="col col-xs-9 padding-t-0 padding-b-0">
+            <div class="col col-xs-9 padding-0">
                 <div class="row-nw align-center">
-                    <h1 class="charname col col-xs-8">
+                    <h1 class="charname col col-xs-12">
                         <input name="name" type="text" value="{{actor.name}}" placeholder="Name" />
                     </h1>
-                    <div class="row-nw col col-xs-4 align-center">
-                        <label class="col col-xs-6 label-header">{{localize "Hitos.Drama"}}</label>
-                        <input class="col col-xs-3 input-header text-center" name="data.drama.value"
-                            value="{{data.drama.value}}" type="number" min="{{data.drama.min}}"
-                            max="{{data.drama.max}}" />
-                        <input class="col col-xs-3 input-header text-center" name="data.drama.max"
-                            value="{{data.drama.max}}" type="number" readonly />
-                    </div>
                 </div>
                 <div class="row-nw padding-t-10">
                     <label class="col col-xs-2 label-header" for="data.concepto">{{localize "Hitos.Concepto"}}</label>
@@ -26,8 +18,8 @@
                     </div>
                 </div>
                 <div class="row-nw padding-t-10">
-                    <label class="col col-xs-2 label-header" for="data.cita">{{localize "Hitos.Cita"}}</label>
-                    <div class="col col-xs-10 input-header" data-edit="data.cita" contenteditable>
+                    <label class="col col-xs-2 label-header" for="data.cita">{{localize "Hitos.Motivacion"}}</label>
+                    <div class="col col-xs-10 input-header" data-edit="data.motivacion" contenteditable>
                         {{data.cita}}
                     </div>
                 </div>
@@ -39,7 +31,6 @@
     <nav class="sheet-tabs tabs tabs-actor" data-group="primary">
         <a class="item" data-tab="bio">{{localize "Hitos.Bio"}}</a>
         <a class="item" data-tab="stats">{{localize "Hitos.Estadisticas"}}</a>
-        <a class="item" data-tab="combat">{{localize "Hitos.Combate"}}</a>
         <a class="item" data-tab="items">{{localize "Hitos.Inventario"}}</a>
     </nav>
 
@@ -48,9 +39,9 @@
         {{!-- Biography Tab --}}
         <div class="tab bio" data-group="primary" data-tab="bio">
             <div class="section-header">
-                <span>{{localize "Hitos.Biografia"}}</span>
+                <span>{{localize "Hitos.Descripcion"}}</span>
             </div>
-            {{editor content=data.biography target="data.biography" button=true
+            {{editor content=data.descripcion target="data.descripcion" button=true
       owner=owner editable=editable}}
         </div>
 
@@ -72,12 +63,27 @@
                 <input class="input-header hito-disable" name="data.hito4.value" value="{{data.hito4.value}}"
                     type="text" placeholder="" />
             </div>
-            <div class="row-nw">
+            <div class="grid-2col">
                 <span class="section-title">{{localize "Hitos.Complicacion"}}</span>
+                <span class="section-title margin-l-10">{{localize "Hitos.Adicional"}}</span>
             </div>
             <div class="grid-2col">
                 <input class="input-header" name="data.complicacion.value" value="{{data.complicacion.value}}"
                     type="text" placeholder="" />
+                <div class="columm-nw margin-l-10">
+                    <div class="row-nw">
+                        <input class="input-body col-xs-10" name="data.campoadicional1.label" type="text"
+                            value="{{data.campoadicional1.label}}" />
+                        <input class="input-body col-xs-2 margin-l-10" name="data.campoadicional1.value" type="number"
+                            value="{{data.campoadicional1.value}}" />
+                    </div>
+                    <div  class="row-nw">
+                        <input class="input-body col-xs-10" name="data.campoadicional2.label" type="text"
+                            value="{{data.campoadicional2.label}}" />
+                        <input class="input-body col-xs-2 margin-l-10" name="data.campoadicional2.value" type="number"
+                            value="{{data.campoadicional2.value}}" />
+                    </div>
+                </div>
             </div>
             <div class="section-header">
                 <span>{{localize "Hitos.Atributos"}}</span>
@@ -86,11 +92,11 @@
                 {{#each data.atributos as |atributo key| }}
                 <div class="row-nw stat-row align-center">
                     <!-- <a class="spent-concept hide"><span class="fa fa-ban" data-atributo={{atributo}}></span></a> -->
-                    <span class="label-body col col-xs-3 rollable"
+                    <span class="label-body col col-xs-4 rollable"
                         data-atributo="{{key}}">{{localize atributo.label}}</span>
                     <input class="input-body col-xs-1" name="data.atributos.{{key}}.value" type="number"
                         value="{{atributo.value}}" />
-                    <div class="hito-disable concept-body col col-xs-8" data-edit="data.atributos.{{key}}.concept"
+                    <div class="hito-disable concept-body col col-xs-7" data-edit="data.atributos.{{key}}.concept"
                         contenteditable>
                         {{atributo.concept}}
                     </div>
@@ -99,230 +105,72 @@
                 {{/each}}
             </div>
             <div class="section-header">
-                <span>{{localize "Hitos.Habilidades"}}</span>
+                <span>{{localize "Hitos.Tripulantes"}}</span>
             </div>
-            <div class="grid-2col habilidades-grid">
-                {{#each data.habilidades as |habilidad key| }}
-                <div class="row-nw stat-row align-center">
-                    <!-- <a class="spent-concept hide"><span class="fa fa-ban" data-habilidad={{habilidad}}></span></a> -->
-                    {{#iff key "contains" "adicional"}}
-                    <img class="habilidad-edit" src="./systems/hitos/assets/abilities/{{key}}.png" height="24px"
-                        width="24px" />
-                    <div class="label-body col col-xs-3 rollable-check" data-habilidad="{{key}}"
-                        data-edit="data.habilidades.{{key}}.label" contenteditable>
-                        {{habilidad.label}}
-                    </div>
-                    {{else}}
-                    <img src="./systems/hitos/assets/abilities/{{key}}.png" height="24px" width="24px" />
-                    <span class="label-body col col-xs-3 rollable-check"
-                        data-habilidad="{{key}}">{{localize habilidad.label}}</span>
-                    {{/iff}}
-                    <input class="input-body col-xs-1" name="data.habilidades.{{key}}.value" type="number"
-                        value="{{habilidad.value}}" />
-                    <div class="hito-disable concept-body col col-xs-8" data-edit="data.habilidades.{{key}}.concept"
-                        contenteditable>
-                        {{habilidad.concept}}
-                    </div>
-                </div>
-
-                {{/each}}
+            <div class="col input-header" data-edit="data.tripulantes" contenteditable>
+                {{data.tripulantes}}
             </div>
-        </div>
-
-        {{!-- Combat Tab --}}
-        <div class="tab combat" data-group="primary" data-tab="combat">
-            <div class="grid-2col col-xs-12">
-                <div class="status-column">
-                    <div class="row-nw section-header col-xs-12">
-                        <span class="">{{localize "Hitos.Estado"}}</span>
-                    </div>
-                    <div class="row-nw grid-2col">
-                        <div class="column-nw">
-                            <div class="grid-2col">
-                                <span class="label-body rollable-status"
-                                    data-status="aguante">{{localize data.aguante.label}}</span>
-                                <input class="col input-body" name="data.aguante.value" value="{{data.aguante.value}}"
-                                    type="number" readonly />
-                            </div>
-                            <div class="row-nw col-xs-12">
-                                <span class="section-title">{{localize "Hitos.Resistencia"}}</span>
-                            </div>
-                            <div class="grid-2col">
-                                <input class="input-body" name="data.resistencia.value"
-                                    value="{{data.resistencia.value}}" type="number" />
-                                <input class="input-body" name="data.resistencia.max" value="{{data.resistencia.max}}"
-                                    type="number" readonly />
-                            </div>
-                            <input class="col col-xs-12 input-body" name="data.resistencia.status"
-                                value="{{data.resistencia.status}}" type="text" readonly />
-                        </div>
-                        <div class="column-nw">
-                            <div class="grid-2col">
-                                <span class="label-body rollable-status"
-                                    data-status="entereza">{{localize data.entereza.label}}</span>
-                                <input class="col input-body" name="data.entereza.value" value="{{data.entereza.value}}"
-                                    type="number" readonly />
-                            </div>
-                            <div class="row-nw col-xs-12">
-                                <span class="section-title">{{localize "Hitos.EstabilidadMental"}}</span>
-                            </div>
-                            <div class="grid-2col">
-                                <input class="input-body" name="data.estabilidadMental.value"
-                                    value="{{data.estabilidadMental.value}}" type="number" />
-                                <input class="input-body" name="data.estabilidadMental.max"
-                                    value="{{data.estabilidadMental.max}}" type="number" readonly />
-                            </div>
-                            <input class="col col-xs-12 input-body" name="data.estabilidadMental.status"
-                                value="{{data.estabilidadMental.status}}" type="text" readonly />
-                        </div>
-                    </div>
-                    <div>
-                        <div class="row-nw col-xs-12">
-                            <span class="section-title">{{localize "Hitos.Secuelas"}}</span>
-                        </div>
-
-                        <div class="input-header" data-edit="data.secuelas.value" contenteditable>
-                            {{data.secuelas.value}}
-                        </div>
-                    </div>
-                    <div class="stat-row">
-                        <div class="row-nw col-xs-12 align-center">
-                            <span class="section-title col col-xs-9">{{localize "Hitos.Degeneracion"}}</span>
-                            <input class="input-body col col-xs-3" name="data.estabilidadMental.degeneracion.value"
-                                value="{{data.estabilidadMental.degeneracion.value}}" type="number" />
-                        </div>
-
-                        <div class="input-header" data-edit="data.estabilidadMental.degeneracion.description"
-                            contenteditable>
-                            {{data.estabilidadMental.degeneracion.description}}
-                        </div>
-                    </div>
-                </div>
-                <div class="combat-column">
-                    <div class="row-nw section-header col-xs-12">
-                        <span class="">{{localize "Hitos.Combate"}}</span>
-                    </div>
-                    <div class="input-row col-xs-6 margin-l-0">
-                        <span class="label-body rollable-init">{{localize "Hitos.Iniciativa"}}</span>
-                        <input class="input-body" name="data.iniciativa" value="{{data.iniciativa}}" type="number"
-                            readonly />
-                    </div>
-                    <div class="row-nw col-xs-12">
-                        <span class="section-title">{{localize "Hitos.Defensa"}}</span>
-                    </div>
-                    <div class="row-nw">
-                        <div class="input-row col-xs-6">
-                            <span class="label-body">{{localize "Hitos.Normal"}}</span>
-                            <input class="input-body" name="data.defensa.normal" value="{{data.defensa.normal}}"
-                                type="number" readonly />
-                        </div>
-                        <div class="input-row col-xs-6">
-                            <span class="label-body">{{localize "Hitos.Desprevenido"}}</span>
-                            <input class="input-body" name="data.defensa.des" value="{{data.defensa.des}}" type="number"
-                                readonly />
-                        </div>
-                    </div>
-                    <div class="input-row col-xs-6 margin-l-0">
-                        <span class="label-body">{{localize "Hitos.RD"}}</span>
-                        <input class="input-body" name="data.rd" value="{{data.rd}}" type="number" readonly />
-                    </div>
-                    <div class="row-nw col-xs-12">
-                        <span class="section-title">{{localize "Hitos.Bonificador"}}</span>
-                    </div>
-                    <div class="row-nw">
-                        <div class="input-row col-xs-6">
-                            <span class="label-body">{{localize "Hitos.Arma.Cuerpo"}}</span>
-                            <input class="input-body" name="data.danio.cuerpo" value="{{data.danio.cuerpo}}"
-                                type="number" readonly />
-                        </div>
-                        <div class="input-row col-xs-6">
-                            <span class="label-body">{{localize "Hitos.Arma.Distancia"}}</span>
-                            <input class="input-body" name="data.danio.distancia" value="{{data.danio.distancia}}"
-                                type="number" readonly />
-                        </div>
-                    </div>
-                </div>
+            <div class="section-header">
+                <span>{{localize "Hitos.Especial"}}</span>
             </div>
-            <div class="grid-2col">
-                <ol class="weapons-list item-list">
-                    <div class="row-nw section-header col-xs-12">
-                        <span class="">{{localize "Hitos.Armas"}}</span>
-                    </div>
-                    {{#each actor.weapon as |item id|}}
-                    <li class="item flexrow" data-item-id="{{item._id}}">
-                        <img src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
-                        <h4 class="item-name rollable-attack" data-itemID="{{item._id}}">{{item.name}}</h4>
-                        {{!-- Iterate through all attributes on the item and output buttons for any that are formula. --}}
-                        <div class="item-buttons">
-                            {{#each item.data.attributes as |itemAttr key|}}
-                            {{#if itemAttr.dtype}}
-                            {{#if itemAttr.isFormula}}
-                            {{!-- Use the items.name.key format for shorthand. --}}
-                            {{#if ../../shorthand}}
-                            <button class="item-button rollable" data-roll="@items.{{slugify item.name}}.{{key}}"
-                                data-label="{{ itemAttr.label }}" title="{{itemAttr.value}}">{{itemAttr.label}}</button>
-                            {{!-- Use the items.name.attributes.key.value format otherwise. --}}
-                            {{else}}
-                            <button class="item-button rollable"
-                                data-roll="@items.{{slugify item.name}}.attributes.{{key}}.value"
-                                data-label="{{ itemAttr.label }}" title="{{itemAttr.value}}">{{itemAttr.label}}</button>
-                            {{/if}}
-                            {{/if}}
-                            {{else}}
-                            {{#each itemAttr as |itemGroupedAttr groupedKey|}}
-                            {{#if itemGroupedAttr.isFormula}}
-                            {{!-- Use the items.name.key format for shorthand. --}}
-                            {{#if ../../../shorthand}}
-                            <button class="item-button rollable"
-                                data-roll="@items.{{slugify item.name}}.{{key}}.{{groupedKey}}"
-                                data-label="{{ itemGroupedAttr.label }}"
-                                title="{{itemGroupedAttr.value}}">{{itemGroupedAttr.label}}</button>
-                            {{!-- Use the items.name.attributes.key.value format otherwise. --}}
-                            {{else}}
-                            <button class="item-button rollable"
-                                data-roll="@items.{{slugify item.name}}.attributes.{{key}}.{{groupedKey}}.value"
-                                data-label="{{ itemGroupedAttr.label }}"
-                                title="{{itemGroupedAttr.value}}">{{itemGroupedAttr.label}}</button>
-                            {{/if}}
-                            {{/if}}
-                            {{/each}}
-                            {{/if}}
-
-                            {{/each}}
-                        </div>
-                        <div class="item-controls">
-                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                        </div>
-                    </li>
-                    {{/each}}
-                </ol>
-                <ol class="armor-list item-list">
-                    <div class="row-nw section-header col-xs-12">
-                        <span class="">{{localize "Hitos.Armaduras"}}</span>
-                    </div>
-                    {{#each actor.armor as |item id|}}
-                    <li class="item flexrow" data-item-id="{{item._id}}">
-                        <img src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
-                        <h4 class="item-name" data-itemID="{{item._id}}">{{item.name}}</h4>
-                        {{!-- Iterate through all attributes on the item and output buttons for any that are formula. --}}
-                        <div class="item-buttons">
-                            <a class="item-control item-toggle {{item.data.equipped}}"
-                                title='{{localize "Hitos.Equipar"}}' data-itemID='{{item._id}}'><i
-                                    class="fas fa-shield-alt"></i></a>
-                        </div>
-                        <div class="item-controls">
-                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                        </div>
-                    </li>
-                    {{/each}}
-                </ol>
+            <div class="col input-header" data-edit="data.especial" contenteditable>
+                {{data.especial}}
             </div>
         </div>
         {{!-- Owned Items Tab --}}
         <div class="tab items" data-group="primary" data-tab="items">
-
+            <ol class="gear-list item-list">
+                <ol class="gear-list item-list">
+                    <div class="row-nw section-header col-xs-12">
+                        <span class="">{{localize "Hitos.Armas"}}</span>
+                    </div>
+                    {{#each actor.weapon as |item id|}}
+                    <li class="item row-nw" data-item-id="{{item._id}}">
+                        <img class="item-image" src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
+                        <h4 class="item-name" data-itemID="{{item._id}}">{{item.name}}</h4>
+                        <div class="item-controls"></div>
+                        <div class="item-controls">
+                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ol>
+                <ol class="gear-list item-list">
+                    <div class="row-nw section-header col-xs-12">
+                        <span class="">{{localize "Hitos.Armaduras"}}</span>
+                    </div>
+                    {{#each actor.armor as |item id|}}
+                    <li class="item row-nw" data-item-id="{{item._id}}">
+                        <img class="item-image" src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
+                        <h4 class="item-name" data-itemID="{{item._id}}">{{item.name}}</h4>
+                        <div class="item-controls"></div>
+                        <div class="item-controls">
+                            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ol>
+                <div class="row-nw section-header col-xs-12">
+                    <span class="">{{localize "Hitos.Inventario"}}</span>
+                </div>
+                {{#each actor.gear as |item id|}}
+                <li class="item row-nw padding-0" data-item-id="{{item._id}}">
+                    <img class="item-image" src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
+                    <h4 class="item-name" data-itemID="{{item._id}}">{{item.name}}</h4>
+                    <div class="item-controls">
+                        <a class="item-control item-quantity-plus" title="Edit Item" data-itemID='{{item._id}}'><i class="fas fa-plus"></i></a>
+                        <span name="item.data.quantity">{{item.data.quantity}}</span>
+                        <a class="item-control item-quantity-minus" title="Delete Item" data-itemID='{{item._id}}'><i class="fas fa-minus"></i></a>
+                    </div>
+                    <div class="item-controls">
+                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+                    </div>
+                </li>
+                {{/each}}
+            </ol>
         </div>
     </section>
 </form>

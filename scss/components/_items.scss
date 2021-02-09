@@ -30,10 +30,22 @@
   }
 
   .item-name {
+    @extend .col;
+    @extend .col-xs-8;
+    @extend .padding-0;
+    margin: 0;
+  }
+  .item-image {
+    @extend .col;
+    @extend .col-xs-2;
+    @extend .padding-0;
     margin: 0;
   }
 
   .item-controls {
+    @extend .col;
+    @extend .col-xs-2;
+    @extend .padding-0;
     flex: 0 0 86px;
     text-align: right;
 
@@ -108,7 +120,7 @@ img {
   background-color: rgba(76, 175, 80, 0.15);
   mix-blend-mode: multiply;
   /* opacity: 30%; */
-  margin-left: 10px;
+  /*margin-left: 10px;*/
   border-radius: 5px;
 }
 

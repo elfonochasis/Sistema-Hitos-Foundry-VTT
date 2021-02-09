@@ -38,7 +38,6 @@ export class HitosItemSheet extends ItemSheet {
   getData() {
     const data = super.getData();
     data.config = CONFIG.hitos;
-    console.log(data)
     return data;
   }
 
