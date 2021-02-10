@@ -45,20 +45,19 @@ export class HitosActor extends Actor {
     const data = actorData.data;
     
     data.aguante.value =
-      data.atributos.for.value + Math.floor(data.atributos.vol.value / 2);
+      Number(data.atributos.for.value) + Number(Math.floor(data.atributos.vol.value / 2));
     data.entereza.value =
-      data.atributos.vol.value + Math.floor(data.atributos.int.value / 2);
+      Number(data.atributos.vol.value) + Number(Math.floor(data.atributos.int.value / 2));
 
-    data.resistencia.max = data.aguante.value * 3;
-    data.estabilidadMental.max = data.entereza.value * 3;
+    data.resistencia.max = Number(data.aguante.value) * 3;
+    data.estabilidadMental.max = Number(data.entereza.value) * 3;
 
     data.defensa.normal =
-      data.atributos.ref.value +
-      (data.habilidades.ffisica.value >= data.habilidades.combate.value
-        ? data.habilidades.ffisica.value
-        : data.habilidades.combate.value) +
-      5;
-    data.defensa.des = data.defensa.normal - 2;
+    Number(data.atributos.ref.value) +
+      (Number(data.habilidades.ffisica.value) >= Number(data.habilidades.combate.value)
+        ? Number(data.habilidades.ffisica.value)
+        : Number(data.habilidades.combate.value)) + 5;
+    data.defensa.des = Number(data.defensa.normal) - 2;
 
     var resistencia = Number(data.resistencia.value);
     var resistencia_Max = Number(data.aguante.value);
