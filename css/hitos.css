@@ -2173,6 +2173,16 @@ div[class*='grid-'] .column-nw {
   border-radius: 5px;
 }
 
+.hitos .hitos-body {
+  background-color: rgba(76, 175, 80, 0.15);
+  mix-blend-mode: multiply;
+  /* opacity: 30%; */
+  /* opacity: 30%; */
+  /*margin-left: 10px;*/
+  padding: 5px 5px;
+  border-radius: 5px;
+}
+
 .hitos .input-body,
 .hitos .input-header {
   text-align: center !important;

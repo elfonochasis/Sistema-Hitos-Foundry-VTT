@@ -7,12 +7,8 @@ export class HitosActor extends Actor {
    * Augment the basic actor data with additional dynamic data.
    */
   prepareData() {
-    const actorData = this.data;
-    const data = actorData.data;
-    const flags = actorData.flags;
-
     let img = CONST.DEFAULT_TOKEN;
-    switch (actorData.type) {
+    switch (this.data.type) {
       case "character":
         img = "/systems/hitos/assets/icons/character.svg";
         break;
@@ -26,7 +22,12 @@ export class HitosActor extends Actor {
           img = "/systems/hitos/assets/icons/vehicle.svg";
           break;
     }
-    if (!actorData.img) actorData.img = img;  
+    if (!this.data.img) this.data.img = img;  
+
+    super.prepareData();
+    const actorData = this.data;
+    const data = actorData.data;
+    const flags = actorData.flags;
 
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
@@ -34,7 +35,7 @@ export class HitosActor extends Actor {
     this._prepareCharacterData(actorData);
     this._calculateRD(actorData)}
   
-    super.prepareData();
+
   }
 
   /**

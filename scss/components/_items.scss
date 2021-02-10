@@ -83,6 +83,15 @@ img {
   }
 }
 
+.hitos-body {
+  background-color: rgba(76, 175, 80, 0.15);
+  mix-blend-mode: multiply;
+  /* opacity: 30%; */
+  /* opacity: 30%; */
+  /*margin-left: 10px;*/
+  padding: 5px 5px;
+  border-radius: 5px;
+}
 
 .input-row {
   @extend .row-nw;
