@@ -1,3 +1,7 @@
+
+
+
+![screen1]
 # Sistema genérico Hitos
 
 En este repositorio podrás encontrar la implementación del sistema genérico Hitos de la editorial Nosolorol para Foundry VTT.
@@ -9,6 +13,7 @@ Como todavía no se encuentra dado de alta en el repositorio oficial, puedes hac
 
 
 # Funcionalidades implementadas
+![screen2]
 La implementación se encuentra en sus primeras versiones y todavía hay aspectos que añadir. Entre las funcionalidades que ya están disponibles se encuentran:
 
 - Hojas de personaje, PNJ y organización.
@@ -18,10 +23,17 @@ La implementación se encuentra en sus primeras versiones y todavía hay aspecto
 - Actualización del valor de protección RD al equipar piezas de armadura.
 - Posibilidad de agotar aspectos (click derecho).
 - Varias habilidades personalizables (se desbloquean los títulos haciendo click en los iconos de cada una de ellas).
- 
-## Pendiente de implementar
-En futuras versiones, se añadirán:
 - Varios campos personalizados para añadir valores.
 - Hoja personalizada de vehículos.
 
+## Pendiente de implementar
+En futuras versiones, se añadirán:
 
+# Información de interés
+Canal del sistema en el servidor de Foundry en español de Discord: [Invitación al servidor](https://discord.com/invite/BpAn2DE3cq)
+Página del sistema en Foundry Hub: [Foundry Hub. Hitos](foundryvtt-hub.com/package/hitos/)
+Twitter: [Elfonochasis](https://twitter.com/Elfonochasis)
+
+
+[screen1]: https://i.imgur.com/UwJcIEn.jpg "Portada de la Guía Genérica"
+[screen2]: https://i.imgur.com/59MCmkG.png "Hoja en Foundry"
