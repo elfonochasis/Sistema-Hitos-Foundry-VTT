@@ -308,6 +308,19 @@
             </div>
             {{!-- Owned Items Tab --}}
             <div class="tab items" data-group="primary" data-tab="items">
+                <div class="column-nw">
+                    <div class="row-nw section-header col-xs-12">
+                        <span class="">{{localize "Hitos.Extras"}}</span>
+                    </div>
+                    {{editor content=data.extras target="data.extras" button=true
+                    owner=owner editable=editable}}
+                    <!-- <div class="hitos-body" name="data.extras" data-edit="data.extras"
+                    contenteditable>
+                    {{data.extras}} 
+                    </div> 
+                -->
+                                  
+                </div>
                 <ol class="gear-list item-list">
                     <div class="row-nw section-header col-xs-12">
                         <span class="">{{localize "Hitos.Inventario"}}</span>

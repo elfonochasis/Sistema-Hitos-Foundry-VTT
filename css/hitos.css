@@ -2007,6 +2007,22 @@ div[class*='grid-'] .column-nw {
   padding: 0 8px;
 }
 
+.hitos .editor {
+  height: 90%;
+}
+
+.hitos .editor .editor-content {
+  min-height: 100px;
+}
+
+.hitos .tox.tox-tinymce {
+  border: none;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  min-height: 100px;
+}
+
 .hitos .resource-label {
   font-weight: bold;
   text-transform: uppercase;
