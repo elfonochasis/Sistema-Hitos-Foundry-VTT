@@ -28,10 +28,13 @@ La implementación se encuentra en sus primeras versiones y todavía hay aspecto
 
 ## Pendiente de implementar
 En futuras versiones, se añadirán:
+- Relanzar dados de una tirada
 
 # Información de interés
 Canal del sistema en el servidor de Foundry en español de Discord: [Invitación al servidor](https://discord.com/invite/BpAn2DE3cq)
+
 Página del sistema en Foundry Hub: [Foundry Hub. Hitos](foundryvtt-hub.com/package/hitos/)
+
 Twitter: [Elfonochasis](https://twitter.com/Elfonochasis)
 
 
