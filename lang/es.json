@@ -8,6 +8,8 @@
   "ITEM.TypeWeapon": "Arma",
   "ITEM.TypeArmor": "Armadura",
 
+  "Hitos.Roll.Elegir": "¿Qué dados mantienes?",
+  "Hitos.Roll.Afectar": "¿Cómo quieres influir?",  
   "Hitos.Extras": "Extra",
   "Hitos.Biografia": "Biografía",
   "Hitos.Descripcion": "Descripción",

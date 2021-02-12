@@ -1,5 +1,6 @@
 // Import Modules
 import { hitos} from "./config.js";
+import * as Chat from "./chat.js";
 import { HitosActor } from "./actor/actor.js";
 import { HitosActorSheet } from "./actor/actor-sheet.js";
 import { HitosItem } from "./item/item.js";
@@ -139,3 +140,6 @@ Hooks.once('init', async function() {
     console.log(something);
   });
 });
+
+
+Hooks.on("renderChatLog", (app,html,data) => Chat.addChatListeners(html));
