@@ -18,11 +18,11 @@ export class HitosActor extends Actor {
       case "organization":
         img = "/systems/hitos/assets/icons/organization.svg";
         break;
-        case "vehicle":
-          img = "/systems/hitos/assets/icons/vehicle.svg";
-          break;
+      case "vehicle":
+        img = "/systems/hitos/assets/icons/vehicle.svg";
+        break;
     }
-    if (!this.data.img) this.data.img = img;  
+    if (!this.data.img) this.data.img = img;
 
     super.prepareData();
     const actorData = this.data;
@@ -31,44 +31,46 @@ export class HitosActor extends Actor {
 
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
-    if(actorData.type === "npc" || actorData.type === "character"){
-    this._prepareCharacterData(actorData);
-    this._calculateRD(actorData)}
-  
-
+    if (actorData.type === "npc" || actorData.type === "character") {
+      this._prepareCharacterData();
+      this._calculateRD();
+      this._calculateDefense();
+    }
   }
 
   /**
    * Prepare Character type specific data
    */
-  _prepareCharacterData(actorData) {
+  _prepareCharacterData() {
+    const actorData = this.data;
     const data = actorData.data;
-    
+
     data.aguante.value =
-      Number(data.atributos.for.value) + Number(Math.floor(data.atributos.vol.value / 2));
+      Number(data.atributos.for.value) +
+      Number(Math.floor(data.atributos.vol.value / 2));
     data.entereza.value =
-      Number(data.atributos.vol.value) + Number(Math.floor(data.atributos.int.value / 2));
+      Number(data.atributos.vol.value) +
+      Number(Math.floor(data.atributos.int.value / 2));
 
     data.resistencia.max = Number(data.aguante.value) * 3;
     data.estabilidadMental.max = Number(data.entereza.value) * 3;
 
-    data.defensa.normal =
-    Number(data.atributos.ref.value) +
-      (Number(data.habilidades.ffisica.value) >= Number(data.habilidades.combate.value)
-        ? Number(data.habilidades.ffisica.value)
-        : Number(data.habilidades.combate.value)) + 5;
-    data.defensa.des = Number(data.defensa.normal) - 2;
-
     var resistencia = Number(data.resistencia.value);
     var resistencia_Max = Number(data.aguante.value);
-    console.log(resistencia, resistencia_Max)
+
     if (resistencia < resistencia_Max) {
       data.resistencia.status = game.i18n.format("Hitos.Salud.Sano");
       data.resistencia.mod = 0;
-    } else if (resistencia_Max <= resistencia && resistencia < 2 * resistencia_Max) {
+    } else if (
+      resistencia_Max <= resistencia &&
+      resistencia < 2 * resistencia_Max
+    ) {
       data.resistencia.status = game.i18n.format("Hitos.Salud.Herido");
       data.resistencia.mod = -2;
-    } else if (2 * resistencia_Max <= resistencia && resistencia  < 3 * resistencia_Max) {
+    } else if (
+      2 * resistencia_Max <= resistencia &&
+      resistencia < 3 * resistencia_Max
+    ) {
       data.resistencia.status = game.i18n.format("Hitos.Salud.Incapacitado");
       data.resistencia.mod = -5;
     } else {
@@ -85,7 +87,10 @@ export class HitosActor extends Actor {
     } else if (estMental_Max <= estMental && estMental < 2 * estMental_Max) {
       data.estabilidadMental.status = game.i18n.format("Hitos.Mental.Alterado");
       data.estabilidadMental.mod = -2;
-    } else if (2 * estMental_Max <= estMental && estMental < 3 * estMental_Max) {
+    } else if (
+      2 * estMental_Max <= estMental &&
+      estMental < 3 * estMental_Max
+    ) {
       data.estabilidadMental.status = game.i18n.format(
         "Hitos.Mental.Trastornado"
       );
@@ -106,15 +111,29 @@ export class HitosActor extends Actor {
     data.danio.distancia = Math.floor(data.habilidades.combate.value / 4);
   }
 
-  _calculateRD(actorData){
+  _calculateRD() {
+    const actorData = this.data;
     let RD = 0;
-    
-    actorData.items.forEach(item => {
-      if (item.type === 'armor' && item.data.equipped === true) {RD += item.data.rd}
+    actorData.items.forEach((item) => {
+      if (item.type === "armor" && item.data.equipped === true) {
+        RD += item.data.rd;
+      }
     });
+    actorData.data.rd = RD;
+  }
 
-    console.log(actorData)
-    actorData.data.rd = RD
+  _calculateDefense(){
+    const data = this.data.data;
 
+    data.defensa.normal =
+    Number(data.atributos.ref.value) +
+    (Number(data.habilidades.ffisica.value) >=
+    Number(data.habilidades.combate.value)
+      ? Number(data.habilidades.ffisica.value)
+      : Number(data.habilidades.combate.value)) +
+    5 +
+    Number(data.resistencia.mod) +
+    Number(data.estabilidadMental.mod);
+  data.defensa.des = Number(data.defensa.normal) - 2;
   }
 }

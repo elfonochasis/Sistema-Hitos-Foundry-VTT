@@ -1,4 +1,4 @@
-import { _onCheckRoll, _onInitRoll, _onAttackRoll, _onStatusRoll} from '../dice.js';
+import { _onCheckRoll, _onInitRoll, _onAttackRoll, _onStatusRoll, _onDramaRoll} from '../dice.js';
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
@@ -145,6 +145,7 @@ export class HitosActorSheet extends ActorSheet {
       //armor.equipped = (armor.equipped === false ? true : false);
       this.actor._calculateRD(this.actor)
     })
+
   }
 
   /* -------------------------------------------- */

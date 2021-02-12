@@ -1,5 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Martel:wght@400;800&family=Roboto:wght@300;400;500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+.text-c {
+  text-align: center;
+}
+
+.text-l {
+  text-align: left;
+}
+
+.text-r {
+  text-align: right;
+}
+
+.font-xs {
+  font-size: 10px;
+}
+
+.font-s {
+  font-size: 12px;
+}
+
 /* Global styles */
 .window-app {
   font-family: "Roboto", sans-serif;
@@ -211,6 +231,46 @@ div[class*='grid-'] .column-nw {
   flex-basis: 0;
   max-width: 100%;
   padding: 0.5rem;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+}
+
+.column {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0 auto;
+  width: 100%;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.column-nw {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0 auto;
+  width: 100%;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
 }
@@ -2005,6 +2065,22 @@ div[class*='grid-'] .column-nw {
 
 .hitos .tox .tox-edit-area {
   padding: 0 8px;
+}
+
+.hitos .editor {
+  height: 90%;
+}
+
+.hitos .editor .editor-content {
+  min-height: 100px;
+}
+
+.hitos .tox.tox-tinymce {
+  border: none;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  min-height: 100px;
 }
 
 .hitos .resource-label {

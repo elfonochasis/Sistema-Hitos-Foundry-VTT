@@ -1,0 +1,24 @@
+<form class="form-group padding-b-15">
+        <div class="row-nw align-center">
+            <span><b>{{ localize "Hitos.Roll.Elegir" }}</b></span>
+        </div>
+        <div class="row-nw align-center">
+            {{#each dices as |dice key|}}
+            <div class="column-nw align-center">
+                <span>{{dice}}</span>
+                <input type="checkbox" class="check-dice" name="dice-{{key}}" value="{{dice}}">
+            </div>
+            {{/each}}
+        </div>
+        <div class="row-nw align-center padding-t-10">
+            <span><b>{{ localize "Hitos.Roll.Afectar" }}</b></span>
+        </div>
+        <div class="grid-2col">
+            <label>
+                <input class="check-affect" type="radio" name="afectar" value="1" checked> Positivamente
+            </label>
+            <label>
+                <input class="check-affect" type="radio" name="afectar" value="-1"> Negativamente
+            </label>
+        </div>
+</form>

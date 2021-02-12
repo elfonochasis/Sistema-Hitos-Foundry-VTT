@@ -48,6 +48,7 @@
   height: 100%;
 }
 
+
 .tox {
   .tox-editor-container {
     background: $c-white;
@@ -56,4 +57,18 @@
   .tox-edit-area {
     padding: 0 8px;
   }
+}
+
+.editor {
+  height: 90%;
+}
+
+.editor .editor-content {
+  min-height: 100px;
+}
+
+.tox.tox-tinymce {
+  border: none;
+  flex: 1;
+  min-height: 100px;
 }

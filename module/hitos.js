@@ -1,5 +1,6 @@
 // Import Modules
 import { hitos} from "./config.js";
+import * as Chat from "./chat.js";
 import { HitosActor } from "./actor/actor.js";
 import { HitosActorSheet } from "./actor/actor-sheet.js";
 import { HitosItem } from "./item/item.js";
@@ -17,8 +18,8 @@ Hooks.once('init', async function() {
    * @type {String}
    */
   CONFIG.Combat.initiative = {
-    formula: "1d20",
-    decimals: 2
+    formula: "3d10dh1kh1 + @iniciativa",
+    decimals: 0
   };
 
   // Define custom Entity classes
@@ -139,3 +140,6 @@ Hooks.once('init', async function() {
     console.log(something);
   });
 });
+
+
+Hooks.on("renderChatLog", (app,html,data) => Chat.addChatListeners(html));
