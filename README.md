@@ -25,10 +25,12 @@ La implementación se encuentra en sus primeras versiones y todavía hay aspecto
 - Varias habilidades personalizables (se desbloquean los títulos haciendo click en los iconos de cada una de ellas).
 - Varios campos personalizados para añadir valores.
 - Hoja personalizada de vehículos.
+- Forzar tirada mediante Drama afectando negativa o positivamente.
+- Cálculo automático de modificadores por estados relacionados con la resistencia y la estabilidad mental.
 
 ## Pendiente de implementar
 En futuras versiones, se añadirán:
-- Relanzar dados de una tirada
+- Personalizar estilo de hoja/distintos temas para ambientaciones.
 
 # Información de interés
 Canal del sistema en el servidor de Foundry en español de Discord: [Invitación al servidor](https://discord.com/invite/BpAn2DE3cq)
