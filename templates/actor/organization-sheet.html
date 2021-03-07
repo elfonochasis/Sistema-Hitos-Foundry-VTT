@@ -14,13 +14,13 @@
                 <div class="row-nw padding-t-10">
                     <label class="col col-xs-2 label-header" for="data.concepto">{{localize "Hitos.Concepto"}}</label>
                     <div class="col col-xs-10 input-header" data-edit="data.concepto" contenteditable>
-                        {{data.concepto}}
+                        {{{data.concepto}}}
                     </div>
                 </div>
                 <div class="row-nw padding-t-10">
                     <label class="col col-xs-2 label-header" for="data.cita">{{localize "Hitos.Motivacion"}}</label>
                     <div class="col col-xs-10 input-header" data-edit="data.motivacion" contenteditable>
-                        {{data.cita}}
+                        {{{data.cita}}}
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                         value="{{atributo.value}}" />
                     <div class="hito-disable concept-body col col-xs-8" data-edit="data.atributos.{{key}}.concept"
                         contenteditable>
-                        {{atributo.concept}}
+                        {{{atributo.concept}}}
                     </div>
                 </div>
                 {{/each}}
@@ -84,7 +84,7 @@
                 <span>{{localize "Hitos.Notas"}}</span>
             </div>
             <div class="col input-header" data-edit="data.notas" contenteditable>
-                {{data.notas}}
+                {{{data.notas}}}
             </div>
         </div>
         {{!-- Owned Items Tab --}}
