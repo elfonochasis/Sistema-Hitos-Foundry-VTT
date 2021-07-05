@@ -42,9 +42,10 @@ export class HitosActorSheet extends ActorSheet {
       editable: this.isEditable,
       actor: baseData.actor,
       data: baseData.actor.data.data,
+      items: baseData.items,
       dtypes: ["String", "Number", "Boolean"]
     }
-    this._prepareCharacterItems(sheetData.actor);
+    this._prepareCharacterItems(sheetData);
     return sheetData;
   }
 
