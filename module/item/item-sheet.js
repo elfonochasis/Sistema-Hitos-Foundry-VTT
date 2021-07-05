@@ -36,9 +36,15 @@ export class HitosItemSheet extends ItemSheet {
 
   /** @override */
   getData() {
-    const data = super.getData();
-    data.config = CONFIG.hitos;
-    return data;
+    const baseData = super.getData();
+    let sheetData = {
+      owner: this.item.isOwner,
+      editable: this.isEditable,
+      item: baseData.item,
+      data: baseData.item.data.data,
+      config: CONFIG.hitos
+    }
+    return sheetData;
   }
 
   /* -------------------------------------------- */

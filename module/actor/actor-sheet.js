@@ -36,10 +36,16 @@ export class HitosActorSheet extends ActorSheet {
 
   /** @override */
   getData() {
-    const data = super.getData();
-    data.dtypes = ["String", "Number", "Boolean"];
-    this._prepareCharacterItems(data);
-    return data;
+    const baseData = super.getData();
+    console.log(baseData)
+    let sheetData = {
+      editable: this.isEditable,
+      actor: baseData.actor,
+      data: baseData.actor.data.data,
+      dtypes: ["String", "Number", "Boolean"]
+    }
+    this._prepareCharacterItems(sheetData.actor);
+    return sheetData;
   }
 
   /** @override */
@@ -57,21 +63,21 @@ export class HitosActorSheet extends ActorSheet {
     // Update Inventory Item
     html.find(".item-edit").click((ev) => {
       const li = $(ev.currentTarget).parents(".item");
-      const item = this.actor.getOwnedItem(li.data("itemId"));
+      const item = this.actor.items.get(li.data("itemId"));
       item.sheet.render(true);
     });
 
     // Delete Inventory Item
     html.find(".item-delete").click((ev) => {
       const li = $(ev.currentTarget).parents(".item");
-      this.actor.deleteOwnedItem(li.data("itemId"));
+      this.actor.deleteEmbeddedDocuments("Item", [li.data("itemId")]);
       li.slideUp(200, () => this.render(false));
     });
 
     // Increment item quantity
     html.find(".item-quantity-plus").click((ev) => {
       ev.preventDefault();
-      let item = this.actor.getOwnedItem(ev.currentTarget.dataset.itemid);    
+      let item = this.actor.items.get(ev.currentTarget.dataset.itemid);    
       console.log(item);
       event.preventDefault();
       item.update({ "data.quantity":  item.data.data.quantity += 1 });
@@ -80,7 +86,7 @@ export class HitosActorSheet extends ActorSheet {
     // Decrease item quantity
     html.find(".item-quantity-minus").click((ev) => {
       ev.preventDefault();
-      let item = this.actor.getOwnedItem(ev.currentTarget.dataset.itemid);    
+      let item = this.actor.items.get(ev.currentTarget.dataset.itemid);    
       console.log(item);
       event.preventDefault();
       item.update({ "data.quantity":  item.data.data.quantity -= 1 });
@@ -109,7 +115,7 @@ export class HitosActorSheet extends ActorSheet {
 
     html.find(".rollable-attack").click((ev) => {
       ev.preventDefault();
-      let weapon = this.actor.getOwnedItem(ev.currentTarget.dataset.itemid).data.data;    
+      let weapon = this.actor.items.get(ev.currentTarget.dataset.itemid).data.data;    
       _onAttackRoll(this.actor,weapon);
     });
 
@@ -140,7 +146,7 @@ export class HitosActorSheet extends ActorSheet {
 
     html.find(".item-toggle").click(ev => {
       ev.preventDefault();
-      let armor = this.actor.getOwnedItem(ev.currentTarget.dataset.itemid);
+      let armor = this.actor.items.get(ev.currentTarget.dataset.itemid);
       armor.update({data: {equipped: !armor.data.data.equipped}});
       //armor.equipped = (armor.equipped === false ? true : false);
       this.actor._calculateRD(this.actor)
@@ -175,7 +181,7 @@ export class HitosActorSheet extends ActorSheet {
     delete itemData.data["type"];
 
     // Finally, create the item!
-    return this.actor.createOwnedItem(itemData);
+    return this.actor.createEmbeddedDocuments("Item", [itemData]);
   }
 
   /* -------------------------------------------- */

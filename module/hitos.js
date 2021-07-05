@@ -23,8 +23,8 @@ Hooks.once('init', async function() {
   };
 
   // Define custom Entity classes
-  CONFIG.Actor.entityClass = HitosActor;
-  CONFIG.Item.entityClass = HitosItem;
+  CONFIG.Actor.documentClass = HitosActor;
+  CONFIG.Item.documentClass = HitosItem;
 
   CONFIG.hitos = hitos;
 
