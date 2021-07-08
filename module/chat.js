@@ -29,12 +29,13 @@ function negDuplicate(arr){
 async function onDramaRoll(event){
     let mods = Number(event.currentTarget.dataset.mods);
     let dicesOld = event.currentTarget.dataset.roll.split(",");
+    console.log(event)
     let actor = game.actors.get(event.currentTarget.dataset.actor);
-    
+    console.log(actor)
     let template = "systems/hitos/templates/chat/roll-drama.html";
     let dialogData = {
         formula: "",
-        data: actor.data.data,
+        data: actor.data,
         dices: dicesOld,
         config: CONFIG.hitos,
     };
@@ -79,7 +80,7 @@ async function onDramaRoll(event){
                         ChatMessage.create({
                             content: html,
                             speaker: {alias: actor.name},
-                            type: CHAT_MESSAGE_TYPES.ROLL, 
+                            type: CONST.CHAT_MESSAGE_TYPES, 
                             rollMode: game.settings.get("core", "rollMode"),
                             roll: newRoll
                         });
