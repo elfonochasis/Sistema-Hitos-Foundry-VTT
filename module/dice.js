@@ -26,7 +26,7 @@ export async function _onInitRoll(actor) {
         total: values[2] + corduraMod + resistenciaMod,
         damage: null,
         dices: values[1],
-        actor: actor.data._id,
+        actor: actor.data.id,
         mods: Number(actor.data.data.iniciativa) + corduraMod + resistenciaMod,
         data: actor.data.data,
         config: CONFIG.hitos,
@@ -35,7 +35,7 @@ export async function _onInitRoll(actor) {
     ChatMessage.create({
         content: html,
         speaker: {alias: actor.name},
-        type: CHAT_MESSAGE_TYPES.ROLL, 
+        type: CONST.CHAT_MESSAGE_TYPES, 
         rollMode: game.settings.get("core", "rollMode"),
         roll: values[0]
     });
@@ -46,7 +46,7 @@ export async function _onAttackRoll(actor, weapon) {
     let resistenciaMod = Number(actor.data.data.resistencia.mod);
 
     /* M + 1 */
-    let damage = new Roll(weapon.damage);
+    let damage = await new Roll(weapon.damage);
     /* M */
     let damageBase = damage.terms[0];
     /* 3 + 4 + 6 */
@@ -79,7 +79,7 @@ export async function _onAttackRoll(actor, weapon) {
         total: attack,
         damage: damageTotal,
         dices: values[1],
-        actor: actor.data._id,
+        actor: actor.data.id,
         data: actor.data.data,
         mods: actor.data.data.atributos.ref.value + actor.data.data.habilidades.combate.value + resistenciaMod + corduraMod,
         config: CONFIG.hitos       
@@ -88,7 +88,7 @@ export async function _onAttackRoll(actor, weapon) {
     ChatMessage.create({
         content: html,
         speaker: {alias: actor.name},
-        type: CHAT_MESSAGE_TYPES.ROLL, 
+        type: CONST.CHAT_MESSAGE_TYPES, 
         rollMode: game.settings.get("core", "rollMode"),
         roll: values[0]
     });
@@ -104,7 +104,7 @@ export async function _onStatusRoll(actor, status) {
         total: values[2],
         damage: null,
         dices: values[1],
-        actor: actor.data._id,
+        actor: actor.data.id,
         mods: Number(getProperty(actor.data, `data.${status}.value`)),
         data: actor.data.data,
         config: CONFIG.hitos,
@@ -113,13 +113,14 @@ export async function _onStatusRoll(actor, status) {
     ChatMessage.create({
         content: html,
         speaker: {alias: actor.name},
-        type: CHAT_MESSAGE_TYPES.ROLL, 
+        type: CONST.CHAT_MESSAGE_TYPES, 
         rollMode: game.settings.get("core", "rollMode"),
         roll: values[0]
     });
 }
 
 export async function _onCheckRoll(actor, valor, habilidadNombre) {
+    console.log(valor, habilidadNombre)
     let corduraMod = Number(actor.data.data.estabilidadMental.mod);
     let resistenciaMod = Number(actor.data.data.resistencia.mod);
     let template = "systems/hitos/templates/chat/roll-dialog.html";
@@ -128,6 +129,7 @@ export async function _onCheckRoll(actor, valor, habilidadNombre) {
         data: actor.data.data,
         config: CONFIG.hitos,
     };
+    console.log(dialogData)
     let html = await renderTemplate(template, dialogData);
     return new Promise((resolve) => {
         new Dialog({
@@ -151,7 +153,7 @@ export async function _onCheckRoll(actor, valor, habilidadNombre) {
                             damage: null,
                             atributo: game.i18n.localize(html[0].querySelectorAll("option:checked")[0].label),
                             dices: values[1],
-                            actor: actor.data._id,
+                            actor: actor.data.id,
                             mods: Number(valor) + Number(html[0].querySelectorAll("option:checked")[0].value) + Number(html[0].querySelectorAll(".bonus")[0].value) + resistenciaMod + corduraMod,
                             data: actor.data.data,
                             config: CONFIG.hitos,
@@ -160,7 +162,7 @@ export async function _onCheckRoll(actor, valor, habilidadNombre) {
                         ChatMessage.create({
                             content: html,
                             speaker: {alias: actor.name},
-                            type: CHAT_MESSAGE_TYPES.ROLL, 
+                            type: CONST.CHAT_MESSAGE_TYPES, 
                             rollMode: game.settings.get("core", "rollMode"),
                             roll: values[0]
                         });
@@ -174,7 +176,7 @@ export async function _onCheckRoll(actor, valor, habilidadNombre) {
 }
 
 function _rolld10(valor) {
-    let d10Roll = new Roll("1d10+1d10+1d10").roll();
+    let d10Roll = new Roll("1d10+1d10+1d10").roll({async: false});
     let d10s = d10Roll.result.split(" + ").sort((a, b) => a - b);
     let result = Number(d10s[1]) + Number(valor);
     return [d10Roll, d10s, result];
