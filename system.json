@@ -2,7 +2,7 @@
   "name": "hitos",
   "title": "Hitos",
   "description": "Implementación del sistema Hitos de Nosolorol para Foundry VTT.",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "minimumCoreVersion": "0.8.7",
   "compatibleCoreVersion": "0.8.8",
   "templateVersion": 2,
