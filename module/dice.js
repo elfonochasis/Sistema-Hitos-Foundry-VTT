@@ -35,7 +35,7 @@ export async function _onInitRoll(actor) {
     ChatMessage.create({
         content: html,
         speaker: {alias: actor.name},
-        type: CONST.CHAT_MESSAGE_TYPES, 
+        type: CONST.CHAT_MESSAGE_TYPES.ROLL, 
         rollMode: game.settings.get("core", "rollMode"),
         roll: values[0]
     });
@@ -88,7 +88,7 @@ export async function _onAttackRoll(actor, weapon) {
     ChatMessage.create({
         content: html,
         speaker: {alias: actor.name},
-        type: CONST.CHAT_MESSAGE_TYPES, 
+        type: CONST.CHAT_MESSAGE_TYPES.ROLL, 
         rollMode: game.settings.get("core", "rollMode"),
         roll: values[0]
     });
@@ -113,7 +113,7 @@ export async function _onStatusRoll(actor, status) {
     ChatMessage.create({
         content: html,
         speaker: {alias: actor.name},
-        type: CONST.CHAT_MESSAGE_TYPES, 
+        type: CONST.CHAT_MESSAGE_TYPES.ROLL, 
         rollMode: game.settings.get("core", "rollMode"),
         roll: values[0]
     });
@@ -162,7 +162,7 @@ export async function _onCheckRoll(actor, valor, habilidadNombre) {
                         ChatMessage.create({
                             content: html,
                             speaker: {alias: actor.name},
-                            type: CONST.CHAT_MESSAGE_TYPES, 
+                            type: CONST.CHAT_MESSAGE_TYPES.ROLL, 
                             rollMode: game.settings.get("core", "rollMode"),
                             roll: values[0]
                         });
