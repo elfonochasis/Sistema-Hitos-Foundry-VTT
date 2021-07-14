@@ -80,7 +80,7 @@ async function onDramaRoll(event){
                         ChatMessage.create({
                             content: html,
                             speaker: {alias: actor.name},
-                            type: CONST.CHAT_MESSAGE_TYPES, 
+                            type: CONST.CHAT_MESSAGE_TYPES.ROLL, 
                             rollMode: game.settings.get("core", "rollMode"),
                             roll: newRoll
                         });
