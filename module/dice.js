@@ -64,7 +64,7 @@ export async function _onAttackRoll(actor, weapon) {
     
     console.log(criticalMod)
 
-    damage.terms[0] = Array.from(damageBase).map((value) => lookup[value]).reduce((sum, value) => sum += value);
+    damage.terms[0] = new NumericTerm({number: Array.from(damageBase.term).map((value) => lookup[value]).reduce((sum, value) => sum += value)});
 
 
 
