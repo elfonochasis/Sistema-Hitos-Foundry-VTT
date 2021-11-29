@@ -34,6 +34,10 @@
   background-size: contain;
 }
 
+#combat-popout section {
+  background-image: none !important;
+}
+
 [class*="rollable-"]:hover, [class*="rollable-"]:focus {
   color: #000;
   text-shadow: 0 0 10px red;

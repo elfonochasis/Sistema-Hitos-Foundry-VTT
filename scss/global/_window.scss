@@ -9,6 +9,10 @@
   background-size: contain;
 }
 
+#combat-popout section{
+  background-image: none !important;
+}
+
 [class*="rollable-"] {
   &:hover,
   &:focus {

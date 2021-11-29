@@ -18,9 +18,9 @@
                     </div>
                 </div>
                 <div class="row-nw padding-t-10">
-                    <label class="col col-xs-2 label-header" for="data.cita">{{localize "Hitos.Motivacion"}}</label>
+                    <label class="col col-xs-2 label-header" for="data.motivacion">{{localize "Hitos.Motivacion"}}</label>
                     <div class="col col-xs-10 input-header" data-edit="data.motivacion" contenteditable>
-                        {{{data.cita}}}
+                        {{{data.motivacion}}}
                     </div>
                 </div>
             </div>
@@ -83,9 +83,8 @@
             <div class="section-header">
                 <span>{{localize "Hitos.Notas"}}</span>
             </div>
-            <div class="col input-header" data-edit="data.notas" contenteditable>
-                {{{data.notas}}}
-            </div>
+            {{editor content=data.notas target="data.notas" button=true
+      owner=owner editable=editable}}
         </div>
         {{!-- Owned Items Tab --}}
         <div class="tab items" data-group="primary" data-tab="items">
