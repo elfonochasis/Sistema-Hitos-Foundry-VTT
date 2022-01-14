@@ -58,20 +58,19 @@ export async function _onAttackRoll(actor, weapon) {
         m: Number(values[1][0]),
         C: Number(values[1][1]),
         M: Number(values[1][2]),
+        mM: Number(values[1][0]) + Number(values[1][2]),
+        CM: Number(values[1][1]) + Number(values[1][2]),
+        mC: Number(values[1][0]) + Number(values[1][1]),
+        mCM: Number(values[1][0]) + Number(values[1][1]) + Number(values[1][2])
     };
     let criticalMod = values[1].filter(value => value==10).length
     criticalMod = criticalMod > 1 ? criticalMod : 1;
     
-    console.log(criticalMod)
 
-    damage.terms[0] = new NumericTerm({number: Array.from(damageBase.term).map((value) => lookup[value]).reduce((sum, value) => sum += value)});
-
-
-
-    let damageTotal = (Number(damage.evaluate().total) + Number(getProperty(actor.data, `data.danio.${weapon.kind}`))) * Number(criticalMod);
-
-    console.log(Number(damage.total),Number(getProperty(actor.data, `data.danio.${weapon.kind}`)), Number(criticalMod))
-    
+    let damageDices = new NumericTerm({number: Array.from(damageBase.term).map((value) => lookup[value]).reduce((sum, value) => sum += value)});
+    let damageWeapon = eval(damageDices.number + damage.terms[1].operator + damage.terms[2].number)
+    console.log(damageWeapon)
+    let damageTotal = (damageWeapon + Number(getProperty(actor.data, `data.danio.${weapon.kind}`))) * Number(criticalMod);
     let template = "systems/hitos/templates/chat/chat-roll.html";
 
     let dialogData = {
