@@ -37,7 +37,6 @@ export class HitosActorSheet extends ActorSheet {
   /** @override */
   getData() {
     const baseData = super.getData();
-    console.log(baseData)
     let sheetData = {
       editable: this.isEditable,
       actor: baseData.actor,
@@ -79,7 +78,6 @@ export class HitosActorSheet extends ActorSheet {
     html.find(".item-quantity-plus").click((ev) => {
       ev.preventDefault();
       let item = this.actor.items.get(ev.currentTarget.dataset.itemid);    
-      console.log(item);
       event.preventDefault();
       item.update({ "data.quantity":  item.data.data.quantity += 1 });
     });
@@ -88,7 +86,6 @@ export class HitosActorSheet extends ActorSheet {
     html.find(".item-quantity-minus").click((ev) => {
       ev.preventDefault();
       let item = this.actor.items.get(ev.currentTarget.dataset.itemid);    
-      console.log(item);
       event.preventDefault();
       item.update({ "data.quantity":  item.data.data.quantity -= 1 });
     });
@@ -169,7 +166,6 @@ export class HitosActorSheet extends ActorSheet {
     const type = header.dataset.type;
     // Grab any data associated with this control.
     const data = duplicate(header.dataset);
-    console.log(header.dataset)
     // Initialize a default name.
     const name = `New ${type.capitalize()}`;
     // Prepare the item object.

@@ -115,8 +115,8 @@ export class HitosActor extends Actor {
     const actorData = this.data;
     let RD = 0;
     actorData.items.forEach((item) => {
-      if (item.type === "armor" && item.data.equipped === true) {
-        RD += item.data.rd;
+      if (item.type === "armor" && item.data.data.equipped === true) {
+        RD += item.data.data.rd;
       }
     });
     actorData.data.rd = RD;

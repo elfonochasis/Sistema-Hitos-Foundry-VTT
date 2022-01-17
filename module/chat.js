@@ -29,9 +29,7 @@ function negDuplicate(arr){
 async function onDramaRoll(event){
     let mods = Number(event.currentTarget.dataset.mods);
     let dicesOld = event.currentTarget.dataset.roll.split(",");
-    console.log(event)
     let actor = game.actors.get(event.currentTarget.dataset.actor);
-    console.log(actor)
     let template = "systems/hitos/templates/chat/roll-drama.html";
     let dialogData = {
         formula: "",
@@ -58,11 +56,9 @@ async function onDramaRoll(event){
                         newRoll.terms[0].results.forEach(result => {dicesNew.push(result.result)})
                         if(afectar === "1"){
                             result = Math.max(...sumDuplicate(dicesNew)) + mods
-                            console.log(dicesNew,mods,result)
                         }
                         else{
                             result = Math.min(...negDuplicate(dicesNew)) + mods
-                            console.log(dicesNew,mods,result)
                         }
                         let template = "systems/hitos/templates/chat/chat-drama.html";
                         dialogData = {
@@ -93,5 +89,4 @@ async function onDramaRoll(event){
     });
 
     //let actor = game.actors.get(card.dataset.ownerId);
-    //console.log(actor)
 }

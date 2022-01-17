@@ -68,8 +68,14 @@ export async function _onAttackRoll(actor, weapon) {
     
 
     let damageDices = new NumericTerm({number: Array.from(damageBase.term).map((value) => lookup[value]).reduce((sum, value) => sum += value)});
-    let damageWeapon = eval(damageDices.number + damage.terms[1].operator + damage.terms[2].number)
-    console.log(damageWeapon)
+
+    let damageWeapon = 0
+
+    if (damage.terms.length > 1){
+        damageWeapon = eval(damageDices.number + damage.terms[1].operator + damage.terms[2].number)}
+    else{
+        damageWeapon = damageDices.number}
+
     let damageTotal = (damageWeapon + Number(getProperty(actor.data, `data.danio.${weapon.kind}`))) * Number(criticalMod);
     let template = "systems/hitos/templates/chat/chat-roll.html";
 
@@ -119,7 +125,6 @@ export async function _onStatusRoll(actor, status) {
 }
 
 export async function _onCheckRoll(actor, valor, habilidadNombre) {
-    console.log(valor, habilidadNombre)
     let corduraMod = Number(actor.data.data.estabilidadMental.mod);
     let resistenciaMod = Number(actor.data.data.resistencia.mod);
     let template = "systems/hitos/templates/chat/roll-dialog.html";
@@ -128,7 +133,6 @@ export async function _onCheckRoll(actor, valor, habilidadNombre) {
         data: actor.data.data,
         config: CONFIG.hitos,
     };
-    console.log(dialogData)
     let html = await renderTemplate(template, dialogData);
     return new Promise((resolve) => {
         new Dialog({
