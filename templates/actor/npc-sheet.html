@@ -13,13 +13,13 @@
                 </div>
                 <div class="row-nw padding-t-10">
                     <label class="col col-xs-2 label-header" for="data.concepto">{{localize "Hitos.Concepto"}}</label>
-                    <div class="col col-xs-10 input-header" data-edit="data.concepto" contenteditable>
+                    <div class="col col-xs-10 input-header" data-edit="data.concepto" contenteditable="true">
                         {{{data.concepto}}}
                     </div>
                 </div>
                 <div class="row-nw padding-t-10">
                     <label class="col col-xs-2 label-header" for="data.cita">{{localize "Hitos.Cita"}}</label>
-                    <div class="col col-xs-10 input-header" data-edit="data.cita" contenteditable>
+                    <div class="col col-xs-10 input-header" data-edit="data.cita" contenteditable="true">
                         {{{data.cita}}}
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                     <input class="input-body col-xs-1" name="data.atributos.{{key}}.value" type="number"
                         value="{{atributo.value}}" />
                     <div class="hito-disable concept-body col col-xs-8" data-edit="data.atributos.{{key}}.concept"
-                        contenteditable>
+                        contenteditable="true">
                         {{{atributo.concept}}}
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                     <img class="habilidad-edit" src="./systems/hitos/assets/abilities/{{key}}.png" height="24px"
                         width="24px" />
                     <div class="label-body col col-xs-3 rollable-check" data-habilidad="{{key}}"
-                        data-edit="data.habilidades.{{key}}.label" contenteditable>
+                        data-edit="data.habilidades.{{key}}.label" contenteditable="true">
                         {{{habilidad.label}}}
                     </div>
                     {{else}}
@@ -89,7 +89,7 @@
                     <input class="input-body col-xs-1" name="data.habilidades.{{key}}.value" type="number"
                         value="{{habilidad.value}}" />
                     <div class="hito-disable concept-body col col-xs-8" data-edit="data.habilidades.{{key}}.concept"
-                        contenteditable>
+                        contenteditable="true">
                         {{{habilidad.concept}}}
                     </div>
                 </div>
@@ -150,7 +150,7 @@
                             <span class="section-title">{{localize "Hitos.Secuelas"}}</span>
                         </div>
 
-                        <div class="input-header" data-edit="data.secuelas.value" contenteditable>
+                        <div class="input-header" data-edit="data.secuelas.value" contenteditable="true">
                             {{{data.secuelas.value}}}
                         </div>
                     </div>
@@ -162,7 +162,7 @@
                         </div>
 
                         <div class="input-header" data-edit="data.estabilidadMental.degeneracion.description"
-                            contenteditable>
+                            contenteditable="true">
                             {{{data.estabilidadMental.degeneracion.description}}}
                         </div>
                     </div>
@@ -259,7 +259,7 @@
                 {{editor content=data.extras target="data.extras" button=true
                 owner=owner editable=editable}}
                 <!-- <div class="hitos-body" name="data.extras" data-edit="data.extras"
-                contenteditable>
+                contenteditable="true">
                 {{data.extras}} 
                 </div> 
             -->

@@ -13,13 +13,13 @@
                 </div>
                 <div class="row-nw padding-t-10">
                     <label class="col col-xs-2 label-header" for="data.concepto">{{localize "Hitos.Concepto"}}</label>
-                    <div class="col col-xs-10 input-header" data-edit="data.concepto" contenteditable>
+                    <div class="col col-xs-10 input-header" data-edit="data.concepto" contenteditable="true">
                         {{{data.concepto}}}
                     </div>
                 </div>
                 <div class="row-nw padding-t-10">
                     <label class="col col-xs-2 label-header" for="data.motivacion">{{localize "Hitos.Motivacion"}}</label>
-                    <div class="col col-xs-10 input-header" data-edit="data.motivacion" contenteditable>
+                    <div class="col col-xs-10 input-header" data-edit="data.motivacion" contenteditable="true">
                         {{{data.motivacion}}}
                     </div>
                 </div>
@@ -97,7 +97,7 @@
                     <input class="input-body col-xs-1" name="data.atributos.{{key}}.value" type="number"
                         value="{{atributo.value}}" />
                     <div class="hito-disable concept-body col col-xs-7" data-edit="data.atributos.{{key}}.concept"
-                        contenteditable>
+                        contenteditable="true">
                         {{atributo.concept}}
                     </div>
                 </div>
@@ -107,13 +107,13 @@
             <div class="section-header">
                 <span>{{localize "Hitos.Tripulantes"}}</span>
             </div>
-            <div class="col input-header" data-edit="data.tripulantes" contenteditable>
+            <div class="col input-header" data-edit="data.tripulantes" contenteditable="true">
                 {{{data.tripulantes}}}
             </div>
             <div class="section-header">
                 <span>{{localize "Hitos.Especial"}}</span>
             </div>
-            <div class="col input-header" data-edit="data.especial" contenteditable>
+            <div class="col input-header" data-edit="data.especial" contenteditable="true">
                 {{{data.especial}}}
             </div>
         </div>
@@ -126,7 +126,7 @@
                 {{editor content=data.extras target="data.extras" button=true
                 owner=owner editable=editable}}
                 <!-- <div class="hitos-body" name="data.extras" data-edit="data.extras"
-                contenteditable>
+                contenteditable="true">
                 {{data.extras}} 
                 </div> 
             -->
