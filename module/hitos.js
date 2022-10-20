@@ -34,7 +34,7 @@ Hooks.once('init', async function() {
     let val = Number(data.value);
     console.log(data)
 
-    if (data.attribute === "resistencia" || data.attribute === "estabilidadmental") {
+    if (data.attribute === "resistencia" || data.attribute === "estabilidadMental") {
       val = Number(data.max - data.value);
     }
 
