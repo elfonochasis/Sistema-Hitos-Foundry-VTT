@@ -33,7 +33,7 @@ Hooks.once('init', async function() {
   Token.prototype._drawBar = function (number, bar, data) {
     let val = Number(data.value);
 
-    if (data.attribute === "resistencia" || data.attribute === "estabilidadmental") {
+    if (data.attribute === "resistencia" || data.attribute === "estabilidadMental") {
       val = Number(data.max - data.value);
     }
 
