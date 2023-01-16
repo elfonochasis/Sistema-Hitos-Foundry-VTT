@@ -2,7 +2,7 @@
   "name": "hitos",
   "title": "Hitos",
   "description": "Implementación del sistema Hitos de Nosolorol para Foundry VTT.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minimumCoreVersion": "0.8.7",
   "compatibleCoreVersion": "0.8.8",
   "templateVersion": 2,
@@ -19,6 +19,11 @@
       "path": "lang/es.json"
     },
     {
+      "lang": "ca",
+      "name": "Català",
+      "path": "lang/ca.json"
+    },
+    {
       "lang": "fr",
       "name": "Français",
       "path": "lang/fr.json"
@@ -30,6 +35,6 @@
   "secondaryTokenAttribute": "power",
   "url": "https://github.com/elfonochasis/Sistema-Hitos-Foundry-VTT",
   "manifest": "https://raw.githubusercontent.com/elfonochasis/Sistema-Hitos-Foundry-VTT/main/system.json",
-  "download": "https://github.com/elfonochasis/Sistema-Hitos-Foundry-VTT/archive/refs/tags/v1.0.0.zip",
+  "download": "https://github.com/elfonochasis/Sistema-Hitos-Foundry-VTT/archive/refs/tags/v1.0.1.zip",
   "license": "LICENSE.txt"
 }
