@@ -18,7 +18,5 @@
         <span><b>{{ localize "Hitos.Roll.NuevaTirada" }}</b></span> 
         <span>{{dices}}</span>
     </div>
-    {{#unless damage}}
-    <a class="drama-roll font-l" data-actor="{{actor}}" data-roll="{{dices}}" data-mods="{{mods}}"><i class="fas fa-dice"></i></a>
-    {{/unless}}  
+    <a class="drama-roll font-l" data-actor="{{actor}}" data-roll="{{dices}}" data-mods="{{mods}}"  data-weaponDamage="{{weaponDamage}}" data-weaponKindBonus="{{weaponKindBonus}}"><i class="fas fa-dice"></i></a>
 </div>

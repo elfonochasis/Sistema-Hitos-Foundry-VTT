@@ -7,7 +7,7 @@ export async function _onDramaRoll(actor){
     let template = "systems/hitos/templates/chat/roll-dialog.html";
     let dialogData = {
         formula: "",
-        data: actor.data.data,
+        data: actor.system,
         config: CONFIG.hitos,
     };
     let html = await renderTemplate(template, dialogData);
@@ -16,9 +16,9 @@ export async function _onDramaRoll(actor){
 
 
 export async function _onInitRoll(actor) {
-    let values = _rolld10(actor.data.data.iniciativa);
-    let corduraMod = Number(actor.data.data.estabilidadMental.mod);
-    let resistenciaMod = Number(actor.data.data.resistencia.mod);
+    let values = _rolld10(actor.system.iniciativa);
+    let corduraMod = Number(actor.system.estabilidadMental.mod);
+    let resistenciaMod = Number(actor.system.resistencia.mod);
     let template = "systems/hitos/templates/chat/chat-roll.html";
 
     let dialogData = {
@@ -26,9 +26,9 @@ export async function _onInitRoll(actor) {
         total: values[2] + corduraMod + resistenciaMod,
         damage: null,
         dices: values[1],
-        actor: actor.data._id,
-        mods: Number(actor.data.data.iniciativa) + corduraMod + resistenciaMod,
-        data: actor.data.data,
+        actor: actor._id,
+        mods: Number(actor.system.iniciativa) + corduraMod + resistenciaMod,
+        data: actor.system,
         config: CONFIG.hitos,
     };
     let html = await renderTemplate(template, dialogData);
@@ -42,35 +42,30 @@ export async function _onInitRoll(actor) {
 }
 
 export async function _onAttackRoll(actor, weapon) {
-    let corduraMod = Number(actor.data.data.estabilidadMental.mod);
-    let resistenciaMod = Number(actor.data.data.resistencia.mod);
+    let corduraMod = Number(actor.system.estabilidadMental.mod);
+    let resistenciaMod = Number(actor.system.resistencia.mod);
 
     /* M + 1 */
-    let damage = await new Roll(weapon.damage);
+    //let damage = await new Roll(weapon.damage);
     /* M */
-    let damageBase = damage.terms[0];
+    //let damageBase = damage.terms[0];
     /* 3 + 4 + 6 */
     let values = _rolld10(0);
 
-    let attack = Number(values[2]) + actor.data.data.atributos.ref.value + actor.data.data.habilidades.combate.value + resistenciaMod + corduraMod
+    let attack = Number(values[2]) + actor.system.atributos.ref.value + actor.system.habilidades.combate.value + resistenciaMod + corduraMod
 
     let lookup = {
         m: Number(values[1][0]),
         C: Number(values[1][1]),
         M: Number(values[1][2]),
     };
+    let damageBase = eval(weapon.damage.replace("m",lookup["m"]).replace("C",lookup["C"]).replace("M",lookup["M"]))
+    //console.log(eval(damage_test))
     let criticalMod = values[1].filter(value => value==10).length
     criticalMod = criticalMod > 1 ? criticalMod : 1;
-    
-    console.log(criticalMod)
-
-    damage.terms[0] = new NumericTerm({number: Array.from(damageBase.term).map((value) => lookup[value]).reduce((sum, value) => sum += value)});
-
-
-
-    let damageTotal = (Number(damage.evaluate().total) + Number(getProperty(actor.data, `data.danio.${weapon.kind}`))) * Number(criticalMod);
-
-    console.log(Number(damage.total),Number(getProperty(actor.data, `data.danio.${weapon.kind}`)), Number(criticalMod))
+    let weaponKindBonus = Number(getProperty(actor.system, `danio.${weapon.kind}`))
+    //damage.terms[0] = new NumericTerm({number: Array.from(damageBase.term).map((value) => lookup[value]).reduce((sum, value) => sum += value)});
+    let damageTotal = (Number(damageBase) + weaponKindBonus) * Number(criticalMod);
     
     let template = "systems/hitos/templates/chat/chat-roll.html";
 
@@ -79,9 +74,11 @@ export async function _onAttackRoll(actor, weapon) {
         total: attack,
         damage: damageTotal,
         dices: values[1],
-        actor: actor.data._id,
-        data: actor.data.data,
-        mods: actor.data.data.atributos.ref.value + actor.data.data.habilidades.combate.value + resistenciaMod + corduraMod,
+        actor: actor._id,
+        weaponDamage: weapon.damage,
+        weaponKindBonus: weaponKindBonus,
+        data: actor.system,
+        mods: actor.system.atributos.ref.value + actor.system.habilidades.combate.value + resistenciaMod + corduraMod,
         config: CONFIG.hitos       
     };
     let html = await renderTemplate(template, dialogData);
@@ -95,8 +92,8 @@ export async function _onAttackRoll(actor, weapon) {
 }
 
 export async function _onStatusRoll(actor, status) {
-    let values = _rolld10(getProperty(actor.data, `data.${status}.value`));
-    let statusLabel = getProperty(actor.data, `data.${status}.label`)
+    let values = _rolld10(getProperty(actor.system, `.${status}.value`));
+    let statusLabel = getProperty(actor.system, `.${status}.label`)
     let template = "systems/hitos/templates/chat/chat-roll.html";
 
     let dialogData = {
@@ -104,9 +101,9 @@ export async function _onStatusRoll(actor, status) {
         total: values[2],
         damage: null,
         dices: values[1],
-        actor: actor.data._id,
-        mods: Number(getProperty(actor.data, `data.${status}.value`)),
-        data: actor.data.data,
+        actor: actor._id,
+        mods: Number(getProperty(actor.system, `.${status}.value`)),
+        data: actor.system,
         config: CONFIG.hitos,
     };
     let html = await renderTemplate(template, dialogData);
@@ -121,12 +118,12 @@ export async function _onStatusRoll(actor, status) {
 
 export async function _onCheckRoll(actor, valor, habilidadNombre) {
     console.log(valor, habilidadNombre)
-    let corduraMod = Number(actor.data.data.estabilidadMental.mod);
-    let resistenciaMod = Number(actor.data.data.resistencia.mod);
+    let corduraMod = Number(actor.system.estabilidadMental.mod);
+    let resistenciaMod = Number(actor.system.resistencia.mod);
     let template = "systems/hitos/templates/chat/roll-dialog.html";
     let dialogData = {
         formula: "",
-        data: actor.data.data,
+        data: actor.system,
         config: CONFIG.hitos,
     };
     console.log(dialogData)
@@ -153,9 +150,9 @@ export async function _onCheckRoll(actor, valor, habilidadNombre) {
                             damage: null,
                             atributo: game.i18n.localize(html[0].querySelectorAll("option:checked")[0].label),
                             dices: values[1],
-                            actor: actor.data._id,
+                            actor: actor._id,
                             mods: Number(valor) + Number(html[0].querySelectorAll("option:checked")[0].value) + Number(html[0].querySelectorAll(".bonus")[0].value) + resistenciaMod + corduraMod,
-                            data: actor.data.data,
+                            data: actor.system,
                             config: CONFIG.hitos,
                         };
                         html = await renderTemplate(template, dialogData);

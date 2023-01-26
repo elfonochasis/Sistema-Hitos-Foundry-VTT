@@ -25,7 +25,7 @@ export class HitosItemSheet extends ItemSheet {
   get template() {
     const path = "systems/hitos/templates/item";
     // Return a single sheet for all item types.
-    return `${path}/${this.item.data.type}-sheet.html`;
+    return `${path}/${this.item.type}-sheet.html`;
     // Alternatively, you could use the following return statement to do a
     // unique item sheet by type, like `weapon-sheet.html`.
 
@@ -35,13 +35,13 @@ export class HitosItemSheet extends ItemSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  getData() {
+  async getData() {
     const baseData = super.getData();
     let sheetData = {
       owner: this.item.isOwner,
       editable: this.isEditable,
       item: baseData.item,
-      data: baseData.item.data.data,
+      data: baseData.item.system,
       config: CONFIG.hitos
     }
     return sheetData;

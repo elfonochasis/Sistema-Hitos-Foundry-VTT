@@ -10,12 +10,12 @@
                     <div class="grid grid-2col">
                         <div class="resource">
                             <label class="resource-label">{{localize "Hitos.ArmaDanio"}}</label>
-                            <input type="text" name="data.damage" value="{{data.damage}}" placeholder="mCm+3"/>
+                            <input type="text" name="system.damage" value="{{system.damage}}" placeholder="mCm+3"/>
                         </div>
                         <div class="resource">
                             <label class="resource-label">{{localize "Hitos.Tipo"}}</label>
-                            <select name="data.kind">
-                                {{#select data.kind}}
+                            <select name="system.kind">
+                                {{#select system.kind}}
                                 {{#each config.weaponKind as |name type|}}
                                 <option value="{{type}}">{{localize name}}</option>
                                 {{/each}}
@@ -38,7 +38,7 @@
 
         {{!-- Description Tab --}}
         <div class="tab" data-group="primary" data-tab="description">
-            {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+            {{editor system.description target="system.description" button=true owner=owner editable=editable}}
         </div>
 
         {{!-- Attributes Tab --}}

@@ -12,15 +12,15 @@
                     </h1>
                 </div>
                 <div class="row-nw padding-t-10">
-                    <label class="col col-xs-2 label-header" for="data.concepto">{{localize "Hitos.Concepto"}}</label>
-                    <div class="col col-xs-10 input-header" data-edit="data.concepto" contenteditable>
-                        {{{data.concepto}}}
+                    <label class="col col-xs-2 label-header" for="system.concepto">{{localize "Hitos.Concepto"}}</label>
+                    <div class="col col-xs-10 input-header" data-edit="system.concepto" contenteditable>
+                        {{{system.concepto}}}
                     </div>
                 </div>
                 <div class="row-nw padding-t-10">
-                    <label class="col col-xs-2 label-header" for="data.motivacion">{{localize "Hitos.Motivacion"}}</label>
-                    <div class="col col-xs-10 input-header" data-edit="data.motivacion" contenteditable>
-                        {{{data.motivacion}}}
+                    <label class="col col-xs-2 label-header" for="system.motivacion">{{localize "Hitos.Motivacion"}}</label>
+                    <div class="col col-xs-10 input-header" data-edit="system.motivacion" contenteditable>
+                        {{{system.motivacion}}}
                     </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
             <div class="section-header">
                 <span>{{localize "Hitos.Descripcion"}}</span>
             </div>
-            {{editor content=data.descripcion target="data.descripcion" button=true
+            {{editor system.descripcion target="system.descripcion" button=true
       owner=owner editable=editable}}
         </div>
 
@@ -54,13 +54,13 @@
                 <span class="section-title">{{localize "Hitos.Hitos"}}</span>
             </div>
             <div class="grid-2col">
-                <input class="input-header hito-disable" name="data.hito1.value" value="{{data.hito1.value}}"
+                <input class="input-header hito-disable" name="system.hito1.value" value="{{system.hito1.value}}"
                     type="text" placeholder="" />
-                <input class="input-header hito-disable" name="data.hito2.value" value="{{data.hito2.value}}"
+                <input class="input-header hito-disable" name="system.hito2.value" value="{{system.hito2.value}}"
                     type="text" placeholder="" />
-                <input class="input-header hito-disable" name="data.hito3.value" value="{{data.hito3.value}}"
+                <input class="input-header hito-disable" name="system.hito3.value" value="{{system.hito3.value}}"
                     type="text" placeholder="" />
-                <input class="input-header hito-disable" name="data.hito4.value" value="{{data.hito4.value}}"
+                <input class="input-header hito-disable" name="system.hito4.value" value="{{system.hito4.value}}"
                     type="text" placeholder="" />
             </div>
             <div class="grid-2col">
@@ -68,20 +68,20 @@
                 <span class="section-title margin-l-10">{{localize "Hitos.Adicional"}}</span>
             </div>
             <div class="grid-2col">
-                <input class="input-header" name="data.complicacion.value" value="{{data.complicacion.value}}"
+                <input class="input-header" name="system.complicacion.value" value="{{system.complicacion.value}}"
                     type="text" placeholder="" />
                 <div class="columm-nw margin-l-10">
                     <div class="row-nw">
-                        <input class="input-body col-xs-10" name="data.campoadicional1.label" type="text"
-                            value="{{data.campoadicional1.label}}" />
-                        <input class="input-body col-xs-2 margin-l-10" name="data.campoadicional1.value" type="number"
-                            value="{{data.campoadicional1.value}}" />
+                        <input class="input-body col-xs-10" name="system.campoadicional1.label" type="text"
+                            value="{{system.campoadicional1.label}}" />
+                        <input class="input-body col-xs-2 margin-l-10" name="system.campoadicional1.value" type="number"
+                            value="{{system.campoadicional1.value}}" />
                     </div>
                     <div  class="row-nw">
-                        <input class="input-body col-xs-10" name="data.campoadicional2.label" type="text"
-                            value="{{data.campoadicional2.label}}" />
-                        <input class="input-body col-xs-2 margin-l-10" name="data.campoadicional2.value" type="number"
-                            value="{{data.campoadicional2.value}}" />
+                        <input class="input-body col-xs-10" name="system.campoadicional2.label" type="text"
+                            value="{{system.campoadicional2.label}}" />
+                        <input class="input-body col-xs-2 margin-l-10" name="system.campoadicional2.value" type="number"
+                            value="{{system.campoadicional2.value}}" />
                     </div>
                 </div>
             </div>
@@ -89,14 +89,14 @@
                 <span>{{localize "Hitos.Atributos"}}</span>
             </div>
             <div class="grid-2col atributos-grid">
-                {{#each data.atributos as |atributo key| }}
+                {{#each system.atributos as |atributo key| }}
                 <div class="row-nw stat-row align-center">
                     <!-- <a class="spent-concept hide"><span class="fa fa-ban" data-atributo={{atributo}}></span></a> -->
                     <span class="label-body col col-xs-4 rollable"
                         data-atributo="{{key}}">{{localize atributo.label}}</span>
-                    <input class="input-body col-xs-1" name="data.atributos.{{key}}.value" type="number"
+                    <input class="input-body col-xs-1" name="system.atributos.{{key}}.value" type="number"
                         value="{{atributo.value}}" />
-                    <div class="hito-disable concept-body col col-xs-7" data-edit="data.atributos.{{key}}.concept"
+                    <div class="hito-disable concept-body col col-xs-7" data-edit="system.atributos.{{key}}.concept"
                         contenteditable>
                         {{atributo.concept}}
                     </div>
@@ -107,14 +107,14 @@
             <div class="section-header">
                 <span>{{localize "Hitos.Tripulantes"}}</span>
             </div>
-            <div class="col input-header" data-edit="data.tripulantes" contenteditable>
-                {{{data.tripulantes}}}
+            <div class="col input-header" data-edit="system.tripulantes" contenteditable>
+                {{{system.tripulantes}}}
             </div>
             <div class="section-header">
                 <span>{{localize "Hitos.Especial"}}</span>
             </div>
-            <div class="col input-header" data-edit="data.especial" contenteditable>
-                {{{data.especial}}}
+            <div class="col input-header" data-edit="system.especial" contenteditable>
+                {{{system.especial}}}
             </div>
         </div>
         {{!-- Owned Items Tab --}}
@@ -123,11 +123,11 @@
                 <div class="row-nw section-header col-xs-12">
                     <span class="">{{localize "Hitos.Extras"}}</span>
                 </div>
-                {{editor content=data.extras target="data.extras" button=true
+                {{editor system.extras target="system.extras" button=true
                 owner=owner editable=editable}}
-                <!-- <div class="hitos-body" name="data.extras" data-edit="data.extras"
+                <!-- <div class="hitos-body" name="system.extras" data-edit="system.extras"
                 contenteditable>
-                {{data.extras}} 
+                {{system.extras}} 
                 </div> 
             -->
                               
@@ -174,7 +174,7 @@
                     <h4 class="item-name" data-itemID="{{item._id}}">{{item.name}}</h4>
                     <div class="item-controls">
                         <a class="item-control item-quantity-plus" title="Edit Item" data-itemID='{{item._id}}'><i class="fas fa-plus"></i></a>
-                        <span name="item.data.quantity">{{item.data.quantity}}</span>
+                        <span name="item.system.quantity">{{item.system.quantity}}</span>
                         <a class="item-control item-quantity-minus" title="Delete Item" data-itemID='{{item._id}}'><i class="fas fa-minus"></i></a>
                     </div>
                     <div class="item-controls">

@@ -7,12 +7,8 @@ export class HitosItem extends Item {
    * Augment the basic Item data model with additional dynamic data.
    */
   prepareData() {
-
-
     // Get the Item's data
-    const itemData = this.data;
-    const actorData = this.actor ? this.actor.data : {};
-    const data = itemData.data;
+    const itemData = this;
 
     let img = CONST.DEFAULT_TOKEN;
     switch (itemData.type) {
@@ -26,7 +22,7 @@ export class HitosItem extends Item {
         img = "/systems/hitos/assets/icons/weapon.svg";
         break;
     }
-    if (!itemData.img) itemData.img = img;  
+    if (itemData.img === "icons/svg/item-bag.svg") itemData.img = img;  
 
     super.prepareData();
   }

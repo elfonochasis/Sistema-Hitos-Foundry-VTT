@@ -172,4 +172,4 @@ Hooks.once('init', async function() {
 });
 
 
-Hooks.on("renderChatLog", (app,html,data) => Chat.addChatListeners(html));
+Hooks.on("renderChatLog", (app,html,system) => Chat.addChatListeners(html));
