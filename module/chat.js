@@ -26,14 +26,38 @@ function negDuplicate(arr){
     return Array.from(map, el => el[1]>1?(el[0]*-1):el[0]);
  };
 
+function calculateDamage(weaponDamage, weaponKindBonus, diceValues){
+
+    //let corduraMod = Number(actor.system.estabilidadMental.mod);
+    //let resistenciaMod = Number(actor.system.resistencia.mod);
+
+    console.log(weaponDamage, weaponKindBonus, diceValues)
+    let lookup = {
+        m: Number(diceValues[0]),
+        C: Number(diceValues[1]),
+        M: Number(diceValues[2]),
+    };
+
+    let damageBase = eval(weaponDamage.replace("m",lookup["m"]).replace("C",lookup["C"]).replace("M",lookup["M"]))
+    let criticalMod = diceValues.filter(value => value==10).length
+    criticalMod = criticalMod > 1 ? criticalMod : 1;
+    let damageTotal = (Number(damageBase) + Number(weaponKindBonus)) * Number(criticalMod);
+    //let attack = Number(lookup["C"]) + actor.system.atributos.ref.value + actor.system.habilidades.combate.value + resistenciaMod + corduraMod
+    console.log(damageTotal)    
+    return damageTotal
+}
+
 async function onDramaRoll(event){
+    console.log(event)
     let mods = Number(event.currentTarget.dataset.mods);
     let dicesOld = event.currentTarget.dataset.roll.split(",");
     let actor = game.actors.get(event.currentTarget.dataset.actor);
+    let weaponDamage = event.currentTarget.dataset.weapondamage;
+    let weaponKindBonus = event.currentTarget.dataset.weaponkindbonus;
     let template = "systems/hitos/templates/chat/roll-drama.html";
     let dialogData = {
         formula: "",
-        data: actor.data,
+        data: actor.system,
         dices: dicesOld,
         config: CONFIG.hitos,
     };
@@ -60,16 +84,19 @@ async function onDramaRoll(event){
                         else{
                             result = Math.min(...negDuplicate(dicesNew)) + mods
                         }
+                        let damage = calculateDamage(weaponDamage,weaponKindBonus, dicesNew.sort((a, b) => a - b))
                         let template = "systems/hitos/templates/chat/chat-drama.html";
                         dialogData = {
                             title: game.i18n.localize("Drama"),
                             total: result,
-                            damage: null,
+                            damage: damage,
                             dicesOld: dicesOld,
                             dices: dicesNew.sort((a, b) => a - b),
-                            actor: actor.data.id,
+                            actor: actor.id,
                             mods: mods,
-                            data: actor.data.data,
+                            weaponDamage: weaponDamage,
+                            weaponKindBonus: weaponKindBonus,
+                            data: actor.system,
                             config: CONFIG.hitos,
                         };
                         html = await renderTemplate(template, dialogData);
@@ -89,4 +116,5 @@ async function onDramaRoll(event){
     });
 
     //let actor = game.actors.get(card.dataset.ownerId);
+    //console.log(actor)
 }

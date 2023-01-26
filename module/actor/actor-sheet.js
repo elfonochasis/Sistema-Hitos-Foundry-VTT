@@ -26,25 +26,42 @@ export class HitosActorSheet extends ActorSheet {
   get template() {
     const path = "systems/hitos/templates/actor";
     // Return a single sheet for all item types.
-    return `${path}/${this.actor.data.type}-sheet.html`;
+    return `${path}/${this.actor.type}-sheet.html`;
     // Alternatively, you could use the following return statement to do a
     // unique item sheet by type, like `weapon-sheet.html`.
 
     // return `${path}/${this.item.data.type}-sheet.html`;
   }
   /* -------------------------------------------- */
+  async _enrichTextFields(data, fieldNameArr) {
+    for (let t = 0; t < fieldNameArr.length; t++) {
+      if (hasProperty(data, fieldNameArr[t])) {
+        setProperty(data, fieldNameArr[t], await TextEditor.enrichHTML(getProperty(data, fieldNameArr[t]), { async: true }));
+      }
+    };
+  }
 
   /** @override */
-  getData() {
+  async getData() {
     const baseData = super.getData();
+    console.log(baseData)
     let sheetData = {
       editable: this.isEditable,
       actor: baseData.actor,
-      data: baseData.actor.data.data,
+      system: baseData.actor.system,
       items: baseData.items,
       dtypes: ["String", "Number", "Boolean"]
     }
     this._prepareCharacterItems(sheetData);
+
+    
+    let enrichedFields = [
+      "system.biografia",
+      "system.extras",
+    ];
+    await this._enrichTextFields(baseData, enrichedFields);
+
+
     return sheetData;
   }
 
@@ -53,7 +70,7 @@ export class HitosActorSheet extends ActorSheet {
     super.activateListeners(html);
 
     // Everything below here is only needed if the sheet is editable
-    if (!this.options.editable) return;
+    if (!this.isEditable) return;
 
     // Add Inventory Item
     html.find(".item-create").click(this._onItemCreate.bind(this));
@@ -78,16 +95,18 @@ export class HitosActorSheet extends ActorSheet {
     html.find(".item-quantity-plus").click((ev) => {
       ev.preventDefault();
       let item = this.actor.items.get(ev.currentTarget.dataset.itemid);    
+      console.log(item);
       event.preventDefault();
-      item.update({ "data.quantity":  item.data.data.quantity += 1 });
+      item.update({ "system.quantity":  item.system.quantity += 1 });
     });
 
     // Decrease item quantity
     html.find(".item-quantity-minus").click((ev) => {
       ev.preventDefault();
       let item = this.actor.items.get(ev.currentTarget.dataset.itemid);    
+      console.log(item);
       event.preventDefault();
-      item.update({ "data.quantity":  item.data.data.quantity -= 1 });
+      item.update({ "system.quantity":  item.system.quantity -= 1 });
     });
 
     // Rollable abilities.
@@ -95,11 +114,11 @@ export class HitosActorSheet extends ActorSheet {
       ev.preventDefault();
       let habilidad = ev.currentTarget.dataset.habilidad;
       let habilidadValor = getProperty(
-        this.actor.data.data,
+        this.actor.system,
         `habilidades.${habilidad}.value`
       );
       let habilidadNombre = getProperty(
-        this.actor.data.data,
+        this.actor.system,
         `habilidades.${habilidad}.label`
       );
       var value = $(ev.currentTarget).attr('contenteditable');
@@ -113,13 +132,13 @@ export class HitosActorSheet extends ActorSheet {
 
     html.find(".rollable-attack").click((ev) => {
       ev.preventDefault();
-      let weapon = this.actor.items.get(ev.currentTarget.dataset.itemid).data.data;    
+      let weapon = this.actor.items.get(ev.currentTarget.dataset.itemid).system;    
       _onAttackRoll(this.actor,weapon);
     });
 
     html.find(".rollable-status").click((ev) => {
       ev.preventDefault();
-      let status = ev.currentTarget.dataset.status;      
+      let status = ev.currentTarget.dataset.status;  
       _onStatusRoll(this.actor,status);
     });
 
@@ -145,7 +164,7 @@ export class HitosActorSheet extends ActorSheet {
     html.find(".item-toggle").click(ev => {
       ev.preventDefault();
       let armor = this.actor.items.get(ev.currentTarget.dataset.itemid);
-      armor.update({data: {equipped: !armor.data.data.equipped}});
+      armor.update({data: {equipped: !armor.system.equipped}});
       //armor.equipped = (armor.equipped === false ? true : false);
       this.actor._calculateRD(this.actor)
     })
@@ -159,13 +178,14 @@ export class HitosActorSheet extends ActorSheet {
    * @param {Event} event   The originating click event
    * @private
    */
-  _onItemCreate(event) {
+   async _onItemCreate(event) {
     event.preventDefault();
     const header = event.currentTarget;
     // Get the type of item to create.
     const type = header.dataset.type;
     // Grab any data associated with this control.
     const data = duplicate(header.dataset);
+    console.log(header.dataset)
     // Initialize a default name.
     const name = `New ${type.capitalize()}`;
     // Prepare the item object.
@@ -175,7 +195,7 @@ export class HitosActorSheet extends ActorSheet {
       data: data,
     };
     // Remove the type from the dataset since it's in the itemData.type prop.
-    delete itemData.data["type"];
+    delete itemsystem["type"];
 
     // Finally, create the item!
     return this.actor.createEmbeddedDocuments("Item", [itemData]);
@@ -189,7 +209,7 @@ export class HitosActorSheet extends ActorSheet {
    *
    * @return {undefined}
    */
-  _prepareCharacterItems(sheetData) {
+   async _prepareCharacterItems(sheetData) {
     const actorData = sheetData.actor;
 
     // Initialize containers.
@@ -200,7 +220,7 @@ export class HitosActorSheet extends ActorSheet {
     // Iterate through items, allocating to containers
     // let totalWeight = 0;
     for (let i of sheetData.items) {
-      let item = i.data;
+      let item = i.system;
       i.img = i.img || DEFAULT_TOKEN;
       // Append to gear.
       if (i.type === 'item') {

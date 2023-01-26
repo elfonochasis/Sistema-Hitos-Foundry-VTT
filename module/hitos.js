@@ -32,6 +32,7 @@ Hooks.once('init', async function() {
   // Override the default Token _drawBar function.
   Token.prototype._drawBar = function (number, bar, data) {
     let val = Number(data.value);
+    console.log(data)
 
     if (data.attribute === "resistencia" || data.attribute === "estabilidadMental") {
       val = Number(data.max - data.value);
@@ -171,4 +172,4 @@ Hooks.once('init', async function() {
 });
 
 
-Hooks.on("renderChatLog", (app,html,data) => Chat.addChatListeners(html));
+Hooks.on("renderChatLog", (app,html,system) => Chat.addChatListeners(html));

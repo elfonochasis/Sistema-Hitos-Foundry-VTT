@@ -3,22 +3,20 @@
         <span>{{title}}</span>
     </div>
     <div class="row-nw">
-        <span class="col col-xs-6 padding-l-0"><b>Resultado</b></span>
+        <span class="col col-xs-6 padding-l-0"><b>{{ localize "Hitos.Roll.Resultado" }}</b></span>
         <div class="col col-xs-6 text-c"><span>{{total}}</span></div>
     </div> 
     {{#if damage}}
     <div class="row-nw">
-        <span class="col col-xs-6 padding-l-0"><b>Daño</b></span>
+        <span class="col col-xs-6 padding-l-0"><b>{{ localize "Hitos.Roll.Dano" }}</b></span>
         <div class="col col-xs-6 text-c"><span>{{damage}}</span></div>
     </div> 
     {{/if}}   
     <div class="grid-2col font-s">
-        <span><b>Tirada</b></span>
+        <span><b>{{ localize "Hitos.Roll.Tirada" }}</b></span>
         <span>{{dices}}</span>
-        <span><b>Modificador</b></span>
+        <span><b>{{ localize "Hitos.Roll.Modificador" }}</b></span>
         <span>{{mods}}</span>
     </div>
-    {{#unless damage}}
-    <a class="drama-roll font-l" data-actor="{{actor}}" data-roll="{{dices}}" data-mods="{{mods}}"><i class="fas fa-dice"></i></a>
-    {{/unless}}     
+    <a class="drama-roll font-l" data-actor="{{actor}}" data-roll="{{dices}}" data-mods="{{mods}}" data-weaponDamage="{{weaponDamage}}" data-weaponKindBonus="{{weaponKindBonus}}"><i class="fas fa-dice"></i></a>
 </div>

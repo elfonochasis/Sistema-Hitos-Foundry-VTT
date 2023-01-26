@@ -8,7 +8,7 @@ export class HitosActor extends Actor {
    */
   prepareData() {
     let img = CONST.DEFAULT_TOKEN;
-    switch (this.data.type) {
+    switch (this.type) {
       case "character":
         img = "/systems/hitos/assets/icons/character.svg";
         break;
@@ -22,12 +22,10 @@ export class HitosActor extends Actor {
         img = "/systems/hitos/assets/icons/vehicle.svg";
         break;
     }
-    if (!this.data.img) this.data.img = img;
+    if (this.img === "icons/svg/mystery-man.svg") this.img = img;
 
     super.prepareData();
-    const actorData = this.data;
-    const data = actorData.data;
-    const flags = actorData.flags;
+    const actorData = this;
 
     // Make separate methods for each Actor type (character, npc, etc.) to keep
     // things organized.
@@ -42,8 +40,8 @@ export class HitosActor extends Actor {
    * Prepare Character type specific data
    */
   _prepareCharacterData() {
-    const actorData = this.data;
-    const data = actorData.data;
+    const actorData = this;
+    const data = actorData.system;
 
     data.aguante.value =
       Number(data.atributos.for.value) +
@@ -112,18 +110,18 @@ export class HitosActor extends Actor {
   }
 
   _calculateRD() {
-    const actorData = this.data;
+    const actorData = this;
     let RD = 0;
     actorData.items.forEach((item) => {
-      if (item.type === "armor" && item.data.data.equipped === true) {
-        RD += item.data.data.rd;
+      if (item.type === "armor" && item.system.equipped === true) {
+        RD += item.system.rd;
       }
     });
-    actorData.data.rd = RD;
+    actorData.system.rd = RD;
   }
 
   _calculateDefense(){
-    const data = this.data.data;
+    const data = this.system;
 
     data.defensa.normal =
     Number(data.atributos.ref.value) +
