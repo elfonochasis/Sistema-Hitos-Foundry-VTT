@@ -41,7 +41,7 @@ export class HitosItemSheet extends ItemSheet {
       owner: this.item.isOwner,
       editable: this.isEditable,
       item: baseData.item,
-      data: baseData.item.system,
+      system: baseData.item.system,
       config: CONFIG.hitos
     }
     return sheetData;
