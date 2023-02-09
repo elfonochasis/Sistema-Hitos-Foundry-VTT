@@ -59,7 +59,7 @@ export async function _onAttackRoll(actor, weapon) {
         C: Number(values[1][1]),
         M: Number(values[1][2]),
     };
-    let damageBase = eval(weapon.damage.replace("m",lookup["m"]).replace("C",lookup["C"]).replace("M",lookup["M"]))
+    let damageBase = eval(weapon.damage.replace("m","+"+lookup["m"]).replace("C","+"+lookup["C"]).replace("M","+"+lookup["M"]))
     //console.log(eval(damage_test))
     let criticalMod = values[1].filter(value => value==10).length
     criticalMod = criticalMod > 1 ? criticalMod : 1;
