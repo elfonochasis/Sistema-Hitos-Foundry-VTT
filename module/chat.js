@@ -38,7 +38,7 @@ function calculateDamage(weaponDamage, weaponKindBonus, diceValues){
         M: Number(diceValues[2]),
     };
 
-    let damageBase = eval(weapon.damage.replace("m","+"+lookup["m"]).replace("C","+"+lookup["C"]).replace("M","+"+lookup["M"]))
+    let damageBase = eval(weaponDamage.replace("m","+"+lookup["m"]).replace("C","+"+lookup["C"]).replace("M","+"+lookup["M"]))
     let criticalMod = diceValues.filter(value => value==10).length
     criticalMod = criticalMod > 1 ? criticalMod : 1;
     let damageTotal = (Number(damageBase) + Number(weaponKindBonus)) * Number(criticalMod);
