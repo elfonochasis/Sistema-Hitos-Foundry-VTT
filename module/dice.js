@@ -92,8 +92,8 @@ export async function _onAttackRoll(actor, weapon) {
 }
 
 export async function _onStatusRoll(actor, status) {
-    let values = _rolld10(getProperty(actor.system, `.${status}.value`));
-    let statusLabel = getProperty(actor.system, `.${status}.label`)
+    let values = _rolld10(getProperty(actor.system, `${status}.value`));
+    let statusLabel = getProperty(actor.system, `${status}.label`)
     let template = "systems/hitos/templates/chat/chat-roll.html";
 
     let dialogData = {
@@ -102,7 +102,7 @@ export async function _onStatusRoll(actor, status) {
         damage: null,
         dices: values[1],
         actor: actor._id,
-        mods: Number(getProperty(actor.system, `.${status}.value`)),
+        mods: Number(getProperty(actor.system, `${status}.value`)),
         data: actor.system,
         config: CONFIG.hitos,
     };
