@@ -21,6 +21,35 @@
 }
 
 /* Global styles */
+
+.sheet.journal-entry .pages-list .page-heading {
+    color: black;
+	font-family: "Bebas Neue", cursive;
+    font-size: var(--font-size-18);
+}
+
+.sheet.journal-entry .journal-sidebar .directory-header .action-button {
+    color: black;
+}
+
+.sheet.journal-entry .journal-entry-content {
+    background: url(../assets/background.jpg) !important;
+	border: 2px solid #b5d8b7;
+}
+
+.sheet.journal-entry .journal-header .title {
+    text-align: center;
+    font-family: "Bebas Neue", cursive;
+    background-image: url(../assets/header.svg) !important;
+}
+
+.sheet.journal-entry .pages-list .directory-item.active:last-of-type {
+    border-bottom: 2px solid #b5d8b7;
+}
+.sheet.journal-entry .pages-list .directory-item.active:first-of-type {
+    border-top: 2px solid #b5d8b7;
+}
+
 .window-app {
   font-family: "Roboto", sans-serif;
 }
