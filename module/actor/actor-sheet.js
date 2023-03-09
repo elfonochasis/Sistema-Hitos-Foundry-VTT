@@ -54,7 +54,7 @@ export class HitosActorSheet extends ActorSheet {
     }
     this._prepareCharacterItems(sheetData);
 
-    
+
     let enrichedFields = [
       "system.biografia",
       "system.extras",
@@ -94,7 +94,7 @@ export class HitosActorSheet extends ActorSheet {
     // Increment item quantity
     html.find(".item-quantity-plus").click((ev) => {
       ev.preventDefault();
-      let item = this.actor.items.get(ev.currentTarget.dataset.itemid);    
+      let item = this.actor.items.get(ev.currentTarget.dataset.itemid);
       console.log(item);
       event.preventDefault();
       item.update({ "system.quantity":  item.system.quantity += 1 });
@@ -103,7 +103,7 @@ export class HitosActorSheet extends ActorSheet {
     // Decrease item quantity
     html.find(".item-quantity-minus").click((ev) => {
       ev.preventDefault();
-      let item = this.actor.items.get(ev.currentTarget.dataset.itemid);    
+      let item = this.actor.items.get(ev.currentTarget.dataset.itemid);
       console.log(item);
       event.preventDefault();
       item.update({ "system.quantity":  item.system.quantity -= 1 });
@@ -132,13 +132,13 @@ export class HitosActorSheet extends ActorSheet {
 
     html.find(".rollable-attack").click((ev) => {
       ev.preventDefault();
-      let weapon = this.actor.items.get(ev.currentTarget.dataset.itemid).system;    
+      let weapon = this.actor.items.get(ev.currentTarget.dataset.itemid).system;
       _onAttackRoll(this.actor,weapon);
     });
 
     html.find(".rollable-status").click((ev) => {
       ev.preventDefault();
-      let status = ev.currentTarget.dataset.status;  
+      let status = ev.currentTarget.dataset.status;
       _onStatusRoll(this.actor,status);
     });
 
@@ -154,11 +154,11 @@ export class HitosActorSheet extends ActorSheet {
       else {
         element.attr('contenteditable','false').addClass('rollable-check');
       }
-    }); 
+    });
 
     html.find(".hito-disable").contextmenu((ev) => {
       $(ev.currentTarget).toggleClass("input-header-disabled");
-    });    
+    });
 
 
     html.find(".item-toggle").click(ev => {
@@ -167,6 +167,60 @@ export class HitosActorSheet extends ActorSheet {
       armor.update({data: {equipped: !armor.system.equipped}});
       //armor.equipped = (armor.equipped === false ? true : false);
       this.actor._calculateRD(this.actor)
+    })
+
+    html.find(".health-inc").click(ev => {
+      ev.preventDefault();
+      if ( this.actor.system.resistencia.consolidated >= this.actor.system.resistencia.max ) {
+        return;
+      }
+
+      if ( this.actor.system.resistencia.value >= this.actor.system.resistencia.max ) {
+        this.actor.update({ "system.resistencia.consolidated":  this.actor.system.resistencia.consolidated += 1 });
+        return;
+      }
+
+      this.actor.update({ "system.resistencia.value":  this.actor.system.resistencia.value += 1 });
+    })
+
+    html.find(".health-dec").click(ev => {
+      ev.preventDefault();
+      if (this.actor.system.resistencia.value <= this.actor.system.resistencia.consolidated) {
+        return;
+      }
+
+      if ( this.actor.system.resistencia.value === 0 ) {
+        return;
+      }
+
+      this.actor.update({ "system.resistencia.value":  this.actor.system.resistencia.value -= 1 });
+    })
+
+    html.find(".mental-inc").click(ev => {
+      ev.preventDefault();
+      if ( this.actor.system.estabilidadMental.consolidated >= this.actor.system.estabilidadMental.max ) {
+        return;
+      }
+
+      if ( this.actor.system.estabilidadMental.value >= this.actor.system.estabilidadMental.max ) {
+        this.actor.update({ "system.estabilidadMental.consolidated":  this.actor.system.estabilidadMental.consolidated += 1 });
+        return;
+      }
+
+      this.actor.update({ "system.estabilidadMental.value":  this.actor.system.estabilidadMental.value += 1 });
+    })
+
+    html.find(".mental-dec").click(ev => {
+      ev.preventDefault();
+      if (this.actor.system.estabilidadMental.value <= this.actor.system.estabilidadMental.consolidated) {
+        return;
+      }
+
+      if ( this.actor.system.estabilidadMental.value === 0 ) {
+        return;
+      }
+
+      this.actor.update({ "system.estabilidadMental.value":  this.actor.system.estabilidadMental.value -= 1 });
     })
 
   }

@@ -24,3 +24,50 @@
   @import 'components/tabs';
   @import 'components/items';
 }
+
+.health table td:first-child{
+  padding-left: 0;
+}
+
+.health-empty-box {
+  height: 20px;
+  margin: 1px;
+  border: 1px solid black;
+}
+
+.health-crossed-box {
+  height: 20px;
+  margin: 1px;
+  border: 1px solid black;
+  background:
+         linear-gradient(to top left,
+             rgba(0,0,0,0) 0%,
+             rgba(0,0,0,0) calc(50% - 1px),
+             rgba(0,0,0,1) 50%,
+             rgba(0,0,0,0) calc(50% + 1px),
+             rgba(0,0,0,0) 100%);
+}
+
+.health-full-box {
+  height: 20px;
+  margin: 1px;
+  border: 1px solid black;
+  background:
+         linear-gradient(to top left,
+             rgba(0,0,0,0) 0%,
+             rgba(0,0,0,0) calc(50% - 1px),
+             rgba(0,0,0,1) 50%,
+             rgba(0,0,0,0) calc(50% + 1px),
+             rgba(0,0,0,0) 100%),
+         linear-gradient(to top right,
+             rgba(0,0,0,0) 0%,
+             rgba(0,0,0,0) calc(50% - 1px),
+             rgba(0,0,0,1) 50%,
+             rgba(0,0,0,0) calc(50% + 1px),
+             rgba(0,0,0,0) 100%);
+}
+
+.health-button {
+  text-align: center;
+  width: 100%;
+}

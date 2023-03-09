@@ -44,7 +44,7 @@
         "resistencia": {
           "label": "Hitos.HP",
           "value": 0,
-          "max": 10,
+          "max": 15,
           "min": 0,
           "consolidated": 0,
           "status": "",
@@ -58,7 +58,7 @@
         "estabilidadMental": {
           "label": "Hitos.MP",
           "value": 0,
-          "max": 10,
+          "max": 15,
           "min": 0,
           "consolidated": 0,
           "status": "",
@@ -371,7 +371,7 @@
           "max": 12,
           "spent": false
         }
-      },      
+      },
       "notas": ""
     }
   },
