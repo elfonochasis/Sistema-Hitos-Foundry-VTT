@@ -9,7 +9,7 @@
   "ITEM.TypeArmor": "Armadura",
 
   "Hitos.Roll.Elegir": "¿Qué dados mantienes?",
-  "Hitos.Roll.Afectar": "¿Cómo quieres influir?",  
+  "Hitos.Roll.Afectar": "¿Cómo quieres influir?",
   "Hitos.Roll.Resultado": "Resultado",
   "Hitos.Roll.Dano": "Daño",
   "Hitos.Roll.Tirada": "Tirada",
@@ -39,7 +39,7 @@
   "Hitos.POD": "PODER",
   "Hitos.TAM": "TAMAÑO",
   "Hitos.EST": "ESTABILIDAD",
-  "Hitos.MAN": "MANEJO",  
+  "Hitos.MAN": "MANEJO",
   "Hitos.TEC": "TECNOLOGÍA",
   "Hitos.Drama": "Drama",
   "Hitos.FFisica": "F. Física",
@@ -96,5 +96,8 @@
   "Hitos.Cantidad": "Cantidad",
   "Hitos.Degeneracion.Titulo": "Degeneración",
   "Hitos.Degeneracion.EstadoActual": "Estado actual",
-  "Hitos.Secuelas": "Secuelas y transtornos"
+  "Hitos.Secuelas": "Secuelas y transtornos",
+  "Hitos.Actual": "Actual",
+  "Hitos.Consolidado": "Consolidado",
+  "Hitos.Maximo": "Máximo"
 }

@@ -3,13 +3,13 @@
     "ACTOR.TypeNpc": "PNJ",
     "ACTOR.TypeVehicle": "Véhicule",
     "ACTOR.TypeOrganization": "Organisation",
-  
+
     "ITEM.TypeItem": "Objet",
     "ITEM.TypeWeapon": "Arme",
     "ITEM.TypeArmor": "Armure",
-  
+
     "Hitos.Roll.Elegir": "Quels dés gardez-vous ?",
-    "Hitos.Roll.Afectar": "Comment voulez-vous influencer ?",  
+    "Hitos.Roll.Afectar": "Comment voulez-vous influencer ?",
     "Hitos.Roll.Resultado": "Résultat",
     "Hitos.Roll.Dano": "Dégâts",
     "Hitos.Roll.Tirada": "Lancer",
@@ -39,7 +39,7 @@
     "Hitos.POD": "POUVOIR",
     "Hitos.TAM": "TAILLE",
     "Hitos.EST": "STABILITÉ",
-    "Hitos.MAN": "MANIPULATION",  
+    "Hitos.MAN": "MANIPULATION",
     "Hitos.TEC": "TECHNOLOGIE",
     "Hitos.Drama": "Drama",
     "Hitos.FFisica": "Condition physique",
@@ -65,7 +65,7 @@
     "Hitos.Defensa": "Défense",
     "Hitos.Normal": "Normal",
     "Hitos.Desprevenido": "Pris au dépourvu",
-    "Hitos.Danio.Cuerpo": "Bonus aux dégâts au corps à corps", 
+    "Hitos.Danio.Cuerpo": "Bonus aux dégâts au corps à corps",
     "Hitos.Danio.Distancia": "Bonus aux dégâts à distance",
     "Hitos.Bonificador": "Bonus aux dégâts",
     "Hitos.Arma.Cuerpo": "Corps à corps",
@@ -81,7 +81,7 @@
     "Hitos.Armaduras": "Armures",
     "Hitos.Roll.Atributo": "Attribut",
     "Hitos.Roll.Mod": "Modificateur",
-    "Hitos.Roll.Tirar": "Lancer les dés!", 
+    "Hitos.Roll.Tirar": "Lancer les dés!",
     "Hitos.Mental.Cuerdo": "Sain d’esprit",
     "Hitos.Mental.Alterado": "Troublé",
     "Hitos.Mental.Trastornado": "Dérangé",
@@ -96,6 +96,8 @@
     "Hitos.Cantidad": "Quantité",
     "Hitos.Degeneracion.Titulo": "Dégénérescence",
     "Hitos.Degeneracion.EstadoActual": "État actuel",
-    "Hitos.Secuelas": "Séquelles et dérangements mentaux"
+    "Hitos.Secuelas": "Séquelles et dérangements mentaux",
+    "Hitos.Actual": "Actuel",
+    "Hitos.Consolidado": "Consolidé",
+    "Hitos.Maximo": "Maximum"
   }
-  

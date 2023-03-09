@@ -9,7 +9,7 @@
   "ITEM.TypeArmor": "Armadura",
 
   "Hitos.Roll.Elegir": "¿Quins daus mantens?",
-  "Hitos.Roll.Afectar": "¿Com vols influir?",  
+  "Hitos.Roll.Afectar": "¿Com vols influir?",
   "Hitos.Roll.Resultado": "Resultat",
   "Hitos.Roll.Dano": "Dany",
   "Hitos.Roll.Tirada": "Tirada",
@@ -18,7 +18,7 @@
   "Hitos.Roll.TiradaAnterior": "Tirada anterior",
   "Hitos.Roll.NuevaTirada": "Nova tirada",
   "Hitos.Roll.Positivamente": "Positivament",
-  "Hitos.Roll.Negativamente": "Negativament",  
+  "Hitos.Roll.Negativamente": "Negativament",
   "Hitos.Extras": "Extra",
   "Hitos.Biografia": "Biografia",
   "Hitos.Descripcion": "Descripció",
@@ -39,7 +39,7 @@
   "Hitos.POD": "PODER",
   "Hitos.TAM": "TAMANY",
   "Hitos.EST": "ESTABILITAT",
-  "Hitos.MAN": "MANEIG",  
+  "Hitos.MAN": "MANEIG",
   "Hitos.TEC": "TECNOLOGIA",
   "Hitos.Drama": "Drama",
   "Hitos.FFisica": "F. Física",
@@ -96,5 +96,8 @@
   "Hitos.Cantidad": "Quantitat",
   "Hitos.Degeneracion.Titulo": "Degeneració",
   "Hitos.Degeneracion.EstadoActual": "Estat actual",
-  "Hitos.Secuelas": "Seqüeles i trastorns"
+  "Hitos.Secuelas": "Seqüeles i trastorns",
+  "Hitos.Actual": "Actual",
+  "Hitos.Consolidado": "Consolidat",
+  "Hitos.Maximo": "Màxim"
 }

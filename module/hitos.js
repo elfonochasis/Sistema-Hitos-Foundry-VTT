@@ -94,7 +94,7 @@ Hooks.once('init', async function() {
     } else {
       return opts.inverse(this);
     }
-  }); 
+  });
 
    // Register Handlebars utilities
    Handlebars.registerHelper("json", JSON.stringify);
@@ -128,10 +128,13 @@ Hooks.once('init', async function() {
            bool = false;
          }
          break;
+       case "%":
+         bool = (a % b) === 0;
+         break;
        default:
          throw "Unknown operator " + operator;
      }
- 
+
      if (bool) {
        return opts.fn(this);
      } else {
