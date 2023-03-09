@@ -34,7 +34,7 @@
 
 .sheet.journal-entry .journal-entry-content {
     background: url(../assets/background.jpg) !important;
-	border: 2px solid #b5d8b7;
+	  border: 2px solid #b5d8b7;
 }
 
 .sheet.journal-entry .journal-header .title {
@@ -2400,4 +2400,14 @@ div[class*='grid-'] .column-nw {
 .health-button {
   text-align: center;
   width: 100%;
+}
+
+.health table{
+  border: none;
+  border-radius: 5px;
+}
+
+.health table td div{
+  background-color: rgba(76, 175, 80, 0.15);
+  mix-blend-mode: multiply;
 }
