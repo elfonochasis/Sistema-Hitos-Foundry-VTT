@@ -128,28 +128,29 @@
                 </div>
                 <div class="grid-2col habilidades-grid">
                     {{#each system.habilidades as |habilidad key| }}
-                    <div class="row-nw stat-row align-center">
-                        <!-- <a class="spent-concept hide"><span class="fa fa-ban" data-habilidad={{habilidad}}></span></a> -->
-                        {{#iff key "contains" "adicional"}}
-                        <img class="habilidad-edit" src="./systems/hitos/assets/abilities/{{key}}.png" height="24px"
-                            width="24px" />
-                        <div class="label-body col col-xs-3 rollable-check" data-habilidad="{{key}}"
-                            data-edit="system.habilidades.{{key}}.label" contenteditable>
-                            {{{habilidad.label}}}
+                    {{#ifGameModule habilidad}}
+                        <div class="row-nw stat-row align-center">
+                            <!-- <a class="spent-concept hide"><span class="fa fa-ban" data-habilidad={{habilidad}}></span></a> -->
+                            {{#iff key "contains" "adicional"}}
+                            <img class="habilidad-edit" src="./systems/hitos/assets/abilities/{{key}}.png" height="24px"
+                                width="24px" />
+                            <div class="label-body col col-xs-4 rollable-check" data-habilidad="{{key}}"
+                                data-edit="system.habilidades.{{key}}.label" contenteditable>
+                                {{{habilidad.label}}}
+                            </div>
+                            {{else}}
+                            <img src="./systems/hitos/assets/abilities/{{key}}.png" height="24px" width="24px" />
+                            <span class="label-body col col-xs-4 rollable-check"
+                                data-habilidad="{{key}}">{{localize habilidad.label}}</span>
+                            {{/iff}}
+                            <input class="input-body col-xs-1" name="system.habilidades.{{key}}.value" type="number"
+                                value="{{habilidad.value}}" />
+                            <div class="hito-disable concept-body col col-xs-8" data-edit="system.habilidades.{{key}}.concept"
+                                contenteditable>
+                                {{{habilidad.concept}}}
+                            </div>
                         </div>
-                        {{else}}
-                        <img src="./systems/hitos/assets/abilities/{{key}}.png" height="24px" width="24px" />
-                        <span class="label-body col col-xs-3 rollable-check"
-                            data-habilidad="{{key}}">{{localize habilidad.label}}</span>
-                        {{/iff}}
-                        <input class="input-body col-xs-1" name="system.habilidades.{{key}}.value" type="number"
-                            value="{{habilidad.value}}" />
-                        <div class="hito-disable concept-body col col-xs-8" data-edit="system.habilidades.{{key}}.concept"
-                            contenteditable>
-                            {{{habilidad.concept}}}
-                        </div>
-                    </div>
-
+                    {{/ifGameModule}}
                     {{/each}}
                 </div>
             </div>
