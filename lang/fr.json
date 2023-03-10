@@ -56,6 +56,7 @@
     "Hitos.Ocultismo": "Occultisme",
     "Hitos.Brujeria": "Sorcellerie",
     "Hitos.Arcanas": "Magie",
+    "Hitos.Tempodinamica": "Dynamique du tempo",
     "Hitos.ArmaDanio": "Dégâts des armes",
     "Hitos.HitosComplicaciones": "Faits marquants",
     "Hitos.Tipo": "Type",
@@ -101,5 +102,8 @@
     "Hitos.Consolidado": "Consolidé",
     "Hitos.Maximo": "Maximum",
     "Hitos.EnableMentalHealth": "Permettre la santé mentale",
-    "Hitos.EnableMentalHealthHint": "Signaler si votre jeu a une santé mentale (cultes sans nom)"
+    "Hitos.EnableMentalHealthHint": "Signaler si votre jeu a une santé mentale (cultes sans nom)",
+    "Hitos.CultosInnombrables": "Cultes sans nom",
+    "Hitos.LasCorrientesDelTiempo": "Les courants du temps",
+    "Hitos.Core": "Core"
   }

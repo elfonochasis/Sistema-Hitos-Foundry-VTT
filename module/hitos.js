@@ -183,6 +183,14 @@ Hooks.once('init', async function() {
       return opts.inverse(this);
     }
   });
+
+  Handlebars.registerHelper("ifGameModule", function(ability, opts) {
+    if (game.settings.get("hitos", "gameModule") === ability.gameModule || "core" === ability.gameModule) {
+      return opts.fn(this);
+    } else {
+      return opts.inverse(this);
+    }
+  });
 });
 
 
