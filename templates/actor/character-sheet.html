@@ -217,6 +217,7 @@
                                 <input class="col col-xs-12 input-body" name="system.resistencia.status"
                                     value="{{system.resistencia.status}}" type="text" readonly />
                             </div>
+                            {{#ifMental}}
                             <div class="column-nw">
                                 <div class="grid-2col">
                                     <span class="label-body rollable-status"
@@ -249,29 +250,13 @@
                                             {{#iff this "!=" 0}}
                                                 </tr>
                                             {{/iff}}
-                                            <tr>
-                                        {{/iff}}
-                                        <td>
-                                            {{#iff this "<" @root.system.estabilidadMental.consolidated}}
-                                                <div class="health-full-box"></div>
-                                            {{else}}
-                                                {{#iff this "<" @root.system.estabilidadMental.value}}
-                                                    <div class="health-crossed-box"></div>
-                                                {{else}}
-                                                    <div class="health-empty-box"></div>
-                                                {{/iff}}
-                                            {{/iff}}
-                                        </td>
-
-                                        {{#iff this "==" (math @root.system.estabilidadMental.max "-" 1)}}
-                                            </tr>
-                                        {{/iff}}
-                                    {{/times}}
-                                    </table>
+                                        {{/times}}
+                                        </table>
+                                    </div>
+                                    <input class="col col-xs-12 input-body" name="system.estabilidadMental.status"
+                                        value="{{system.estabilidadMental.status}}" type="text" readonly />
                                 </div>
-                                <input class="col col-xs-12 input-body" name="system.estabilidadMental.status"
-                                    value="{{system.estabilidadMental.status}}" type="text" readonly />
-                            </div>
+                            {{/ifMental}}
                         </div>
                         <div>
                             <div class="row-nw col-xs-12">
@@ -282,18 +267,20 @@
                                 {{{system.secuelas.value}}}
                             </div>
                         </div>
-                        <div class="stat-row">
-                            <div class="row-nw col-xs-12 align-center">
-                                <span class="section-title col col-xs-9">{{localize "Hitos.Degeneracion.Titulo"}}</span>
-                                <input class="input-body col col-xs-3" name="system.estabilidadMental.degeneracion.value"
-                                    value="{{system.estabilidadMental.degeneracion.value}}" type="number" />
-                            </div>
+                        {{#ifMental}}
+                            <div class="stat-row">
+                                <div class="row-nw col-xs-12 align-center">
+                                    <span class="section-title col col-xs-9">{{localize "Hitos.Degeneracion.Titulo"}}</span>
+                                    <input class="input-body col col-xs-3" name="system.estabilidadMental.degeneracion.value"
+                                        value="{{system.estabilidadMental.degeneracion.value}}" type="number" />
+                                </div>
 
-                            <div class="input-header" data-edit="system.estabilidadMental.degeneracion.description"
-                                contenteditable>
-                                {{{system.estabilidadMental.degeneracion.description}}}
+                                <div class="input-header" data-edit="system.estabilidadMental.degeneracion.description"
+                                    contenteditable>
+                                    {{{system.estabilidadMental.degeneracion.description}}}
+                                </div>
                             </div>
-                        </div>
+                        {{/ifMental}}
                     </div>
                     <div class="combat-column">
                         <div class="row-nw section-header col-xs-12">

@@ -99,5 +99,7 @@
   "Hitos.Secuelas": "Seqüeles i trastorns",
   "Hitos.Actual": "Actual",
   "Hitos.Consolidado": "Consolidat",
-  "Hitos.Maximo": "Màxim"
+  "Hitos.Maximo": "Màxim",
+  "Hitos.EnableMentalHealth": "Habilitar salut mental",
+  "Hitos.EnableMentalHealthHint": "Marcar si el teu joc té salut mental (cultes innombrables)"
 }

@@ -99,5 +99,7 @@
     "Hitos.Secuelas": "Séquelles et dérangements mentaux",
     "Hitos.Actual": "Actuel",
     "Hitos.Consolidado": "Consolidé",
-    "Hitos.Maximo": "Maximum"
+    "Hitos.Maximo": "Maximum",
+    "Hitos.EnableMentalHealth": "Permettre la santé mentale",
+    "Hitos.EnableMentalHealthHint": "Signaler si votre jeu a une santé mentale (cultes sans nom)"
   }

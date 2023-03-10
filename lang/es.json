@@ -99,5 +99,7 @@
   "Hitos.Secuelas": "Secuelas y transtornos",
   "Hitos.Actual": "Actual",
   "Hitos.Consolidado": "Consolidado",
-  "Hitos.Maximo": "Máximo"
+  "Hitos.Maximo": "Máximo",
+  "Hitos.EnableMentalHealth": "Habilitar salud mental",
+  "Hitos.EnableMentalHealthHint": "Marcar si tu juego tiene salud mental (cultos innombrables)"
 }

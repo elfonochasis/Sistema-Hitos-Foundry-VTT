@@ -46,12 +46,15 @@ export class HitosActor extends Actor {
     data.aguante.value =
       Number(data.atributos.for.value) +
       Number(Math.floor(data.atributos.vol.value / 2));
-    data.entereza.value =
-      Number(data.atributos.vol.value) +
-      Number(Math.floor(data.atributos.int.value / 2));
+
+    if (game.settings.get("hitos", "mentalHealthEnabled")) {
+      data.entereza.value =
+        Number(data.atributos.vol.value) +
+        Number(Math.floor(data.atributos.int.value / 2));
+    }
 
     data.resistencia.max = Number(data.aguante.value) * 3;
-    data.estabilidadMental.max = Number(data.entereza.value) * 3;
+    data.estabilidadMental.max = game.settings.get("hitos", "mentalHealthEnabled")? Number(data.entereza.value) * 3 : 0;
 
     var resistencia = Number(data.resistencia.value);
     var resistencia_Max = Number(data.aguante.value);
@@ -76,28 +79,31 @@ export class HitosActor extends Actor {
       data.resistencia.mod = -5;
     }
 
-    var estMental = Number(data.estabilidadMental.value);
-    var estMental_Max = Number(data.entereza.value);
 
-    if (estMental < estMental_Max) {
-      data.estabilidadMental.status = game.i18n.format("Hitos.Mental.Cuerdo");
-      data.estabilidadMental.mod = 0;
-    } else if (estMental_Max <= estMental && estMental < 2 * estMental_Max) {
-      data.estabilidadMental.status = game.i18n.format("Hitos.Mental.Alterado");
-      data.estabilidadMental.mod = -2;
-    } else if (
-      2 * estMental_Max <= estMental &&
-      estMental < 3 * estMental_Max
-    ) {
-      data.estabilidadMental.status = game.i18n.format(
-        "Hitos.Mental.Trastornado"
-      );
-      data.estabilidadMental.mod = -5;
-    } else {
-      data.estabilidadMental.status = game.i18n.format(
-        "Hitos.Mental.Enloquecido"
-      );
-      data.estabilidadMental.mod = -5;
+    if (game.settings.get("hitos", "mentalHealthEnabled")) {
+      var estMental = Number(data.estabilidadMental.value);
+      var estMental_Max = Number(data.entereza.value);
+
+      if (estMental < estMental_Max) {
+        data.estabilidadMental.status = game.i18n.format("Hitos.Mental.Cuerdo");
+        data.estabilidadMental.mod = 0;
+      } else if (estMental_Max <= estMental && estMental < 2 * estMental_Max) {
+        data.estabilidadMental.status = game.i18n.format("Hitos.Mental.Alterado");
+        data.estabilidadMental.mod = -2;
+      } else if (
+        2 * estMental_Max <= estMental &&
+        estMental < 3 * estMental_Max
+      ) {
+        data.estabilidadMental.status = game.i18n.format(
+          "Hitos.Mental.Trastornado"
+        );
+        data.estabilidadMental.mod = -5;
+      } else {
+        data.estabilidadMental.status = game.i18n.format(
+          "Hitos.Mental.Enloquecido"
+        );
+        data.estabilidadMental.mod = -5;
+      }
     }
 
     data.iniciativa =
@@ -131,7 +137,7 @@ export class HitosActor extends Actor {
       : Number(data.habilidades.combate.value)) +
     5 +
     Number(data.resistencia.mod) +
-    Number(data.estabilidadMental.mod);
+    (game.settings.get("hitos", "mentalHealthEnabled") ? Number(data.estabilidadMental.mod) : 0);
   data.defensa.des = Number(data.defensa.normal) - 2;
   }
 }
