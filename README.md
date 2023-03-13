@@ -27,10 +27,17 @@ La implementación se encuentra en sus primeras versiones y todavía hay aspecto
 - Hoja personalizada de vehículos.
 - Forzar tirada mediante Drama afectando negativa o positivamente.
 - Cálculo automático de modificadores por estados relacionados con la resistencia y la estabilidad mental.
+- Consolidación de daño físico y mental. Gracias a [statukuo](https://github.com/statukuo).
+- Se puede modificar la lista de habilidades según ambientación (CORE / Corrientes del Tiempo / Cultos Innombrables). Gracias a [statukuo](https://github.com/statukuo).
+
+# Idiomas disponibles
+- Castellano.
+- Catalán. Gracias a [pixatintes](https://github.com/pixatintes).
+- Francés. Gracias a [tissema](https://github.com/tissema).
 
 ## Pendiente de implementar
 En futuras versiones, se añadirán:
-- Personalizar estilo de hoja/distintos temas para ambientaciones.
+
 
 # Información de interés
 Canal del sistema en el servidor de Foundry en español de Discord: [Invitación al servidor](https://discord.com/invite/BpAn2DE3cq)

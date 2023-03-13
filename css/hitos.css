@@ -2086,12 +2086,12 @@ div[class*='grid-'] .column-nw {
   flex: 0;
 }
 
-.hitos .sheet-body,
+/* .hitos .sheet-body,
 .hitos .sheet-body .tab,
 .hitos .sheet-body .tab .editor {
   height: 100%;
 }
-
+ */
 .hitos .tox .tox-editor-container {
   background: #fff;
 }
