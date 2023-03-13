@@ -56,6 +56,7 @@
   "Hitos.Ocultismo": "Ocultismo",
   "Hitos.Brujeria": "Brujería",
   "Hitos.Arcanas": "Arcanas",
+  "Hitos.Tempodinamica": "Tempodinámica",
   "Hitos.ArmaDanio": "Daño del arma",
   "Hitos.HitosComplicaciones": "Hitos",
   "Hitos.Tipo": "Tipo",
@@ -99,5 +100,10 @@
   "Hitos.Secuelas": "Secuelas y transtornos",
   "Hitos.Actual": "Actual",
   "Hitos.Consolidado": "Consolidado",
-  "Hitos.Maximo": "Máximo"
+  "Hitos.Maximo": "Máximo",
+  "Hitos.EnableMentalHealth": "Habilitar salud mental",
+  "Hitos.EnableMentalHealthHint": "Marcar si tu juego tiene salud mental (cultos innombrables)",
+  "Hitos.CultosInnombrables": "Cultos Innombrables",
+  "Hitos.LasCorrientesDelTiempo": "Las Corrientes Del Tiempo",
+  "Hitos.Core": "Core"
 }

@@ -56,6 +56,7 @@
   "Hitos.Ocultismo": "Ocultisme",
   "Hitos.Brujeria": "Bruixeria",
   "Hitos.Arcanas": "Arcanes",
+  "Hitos.Tempodinamica": "Tempodinámica",
   "Hitos.ArmaDanio": "Mal de l'arma",
   "Hitos.HitosComplicaciones": "Hitos",
   "Hitos.Tipo": "Tipus",
@@ -99,5 +100,10 @@
   "Hitos.Secuelas": "Seqüeles i trastorns",
   "Hitos.Actual": "Actual",
   "Hitos.Consolidado": "Consolidat",
-  "Hitos.Maximo": "Màxim"
+  "Hitos.Maximo": "Màxim",
+  "Hitos.EnableMentalHealth": "Habilitar salut mental",
+  "Hitos.EnableMentalHealthHint": "Marcar si el teu joc té salut mental (cultes innombrables)",
+  "Hitos.CultosInnombrables": "Cultes Innombrables",
+  "Hitos.LasCorrientesDelTiempo": "Els Corrents Del Temps",
+  "Hitos.Core": "Core"
 }

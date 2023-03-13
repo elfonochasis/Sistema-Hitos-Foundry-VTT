@@ -142,7 +142,8 @@
             "min": 0,
             "max": 12,
             "spent": false,
-            "available": true
+            "available": true,
+            "gameModule": "core"
           },
           "combate": {
             "label": "Hitos.Combate",
@@ -151,7 +152,8 @@
             "min": 0,
             "max": 12,
             "spent": false,
-            "available": true
+            "available": true,
+            "gameModule": "core"
           },
           "interaccion": {
             "label": "Hitos.Interaccion",
@@ -160,7 +162,8 @@
             "min": 0,
             "max": 12,
             "spent": false,
-            "available": true
+            "available": true,
+            "gameModule": "core"
           },
           "percepcion": {
             "label": "Hitos.Percepcion",
@@ -169,7 +172,8 @@
             "min": 0,
             "max": 12,
             "spent": false,
-            "available": true
+            "available": true,
+            "gameModule": "core"
           },
           "subterfugio": {
             "label": "Hitos.Subterfugio",
@@ -178,7 +182,8 @@
             "min": 0,
             "max": 12,
             "spent": false,
-            "available": true
+            "available": true,
+            "gameModule": "core"
           },
           "cultura": {
             "label": "Hitos.Cultura",
@@ -187,7 +192,8 @@
             "min": 0,
             "max": 12,
             "spent": false,
-            "available": true
+            "available": true,
+            "gameModule": "core"
           },
           "profesion": {
             "label": "Hitos.Profesion",
@@ -196,7 +202,8 @@
             "min": 0,
             "max": 12,
             "spent": false,
-            "available": true
+            "available": true,
+            "gameModule": "core"
           },
           "psiquico": {
             "label": "Hitos.Psiquico",
@@ -205,7 +212,8 @@
             "min": 0,
             "max": 12,
             "spent": false,
-            "available": true
+            "available": true,
+            "gameModule": "cultos"
           },
           "ocultismo": {
             "label": "Hitos.Ocultismo",
@@ -214,7 +222,8 @@
             "min": 0,
             "max": 12,
             "spent": false,
-            "available": true
+            "available": true,
+            "gameModule": "cultos"
           },
           "brujeria": {
             "label": "Hitos.Brujeria",
@@ -223,7 +232,8 @@
             "min": 0,
             "max": 12,
             "spent": false,
-            "available": true
+            "available": true,
+            "gameModule": "cultos"
           },
           "arcanas": {
             "label": "Hitos.Arcanas",
@@ -232,7 +242,18 @@
             "min": 0,
             "max": 12,
             "spent": false,
-            "available": true
+            "available": true,
+            "gameModule": "cultos"
+          },
+          "tempodinamica": {
+            "label": "Hitos.Tempodinamica",
+            "concept": "",
+            "value": 0,
+            "min": 0,
+            "max": 12,
+            "spent": false,
+            "available": true,
+            "gameModule": "lcdt"
           },
           "adicional1": {
             "label": "",
@@ -241,7 +262,8 @@
             "min": 0,
             "max": 12,
             "spent": false,
-            "available": true
+            "available": true,
+            "gameModule": "core"
           },
           "adicional2": {
             "label": "",
@@ -250,7 +272,8 @@
             "min": 0,
             "max": 12,
             "spent": false,
-            "available": true
+            "available": true,
+            "gameModule": "core"
           },
           "adicional3": {
             "label": "",
@@ -259,7 +282,8 @@
             "min": 0,
             "max": 12,
             "spent": false,
-            "available": true
+            "available": true,
+            "gameModule": "core"
           },
           "adicional4": {
             "label": "",
@@ -268,7 +292,8 @@
             "min": 0,
             "max": 12,
             "spent": false,
-            "available": true
+            "available": true,
+            "gameModule": "core"
           }
         }
       }
