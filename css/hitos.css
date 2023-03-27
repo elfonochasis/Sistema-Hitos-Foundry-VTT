@@ -22,6 +22,10 @@
 
 /* Global styles */
 
+.sheet.journal-entry .journal-sidebar a {
+    color: black;
+}
+
 .sheet.journal-entry .pages-list .page-heading {
     color: black;
 	font-family: "Bebas Neue", cursive;
