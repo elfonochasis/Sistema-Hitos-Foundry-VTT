@@ -8,15 +8,22 @@
     </div>
     <div class="grid-2col font-s">
         <span><b>{{ localize "Hitos.Roll.Modificador" }}</b></span>
-        <span>{{mods}}</span>
+        <span class="chat-tooltip">
+            {{mods}}
+            <ul class="chat-tooltiptext">
+                {{#each modsTooltip as |modTooltip key| }}
+                    <li>{{modTooltip}}</li>
+                {{/each}}
+            </ul>
+        </span>
         {{#if damage}}
         <span><b>{{ localize "Hitos.Roll.Dano" }}</b></span>
         <span>{{damage}}</span>
         {{/if}}
         <span><b>{{ localize "Hitos.Roll.TiradaAnterior" }}</b></span>
         <span>{{dicesOld}}</span>
-        <span><b>{{ localize "Hitos.Roll.NuevaTirada" }}</b></span> 
+        <span><b>{{ localize "Hitos.Roll.NuevaTirada" }}</b></span>
         <span>{{dices}}</span>
     </div>
-    <a class="drama-roll font-l" data-actor="{{actor}}" data-roll="{{dices}}" data-mods="{{mods}}"  data-weaponDamage="{{weaponDamage}}" data-weaponKindBonus="{{weaponKindBonus}}"><i class="fas fa-dice"></i></a>
+    <a class="drama-roll font-l" data-actor="{{actor}}" data-roll="{{dices}}" data-mods="{{mods}}" data-modsTooltip="{{modsTooltip}}" data-weaponDamage="{{weaponDamage}}" data-weaponKindBonus="{{weaponKindBonus}}"><i class="fas fa-dice"></i></a>
 </div>

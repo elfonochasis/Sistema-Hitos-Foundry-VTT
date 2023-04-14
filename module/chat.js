@@ -43,13 +43,14 @@ function calculateDamage(weaponDamage, weaponKindBonus, diceValues){
     criticalMod = criticalMod > 1 ? criticalMod : 1;
     let damageTotal = (Number(damageBase) + Number(weaponKindBonus)) * Number(criticalMod);
     //let attack = Number(lookup["C"]) + actor.system.atributos.ref.value + actor.system.habilidades.combate.value + resistenciaMod + corduraMod
-    console.log(damageTotal)    
+    console.log(damageTotal)
     return damageTotal
 }
 
 async function onDramaRoll(event){
     console.log(event)
     let mods = Number(event.currentTarget.dataset.mods);
+    let modsTooltip = event.currentTarget.dataset.modstooltip.split(",");
     let dicesOld = event.currentTarget.dataset.roll.split(",");
     let actor = game.actors.get(event.currentTarget.dataset.actor);
     let weaponDamage = event.currentTarget.dataset.weapondamage;
@@ -94,6 +95,7 @@ async function onDramaRoll(event){
                             dices: dicesNew.sort((a, b) => a - b),
                             actor: actor.id,
                             mods: mods,
+                            modsTooltip: modsTooltip,
                             weaponDamage: weaponDamage,
                             weaponKindBonus: weaponKindBonus,
                             data: actor.system,
@@ -103,7 +105,7 @@ async function onDramaRoll(event){
                         ChatMessage.create({
                             content: html,
                             speaker: {alias: actor.name},
-                            type: CONST.CHAT_MESSAGE_TYPES.ROLL, 
+                            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
                             rollMode: game.settings.get("core", "rollMode"),
                             roll: newRoll
                         });
