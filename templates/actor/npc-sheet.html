@@ -72,28 +72,29 @@
             </div>
             <div class="grid-2col habilidades-grid">
                 {{#each system.habilidades as |habilidad key| }}
-                <div class="row-nw stat-row align-center">
-                    <!-- <a class="spent-concept hide"><span class="fa fa-ban" data-habilidad={{habilidad}}></span></a> -->
-                    {{#iff key "contains" "adicional"}}
-                    <img class="habilidad-edit" src="./systems/hitos/assets/abilities/{{key}}.png" height="24px"
-                        width="24px" />
-                    <div class="label-body col col-xs-3 rollable-check" data-habilidad="{{key}}"
-                        data-edit="system.habilidades.{{key}}.label" contenteditable>
-                        {{{habilidad.label}}}
+                {{#ifGameModule habilidad}}
+                    <div class="row-nw stat-row align-center">
+                        <!-- <a class="spent-concept hide"><span class="fa fa-ban" data-habilidad={{habilidad}}></span></a> -->
+                        {{#iff key "contains" "adicional"}}
+                        <img class="habilidad-edit" src="./systems/hitos/assets/abilities/{{key}}.png" height="24px"
+                            width="24px" />
+                        <div class="label-body col col-xs-3 rollable-check" data-habilidad="{{key}}"
+                            data-edit="system.habilidades.{{key}}.label" contenteditable>
+                            {{{habilidad.label}}}
+                        </div>
+                        {{else}}
+                        <img src="./systems/hitos/assets/abilities/{{key}}.png" height="24px" width="24px" />
+                        <span class="label-body col col-xs-3 rollable-check"
+                            data-habilidad="{{key}}">{{localize habilidad.label}}</span>
+                        {{/iff}}
+                        <input class="input-body col-xs-1" name="system.habilidades.{{key}}.value" type="number"
+                            value="{{habilidad.value}}" />
+                        <div class="hito-disable concept-body col col-xs-8" data-edit="system.habilidades.{{key}}.concept"
+                            contenteditable>
+                            {{{habilidad.concept}}}
+                        </div>
                     </div>
-                    {{else}}
-                    <img src="./systems/hitos/assets/abilities/{{key}}.png" height="24px" width="24px" />
-                    <span class="label-body col col-xs-3 rollable-check"
-                        data-habilidad="{{key}}">{{localize habilidad.label}}</span>
-                    {{/iff}}
-                    <input class="input-body col-xs-1" name="system.habilidades.{{key}}.value" type="number"
-                        value="{{habilidad.value}}" />
-                    <div class="hito-disable concept-body col col-xs-8" data-edit="system.habilidades.{{key}}.concept"
-                        contenteditable>
-                        {{{habilidad.concept}}}
-                    </div>
-                </div>
-
+                {{/ifGameModule}}
                 {{/each}}
             </div>
         </div>
@@ -117,33 +118,107 @@
                                 <span class="section-title">{{localize "Hitos.Resistencia"}}</span>
                             </div>
                             <div class="grid-2col">
+                                <span class="label-body">{{localize "Hitos.Actual"}}</span>
                                 <input class="input-body" name="system.resistencia.value"
                                     value="{{system.resistencia.value}}" type="number" />
-                                <input class="input-body" name="system.resistencia.max" value="{{system.resistencia.max}}"
-                                    type="number" readonly />
+                                <span class="label-body">{{localize "Hitos.Consolidado"}}</span>
+                                <input class="input-body" name="system.resistencia.consolidated"
+                                    value="{{system.resistencia.consolidated}}" type="number" />
+                                <span class="label-body">{{localize "Hitos.Maximo"}}</span>
+                                <input class="input-body" name="system.resistencia.max"
+                                        value="{{system.resistencia.max}}" type="number" readonly />
+                            </div>
+                            <div class="grid-2col  margin-0">
+                                <img class="health-dec health-button" src="./systems/hitos/assets/health/minus.svg" height="25px" width="25px" />
+                                <img class="health-inc health-button" src="./systems/hitos/assets/health/add.svg" height="25px" width="25px" />
+                            </div>
+                            <div class="col-xs-12 health">
+                                <table>
+                                {{#times system.resistencia.max }}
+                                    {{#iff this "%" @root.system.aguante.value}}
+                                        {{#iff this "!=" 0}}
+                                            </tr>
+                                        {{/iff}}
+                                        <tr>
+                                    {{/iff}}
+                                    <td>
+                                        {{#iff this "<" @root.system.resistencia.consolidated}}
+                                            <div class="health-full-box"></div>
+                                        {{else}}
+                                            {{#iff this "<" @root.system.resistencia.value}}
+                                                <div class="health-crossed-box"></div>
+                                            {{else}}
+                                                <div class="health-empty-box"></div>
+                                            {{/iff}}
+                                        {{/iff}}
+                                    </td>
+
+                                    {{#iff this "==" (math @root.system.resistencia.max "-" 1)}}
+                                        </tr>
+                                    {{/iff}}
+                                {{/times}}
+                                </table>
                             </div>
                             <input class="col col-xs-12 input-body" name="system.resistencia.status"
                                 value="{{system.resistencia.status}}" type="text" readonly />
                         </div>
-                        <div class="column-nw">
-                            <div class="grid-2col">
-                                <span class="label-body rollable-status"
-                                    data-status="entereza">{{localize system.entereza.label}}</span>
-                                <input class="col input-body" name="system.entereza.value" value="{{system.entereza.value}}"
-                                    type="number" readonly />
+                        {{#ifMental}}
+                            <div class="column-nw">
+                                <div class="grid-2col">
+                                    <span class="label-body rollable-status"
+                                        data-status="entereza">{{localize system.entereza.label}}</span>
+                                    <input class="col input-body" name="system.entereza.value" value="{{system.entereza.value}}"
+                                        type="number" readonly />
+                                </div>
+                                <div class="row-nw col-xs-12">
+                                    <span class="section-title">{{localize "Hitos.EstabilidadMental"}}</span>
+                                </div>
+                                <div class="grid-2col">
+                                    <span class="label-body">{{localize "Hitos.Actual"}}</span>
+                                    <input class="input-body" name="system.estabilidadMental.value"
+                                        value="{{system.estabilidadMental.value}}" type="number" />
+                                    <span class="label-body">{{localize "Hitos.Consolidado"}}</span>
+                                    <input class="input-body" name="system.estabilidadMental.consolidated"
+                                        value="{{system.estabilidadMental.consolidated}}" type="number" />
+                                    <span class="label-body">{{localize "Hitos.Maximo"}}</span>
+                                    <input class="input-body" name="system.estabilidadMental.max"
+                                        value="{{system.estabilidadMental.max}}" type="number" readonly />
+                                </div>
+                                <div class="grid-2col margin-0">
+                                    <img class="mental-dec health-button" src="./systems/hitos/assets/health/minus.svg" height="25px" width="25px" />
+                                    <img class="mental-inc health-button" src="./systems/hitos/assets/health/add.svg" height="25px" width="25px" />
+                                </div>
+                                <div class="col-xs-12 health">
+                                    <table>
+                                    {{#times system.estabilidadMental.max }}
+                                        {{#iff this "%" @root.system.entereza.value}}
+                                            {{#iff this "!=" 0}}
+                                                </tr>
+                                            {{/iff}}
+                                            <tr>
+                                        {{/iff}}
+                                        <td>
+                                            {{#iff this "<" @root.system.estabilidadMental.consolidated}}
+                                                <div class="health-full-box"></div>
+                                            {{else}}
+                                                {{#iff this "<" @root.system.estabilidadMental.value}}
+                                                    <div class="health-crossed-box"></div>
+                                                {{else}}
+                                                    <div class="health-empty-box"></div>
+                                                {{/iff}}
+                                            {{/iff}}
+                                        </td>
+
+                                        {{#iff this "==" (math @root.system.estabilidadMental.max "-" 1)}}
+                                            </tr>
+                                        {{/iff}}
+                                    {{/times}}
+                                    </table>
+                                </div>
+                                <input class="col col-xs-12 input-body" name="system.estabilidadMental.status"
+                                    value="{{system.estabilidadMental.status}}" type="text" readonly />
                             </div>
-                            <div class="row-nw col-xs-12">
-                                <span class="section-title">{{localize "Hitos.EstabilidadMental"}}</span>
-                            </div>
-                            <div class="grid-2col">
-                                <input class="input-body" name="system.estabilidadMental.value"
-                                    value="{{system.estabilidadMental.value}}" type="number" />
-                                <input class="input-body" name="system.estabilidadMental.max"
-                                    value="{{system.estabilidadMental.max}}" type="number" readonly />
-                            </div>
-                            <input class="col col-xs-12 input-body" name="system.estabilidadMental.status"
-                                value="{{system.estabilidadMental.status}}" type="text" readonly />
-                        </div>
+                        {{/ifMental}}
                     </div>
                     <div>
                         <div class="row-nw col-xs-12">
@@ -154,18 +229,20 @@
                             {{{system.secuelas.value}}}
                         </div>
                     </div>
-                    <div class="stat-row">
-                        <div class="row-nw col-xs-12 align-center">
-                            <span class="section-title col col-xs-9">{{localize "Hitos.Degeneracion.Titulo"}}</span>
-                            <input class="input-body col col-xs-3" name="system.estabilidadMental.degeneracion.value"
-                                value="{{system.estabilidadMental.degeneracion.value}}" type="number" />
-                        </div>
+                    {{#ifMental}}
+                        <div class="stat-row">
+                            <div class="row-nw col-xs-12 align-center">
+                                <span class="section-title col col-xs-9">{{localize "Hitos.Degeneracion.Titulo"}}</span>
+                                <input class="input-body col col-xs-3" name="system.estabilidadMental.degeneracion.value"
+                                    value="{{system.estabilidadMental.degeneracion.value}}" type="number" />
+                            </div>
 
-                        <div class="input-header" data-edit="system.estabilidadMental.degeneracion.description"
-                            contenteditable>
-                            {{{system.estabilidadMental.degeneracion.description}}}
+                            <div class="input-header" data-edit="system.estabilidadMental.degeneracion.description"
+                                contenteditable>
+                                {{{system.estabilidadMental.degeneracion.description}}}
+                            </div>
                         </div>
-                    </div>
+                    {{/ifMental}}
                 </div>
                 <div class="combat-column">
                     <div class="row-nw section-header col-xs-12">
@@ -260,10 +337,10 @@
                 owner=owner editable=editable}}
                 <!-- <div class="hitos-body" name="system.extras" data-edit="system.extras"
                 contenteditable>
-                {{system.extras}} 
-                </div> 
+                {{system.extras}}
+                </div>
             -->
-                              
+
             </div>
             <ol class="gear-list item-list">
                 <div class="row-nw section-header col-xs-12">
