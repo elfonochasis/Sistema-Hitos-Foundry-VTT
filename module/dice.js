@@ -28,6 +28,11 @@ export async function _onInitRoll(actor) {
         dices: values[1],
         actor: actor._id,
         mods: Number(actor.system.iniciativa) + corduraMod + resistenciaMod,
+        modsTooltip: _formatModsTooltip([
+            {value: actor.system.iniciativa, key: "Iniciativa"},
+            {value: corduraMod, key: "EstabilidadMental"},
+            {value: resistenciaMod, key: "Resistencia"}
+        ]),
         data: actor.system,
         config: CONFIG.hitos,
     };
@@ -79,6 +84,12 @@ export async function _onAttackRoll(actor, weapon) {
         weaponKindBonus: weaponKindBonus,
         data: actor.system,
         mods: actor.system.atributos.ref.value + actor.system.habilidades.combate.value + resistenciaMod + corduraMod,
+        modsTooltip: _formatModsTooltip([
+            {value: actor.system.atributos.ref.value, key: "REF"},
+            {value: actor.system.habilidades.combate.value, key: "Combate"},
+            {value: corduraMod, key: "EstabilidadMental"},
+            {value: resistenciaMod, key: "Resistencia"}
+        ]),
         config: CONFIG.hitos
     };
     let html = await renderTemplate(template, dialogData);
@@ -103,6 +114,9 @@ export async function _onStatusRoll(actor, status) {
         dices: values[1],
         actor: actor._id,
         mods: Number(getProperty(actor.system, `${status}.value`)),
+        modsTooltip: _formatModsTooltip([
+            {value: Number(getProperty(actor.system, `${status}.value`)), key: statusLabel.replace("Hitos.","")}
+        ]),
         data: actor.system,
         config: CONFIG.hitos,
     };
@@ -152,6 +166,13 @@ export async function _onCheckRoll(actor, valor, habilidadNombre) {
                             dices: values[1],
                             actor: actor._id,
                             mods: Number(valor) + Number(html[0].querySelectorAll("option:checked")[0].value) + Number(html[0].querySelectorAll(".bonus")[0].value) + resistenciaMod + corduraMod,
+                            modsTooltip: _formatModsTooltip([
+                                {value: Number(valor), key: habilidadNombre.replace("Hitos.", "")},
+                                {value: Number(html[0].querySelectorAll("option:checked")[0].value), key: html[0].querySelectorAll("option:checked")[0].label.replace("Hitos.", "").substring(0, 3)},
+                                {value: Number(html[0].querySelectorAll(".bonus")[0].value), key: "Roll.Modificador"},
+                                {value: corduraMod, key: "EstabilidadMental"},
+                                {value: resistenciaMod, key: "Resistencia"}
+                            ]),
                             data: actor.system,
                             config: CONFIG.hitos,
                         };
@@ -177,4 +198,10 @@ function _rolld10(valor) {
     let d10s = d10Roll.result.split(" + ").sort((a, b) => a - b);
     let result = Number(d10s[1]) + Number(valor);
     return [d10Roll, d10s, result];
+}
+
+function _formatModsTooltip(data) {
+    return data.filter(({value}) => value !== 0).map(({value, key}) => {
+        return game.i18n.localize("Hitos." + key) + ": " + value;
+    });
 }
