@@ -1,12 +1,12 @@
 {
-  "ACTOR.TypeCharacter": "Personaje",
-  "ACTOR.TypeNpc": "PNJ",
-  "ACTOR.TypeVehicle": "Vehículo",
-  "ACTOR.TypeOrganization": "Organización",
+  "TYPES.Actor.character": "Personaje",
+  "TYPES.Actor.npc": "PNJ",
+  "TYPES.Actor.vehicle": "Vehículo",
+  "TYPES.Actor.organization": "Organización",
 
-  "ITEM.TypeItem": "Objeto",
-  "ITEM.TypeWeapon": "Arma",
-  "ITEM.TypeArmor": "Armadura",
+  "TYPES.Item.item": "Objeto",
+  "TYPES.Item.weapon": "Arma",
+  "TYPES.Item.armor": "Armadura",
 
   "Hitos.Roll.Elegir": "¿Qué dados mantienes?",
   "Hitos.Roll.Afectar": "¿Cómo quieres influir?",

@@ -1,12 +1,12 @@
 {
-    "ACTOR.TypeCharacter": "PJ",
-    "ACTOR.TypeNpc": "PNJ",
-    "ACTOR.TypeVehicle": "Véhicule",
-    "ACTOR.TypeOrganization": "Organisation",
+    "TYPES.Actor.character": "PJ",
+    "TYPES.Actor.npc": "PNJ",
+    "TYPES.Actor.vehicle": "Véhicule",
+    "TYPES.Actor.organization": "Organisation",
 
-    "ITEM.TypeItem": "Objet",
-    "ITEM.TypeWeapon": "Arme",
-    "ITEM.TypeArmor": "Armure",
+    "TYPES.Item.item": "Objet",
+    "TYPES.Item.weapon": "Arme",
+    "TYPES.Item.armor": "Armure",
 
     "Hitos.Roll.Elegir": "Quels dés gardez-vous ?",
     "Hitos.Roll.Afectar": "Comment voulez-vous influencer ?",
