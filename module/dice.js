@@ -16,7 +16,7 @@ export async function _onDramaRoll(actor){
 
 
 export async function _onInitRoll(actor) {
-    let values = _rolld10(actor.system.iniciativa);
+    let values = await _rolld10(actor.system.iniciativa);
     let corduraMod = game.settings.get("hitos", "mentalHealthEnabled")? Number(actor.system.estabilidadMental.mod) : 0;
     let resistenciaMod = Number(actor.system.resistencia.mod);
     let template = "systems/hitos/templates/chat/chat-roll.html";
@@ -55,7 +55,7 @@ export async function _onAttackRoll(actor, weapon) {
     /* M */
     //let damageBase = damage.terms[0];
     /* 3 + 4 + 6 */
-    let values = _rolld10(0);
+    let values = await _rolld10(0);
 
     let attack = Number(values[2]) + actor.system.atributos.ref.value + actor.system.habilidades.combate.value + resistenciaMod + corduraMod
 
@@ -103,7 +103,7 @@ export async function _onAttackRoll(actor, weapon) {
 }
 
 export async function _onStatusRoll(actor, status) {
-    let values = _rolld10(getProperty(actor.system, `${status}.value`));
+    let values = await _rolld10(getProperty(actor.system, `${status}.value`));
     let statusLabel = getProperty(actor.system, `${status}.label`)
     let template = "systems/hitos/templates/chat/chat-roll.html";
 
@@ -150,7 +150,7 @@ export async function _onCheckRoll(actor, valor, habilidadNombre) {
                 normal: {
                     label: game.i18n.localize("Hitos.Roll.Tirar"),
                     callback: async (html) => {
-                        let values = _rolld10(valor);
+                        let values = await _rolld10(valor);
                         let total =
                             Number(html[0].querySelectorAll("option:checked")[0].value) +
                             Number(html[0].querySelectorAll(".bonus")[0].value) +
@@ -193,8 +193,8 @@ export async function _onCheckRoll(actor, valor, habilidadNombre) {
     });
 }
 
-function _rolld10(valor) {
-    let d10Roll = new Roll("1d10+1d10+1d10").roll({async: false});
+async function _rolld10(valor) {
+    let d10Roll = await new Roll("1d10+1d10+1d10").evaluate();
     let d10s = d10Roll.result.split(" + ").sort((a, b) => a - b);
     let result = Number(d10s[1]) + Number(valor);
     return [d10Roll, d10s, result];
