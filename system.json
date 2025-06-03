@@ -29,6 +29,11 @@
       "lang": "ca",
       "name": "Catalán",
       "path": "lang/ca.json"
+    },
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
     }
   ],
   "gridDistance": 5,
