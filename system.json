@@ -1,4 +1,5 @@
 {
+  "id": "hitos",
   "name": "hitos",
   "title": "Hitos",
   "description": "Implementación del sistema Hitos de Nosolorol para Foundry VTT.",
