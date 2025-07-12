@@ -77,7 +77,7 @@ async function onDramaRoll(event){
                         let dicesNew = [];
                         let result = 0;
                         selectedDices.forEach(dice => {dicesNew.push(Number(dice.value))});
-                        let newRoll = await new Roll((3 - Number(dicesNew.length)) + "d10").roll({async: true});
+                        let newRoll = await new Roll((3 - Number(dicesNew.length)) + "d10").evaluate();
                         newRoll.terms[0].results.forEach(result => {dicesNew.push(result.result)})
                         if(afectar === "1"){
                             result = Math.max(...sumDuplicate(dicesNew)) + mods
