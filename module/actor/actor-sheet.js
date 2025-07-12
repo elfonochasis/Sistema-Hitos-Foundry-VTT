@@ -35,8 +35,14 @@ export class HitosActorSheet extends ActorSheet {
   /* -------------------------------------------- */
   async _enrichTextFields(data, fieldNameArr) {
     for (let t = 0; t < fieldNameArr.length; t++) {
-      if (hasProperty(data, fieldNameArr[t])) {
-        setProperty(data, fieldNameArr[t], await TextEditor.enrichHTML(getProperty(data, fieldNameArr[t]), { async: true }));
+      if (foundry.utils.hasProperty(data, fieldNameArr[t])) {
+        foundry.utils.setProperty(data, fieldNameArr[t], await TextEditor.enrichHTML(foundry.utils.getProperty(data, fieldNameArr[t]), { 
+          async: true,
+          secrets: false,
+          documents: true,
+          links: true,
+          rolls: true
+        }));
       }
     };
   }
@@ -113,11 +119,11 @@ export class HitosActorSheet extends ActorSheet {
     html.find(".rollable-check").click((ev) => {
       ev.preventDefault();
       let habilidad = ev.currentTarget.dataset.habilidad;
-      let habilidadValor = getProperty(
+      let habilidadValor = foundry.utils.getProperty(
         this.actor.system,
         `habilidades.${habilidad}.value`
       );
-      let habilidadNombre = getProperty(
+      let habilidadNombre = foundry.utils.getProperty(
         this.actor.system,
         `habilidades.${habilidad}.label`
       );
@@ -164,7 +170,7 @@ export class HitosActorSheet extends ActorSheet {
     html.find(".item-toggle").click(ev => {
       ev.preventDefault();
       let armor = this.actor.items.get(ev.currentTarget.dataset.itemid);
-      armor.update({data: {equipped: !armor.system.equipped}});
+      armor.update({"system.equipped": !armor.system.equipped});
       //armor.equipped = (armor.equipped === false ? true : false);
       this.actor._calculateRD(this.actor)
     })
@@ -238,7 +244,7 @@ export class HitosActorSheet extends ActorSheet {
     // Get the type of item to create.
     const type = header.dataset.type;
     // Grab any data associated with this control.
-    const data = duplicate(header.dataset);
+    const data = foundry.utils.duplicate(header.dataset);
     console.log(header.dataset)
     // Initialize a default name.
     const name = `New ${type.capitalize()}`;
@@ -246,10 +252,10 @@ export class HitosActorSheet extends ActorSheet {
     const itemData = {
       name: name,
       type: type,
-      data: data,
+      system: data,
     };
     // Remove the type from the dataset since it's in the itemData.type prop.
-    delete itemsystem["type"];
+    delete itemData.system["type"];
 
     // Finally, create the item!
     return this.actor.createEmbeddedDocuments("Item", [itemData]);

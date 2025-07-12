@@ -104,10 +104,13 @@ async function onDramaRoll(event){
                         html = await renderTemplate(template, dialogData);
                         ChatMessage.create({
                             content: html,
-                            speaker: {alias: actor.name},
+                            speaker: ChatMessage.getSpeaker({actor: actor}),
                             type: CONST.CHAT_MESSAGE_TYPES.ROLL,
                             rollMode: game.settings.get("core", "rollMode"),
-                            roll: newRoll
+                            roll: newRoll,
+                            flags: {
+                                "hitos.dramaRoll": true
+                            }
                         });
                     },
                 },
