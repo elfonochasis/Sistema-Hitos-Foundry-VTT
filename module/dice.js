@@ -39,10 +39,13 @@ export async function _onInitRoll(actor) {
     let html = await renderTemplate(template, dialogData);
     ChatMessage.create({
         content: html,
-        speaker: {alias: actor.name},
+        speaker: ChatMessage.getSpeaker({actor: actor}),
         type: CONST.CHAT_MESSAGE_TYPES.ROLL,
         rollMode: game.settings.get("core", "rollMode"),
-        roll: values[0]
+        roll: values[0],
+        flags: {
+            "hitos.initiativeRoll": true
+        }
     });
 }
 
@@ -68,7 +71,7 @@ export async function _onAttackRoll(actor, weapon) {
     //console.log(eval(damage_test))
     let criticalMod = values[1].filter(value => value==10).length
     criticalMod = criticalMod > 1 ? criticalMod : 1;
-    let weaponKindBonus = Number(getProperty(actor.system, `danio.${weapon.kind}`))
+    let weaponKindBonus = Number(foundry.utils.getProperty(actor.system, `danio.${weapon.kind}`))
     //damage.terms[0] = new NumericTerm({number: Array.from(damageBase.term).map((value) => lookup[value]).reduce((sum, value) => sum += value)});
     let damageTotal = (Number(damageBase) + weaponKindBonus) * Number(criticalMod);
 
@@ -95,16 +98,20 @@ export async function _onAttackRoll(actor, weapon) {
     let html = await renderTemplate(template, dialogData);
     ChatMessage.create({
         content: html,
-        speaker: {alias: actor.name},
+        speaker: ChatMessage.getSpeaker({actor: actor}),
         type: CONST.CHAT_MESSAGE_TYPES.ROLL,
         rollMode: game.settings.get("core", "rollMode"),
-        roll: values[0]
+        roll: values[0],
+        flags: {
+            "hitos.attackRoll": true,
+            "hitos.weaponType": weapon.kind
+        }
     });
 }
 
 export async function _onStatusRoll(actor, status) {
-    let values = await _rolld10(getProperty(actor.system, `${status}.value`));
-    let statusLabel = getProperty(actor.system, `${status}.label`)
+    let values = await _rolld10(foundry.utils.getProperty(actor.system, `${status}.value`));
+    let statusLabel = foundry.utils.getProperty(actor.system, `${status}.label`)
     let template = "systems/hitos/templates/chat/chat-roll.html";
 
     let dialogData = {
@@ -113,9 +120,9 @@ export async function _onStatusRoll(actor, status) {
         damage: null,
         dices: values[1],
         actor: actor._id,
-        mods: Number(getProperty(actor.system, `${status}.value`)),
+        mods: Number(foundry.utils.getProperty(actor.system, `${status}.value`)),
         modsTooltip: _formatModsTooltip([
-            {value: Number(getProperty(actor.system, `${status}.value`)), key: statusLabel.replace("Hitos.","")}
+            {value: Number(foundry.utils.getProperty(actor.system, `${status}.value`)), key: statusLabel.replace("Hitos.","")}
         ]),
         data: actor.system,
         config: CONFIG.hitos,
@@ -123,10 +130,14 @@ export async function _onStatusRoll(actor, status) {
     let html = await renderTemplate(template, dialogData);
     ChatMessage.create({
         content: html,
-        speaker: {alias: actor.name},
+        speaker: ChatMessage.getSpeaker({actor: actor}),
         type: CONST.CHAT_MESSAGE_TYPES.ROLL,
         rollMode: game.settings.get("core", "rollMode"),
-        roll: values[0]
+        roll: values[0],
+        flags: {
+            "hitos.statusRoll": true,
+            "hitos.statusType": status
+        }
     });
 }
 
@@ -179,10 +190,14 @@ export async function _onCheckRoll(actor, valor, habilidadNombre) {
                         html = await renderTemplate(template, dialogData);
                         ChatMessage.create({
                             content: html,
-                            speaker: {alias: actor.name},
+                            speaker: ChatMessage.getSpeaker({actor: actor}),
                             type: CONST.CHAT_MESSAGE_TYPES.ROLL,
                             rollMode: game.settings.get("core", "rollMode"),
-                            roll: values[0]
+                            roll: values[0],
+                            flags: {
+                                "hitos.checkRoll": true,
+                                "hitos.skill": habilidadNombre
+                            }
                         });
                     },
                 },

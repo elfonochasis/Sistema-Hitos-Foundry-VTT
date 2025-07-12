@@ -5,7 +5,7 @@
   "description": "Implementación del sistema Hitos de Nosolorol para Foundry VTT.",
   "version": "1.2.0",
   "compatibility": {
-        "minimum": "11.315",
+        "minimum": "12.0.0",
         "verified": "13"
   },
   "templateVersion": 2,

@@ -25,7 +25,7 @@ Hooks.once('init', async function() {
     decimals: 0
   };
 
-  // Define custom Entity classes
+  // Define custom Document classes
   CONFIG.Actor.documentClass = HitosActor;
   CONFIG.Item.documentClass = HitosItem;
 
@@ -43,7 +43,7 @@ Hooks.once('init', async function() {
 
     const pct = Math.clamped(val, 0, data.max) / data.max;
     let h = Math.max(canvas.dimensions.size / 12, 8);
-    if (this.data.height >= 2) h *= 1.6; // Enlarge the bar for large tokens
+    if (this.document.height >= 2) h *= 1.6; // Enlarge the bar for large tokens
     // Draw the bar
     let color = number === 0 ? [1 - pct / 2, pct, 0] : [0.5 * pct, 0.7 * pct, 0.5 + pct / 2];
     bar
@@ -51,7 +51,7 @@ Hooks.once('init', async function() {
       .beginFill(0x000000, 0.5)
       .lineStyle(2, 0x000000, 0.9)
       .drawRoundedRect(0, 0, this.w, h, 3)
-      .beginFill(PIXI.utils.rgb2hex(color), 0.8)
+      .beginFill(Color.from(color).valueOf(), 0.8)
       .lineStyle(1, 0x000000, 0.8)
       .drawRoundedRect(1, 1, pct * (this.w - 2), h - 2, 2);
     // Set position
@@ -63,9 +63,15 @@ Hooks.once('init', async function() {
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("hitos", HitosActorSheet, { makeDefault: true });
+  Actors.registerSheet("hitos", HitosActorSheet, { 
+    types: ["character", "npc", "organization", "vehicle"],
+    makeDefault: true 
+  });
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("hitos", HitosItemSheet, { makeDefault: true });
+  Items.registerSheet("hitos", HitosItemSheet, { 
+    types: ["item", "armor", "weapon"],
+    makeDefault: true 
+  });
 
   Handlebars.registerHelper("math", function (lvalue, operator, rvalue, options) {
     lvalue = parseFloat(lvalue);
@@ -160,7 +166,13 @@ Hooks.once('init', async function() {
   });
 
   Handlebars.registerHelper('enrich', function(str) {
-    return TextEditor.enrichHTML(str);
+    return TextEditor.enrichHTML(str, { 
+      async: false,
+      secrets: false,
+      documents: true,
+      links: true,
+      rolls: true
+    });
   });
 
   Handlebars.registerHelper("times", function (n, content){

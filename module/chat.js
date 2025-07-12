@@ -77,7 +77,7 @@ async function onDramaRoll(event){
                         let dicesNew = [];
                         let result = 0;
                         selectedDices.forEach(dice => {dicesNew.push(Number(dice.value))});
-                        let newRoll = await new Roll((3 - Number(dicesNew.length)) + "d10").roll({async: true});
+                        let newRoll = await new Roll((3 - Number(dicesNew.length)) + "d10").evaluate();
                         newRoll.terms[0].results.forEach(result => {dicesNew.push(result.result)})
                         if(afectar === "1"){
                             result = Math.max(...sumDuplicate(dicesNew)) + mods
@@ -104,10 +104,13 @@ async function onDramaRoll(event){
                         html = await renderTemplate(template, dialogData);
                         ChatMessage.create({
                             content: html,
-                            speaker: {alias: actor.name},
+                            speaker: ChatMessage.getSpeaker({actor: actor}),
                             type: CONST.CHAT_MESSAGE_TYPES.ROLL,
                             rollMode: game.settings.get("core", "rollMode"),
-                            roll: newRoll
+                            roll: newRoll,
+                            flags: {
+                                "hitos.dramaRoll": true
+                            }
                         });
                     },
                 },
