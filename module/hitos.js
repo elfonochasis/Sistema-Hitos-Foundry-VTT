@@ -41,9 +41,9 @@ Hooks.once('init', async function() {
       val = Number(data.max - data.value);
     }
 
-    const pct = Math.clamped(val, 0, data.max) / data.max;
+    const pct = Math.clamp(val, 0, data.max) / data.max;
     let h = Math.max(canvas.dimensions.size / 12, 8);
-    if (this.data.height >= 2) h *= 1.6; // Enlarge the bar for large tokens
+    if (this.document.height >= 2) h *= 1.6; // Enlarge the bar for large tokens
     // Draw the bar
     let color = number === 0 ? [1 - pct / 2, pct, 0] : [0.5 * pct, 0.7 * pct, 0.5 + pct / 2];
     bar
@@ -51,7 +51,7 @@ Hooks.once('init', async function() {
       .beginFill(0x000000, 0.5)
       .lineStyle(2, 0x000000, 0.9)
       .drawRoundedRect(0, 0, this.w, h, 3)
-      .beginFill(PIXI.utils.rgb2hex(color), 0.8)
+      .beginFill(new PIXI.Color(color).toNumber(), 0.8)
       .lineStyle(1, 0x000000, 0.8)
       .drawRoundedRect(1, 1, pct * (this.w - 2), h - 2, 2);
     // Set position

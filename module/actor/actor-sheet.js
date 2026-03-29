@@ -9,7 +9,7 @@ export class HitosActorSheet extends ActorSheet {
   }
   /** @override */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["hitos", "sheet", "actor"],
       template: "systems/hitos/templates/actor/actor-sheet.html",
       width: 740,
@@ -35,8 +35,8 @@ export class HitosActorSheet extends ActorSheet {
   /* -------------------------------------------- */
   async _enrichTextFields(data, fieldNameArr) {
     for (let t = 0; t < fieldNameArr.length; t++) {
-      if (hasProperty(data, fieldNameArr[t])) {
-        setProperty(data, fieldNameArr[t], await TextEditor.enrichHTML(getProperty(data, fieldNameArr[t]), { async: true }));
+      if (foundry.utils.hasProperty(data, fieldNameArr[t])) {
+        foundry.utils.setProperty(data, fieldNameArr[t], await TextEditor.enrichHTML(foundry.utils.getProperty(data, fieldNameArr[t])));
       }
     };
   }
@@ -113,11 +113,11 @@ export class HitosActorSheet extends ActorSheet {
     html.find(".rollable-check").click((ev) => {
       ev.preventDefault();
       let habilidad = ev.currentTarget.dataset.habilidad;
-      let habilidadValor = getProperty(
+      let habilidadValor = foundry.utils.getProperty(
         this.actor.system,
         `habilidades.${habilidad}.value`
       );
-      let habilidadNombre = getProperty(
+      let habilidadNombre = foundry.utils.getProperty(
         this.actor.system,
         `habilidades.${habilidad}.label`
       );
@@ -238,7 +238,7 @@ export class HitosActorSheet extends ActorSheet {
     // Get the type of item to create.
     const type = header.dataset.type;
     // Grab any data associated with this control.
-    const data = duplicate(header.dataset);
+    const data = foundry.utils.deepClone(header.dataset);
     console.log(header.dataset)
     // Initialize a default name.
     const name = `New ${type.capitalize()}`;
@@ -275,7 +275,7 @@ export class HitosActorSheet extends ActorSheet {
     // let totalWeight = 0;
     for (let i of sheetData.items) {
       let item = i.system;
-      i.img = i.img || DEFAULT_TOKEN;
+      i.img = i.img || "icons/svg/mystery-man.svg";
       // Append to gear.
       if (i.type === 'item') {
         gear.push(i);

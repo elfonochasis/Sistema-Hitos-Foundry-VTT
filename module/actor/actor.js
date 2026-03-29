@@ -7,7 +7,7 @@ export class HitosActor extends Actor {
    * Augment the basic actor data with additional dynamic data.
    */
   prepareData() {
-    let img = CONST.DEFAULT_TOKEN;
+    let img = "icons/svg/mystery-man.svg";
     switch (this.type) {
       case "character":
         img = "/systems/hitos/assets/icons/character.svg";

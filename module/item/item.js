@@ -10,7 +10,7 @@ export class HitosItem extends Item {
     // Get the Item's data
     const itemData = this;
 
-    let img = CONST.DEFAULT_TOKEN;
+    let img = "icons/svg/item-bag.svg";
     switch (itemData.type) {
       case "item":
         img = "/systems/hitos/assets/icons/item.svg";

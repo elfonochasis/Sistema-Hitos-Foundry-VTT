@@ -13,7 +13,7 @@ export class HitosItemSheet extends ItemSheet {
   }
   /** @override */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["hitos", "sheet", "item"],
       width: 500,
       height: 400,
