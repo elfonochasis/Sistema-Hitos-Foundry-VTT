@@ -55,7 +55,7 @@
                 {{#each system.atributos as |atributo key| }}
                 <div class="row-nw stat-row align-center">
                     <!-- <a class="spent-concept hide"><span class="fa fa-ban" data-atributo={{atributo}}></span></a> -->
-                    <span class="label-body col col-xs-3 rollable"
+                    <span class="label-body col col-xs-3 rollable rollable-atributo"
                         data-atributo="{{key}}">{{localize atributo.label}}</span>
                     <input class="input-body col-xs-1" name="system.atributos.{{key}}.value" type="number"
                         value="{{atributo.value}}" />

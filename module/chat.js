@@ -1,5 +1,5 @@
 export function addChatListeners(html){
-    html.on('click','.drama-roll',onDramaRoll)
+    $(html).on('click','.drama-roll',onDramaRoll)
 };
 
 function sumDuplicate(arr){
@@ -63,7 +63,7 @@ async function onDramaRoll(event){
         config: CONFIG.hitos,
     };
 
-    let html = await renderTemplate(template, dialogData);
+    let html = await foundry.applications.handlebars.renderTemplate(template, dialogData);
     return new Promise((resolve) => {
         new Dialog({
             title: "Tirada",
@@ -101,7 +101,7 @@ async function onDramaRoll(event){
                             data: actor.system,
                             config: CONFIG.hitos,
                         };
-                        html = await renderTemplate(template, dialogData);
+                        html = await foundry.applications.handlebars.renderTemplate(template, dialogData);
                         ChatMessage.create({
                             content: html,
                             speaker: {alias: actor.name},

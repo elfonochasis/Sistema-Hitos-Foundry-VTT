@@ -6,11 +6,7 @@
     <div class="form-group">
         <label>{{ localize "Hitos.Roll.Atributo" }}</label>
         <select class="atributo" name="atributo">
-            {{#select atributo}}
-            {{#each data.atributos as |atributo key|}}
-            <option value="{{atributo.value}}">{{localize atributo.label}}</option>
-        {{/each}}
-        {{/select}}
+            {{selectOptions atributosOptions selected=selectedAtributo}}
         </select>
     </div>
 </form>

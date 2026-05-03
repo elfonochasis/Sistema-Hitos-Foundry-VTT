@@ -10,39 +10,39 @@ export async function _onDramaRoll(actor){
         data: actor.system,
         config: CONFIG.hitos,
     };
-    let html = await renderTemplate(template, dialogData);
+    let html = await foundry.applications.handlebars.renderTemplate(template, dialogData);
     return 1
 }
 
-
 export async function _onInitRoll(actor) {
-    let values = await _rolld10(actor.system.iniciativa);
-    let corduraMod = game.settings.get("hitos", "mentalHealthEnabled")? Number(actor.system.estabilidadMental.mod) : 0;
+    let values = await _rolld10(actor.system.iniciativa); // <- Use array style
+    let corduraMod = game.settings.get("hitos", "mentalHealthEnabled")
+        ? Number(actor.system.estabilidadMental.mod)
+        : 0;
     let resistenciaMod = Number(actor.system.resistencia.mod);
-    let template = "systems/hitos/templates/chat/chat-roll.html";
 
+    let template = "systems/hitos/templates/chat/chat-roll.html";
     let dialogData = {
         title: game.i18n.localize("Hitos.Iniciativa"),
         total: values[2] + corduraMod + resistenciaMod,
         damage: null,
         dices: values[1],
-        actor: actor._id,
+        actor: actor.id,
         mods: Number(actor.system.iniciativa) + corduraMod + resistenciaMod,
         modsTooltip: _formatModsTooltip([
-            {value: actor.system.iniciativa, key: "Iniciativa"},
-            {value: corduraMod, key: "EstabilidadMental"},
-            {value: resistenciaMod, key: "Resistencia"}
+            { value: Number(actor.system.iniciativa), key: "Iniciativa" },
+            { value: corduraMod, key: "EstabilidadMental" },
+            { value: resistenciaMod, key: "Resistencia" }
         ]),
-        data: actor.system,
-        config: CONFIG.hitos,
+        config: CONFIG.hitos
     };
-    let html = await renderTemplate(template, dialogData);
+
+    let html = await foundry.applications.handlebars.renderTemplate(template, dialogData);
     ChatMessage.create({
         content: html,
-        speaker: {alias: actor.name},
-        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-        rollMode: game.settings.get("core", "rollMode"),
-        roll: values[0]
+        speaker: { alias: actor.name },
+        rolls: [values[0]],
+        rollMode: game.settings.get("core", "rollMode")
     });
 }
 
@@ -55,20 +55,23 @@ export async function _onAttackRoll(actor, weapon) {
     /* M */
     //let damageBase = damage.terms[0];
     /* 3 + 4 + 6 */
-    let values = await _rolld10(0);
+    let values = await _rolld10(0); // <- added 'await'
 
-    let attack = Number(values[2]) + actor.system.atributos.ref.value + actor.system.habilidades.combate.value + resistenciaMod + corduraMod
+    // Defensive assignment: fallback to 0
+    let diceArr = (values[1] && values[1].length >= 3) ? values[1] : [0,0,0];
+
+    let attack = Number(values[2] ?? 0) + actor.system.atributos.ref.value + actor.system.habilidades.combate.value + resistenciaMod + corduraMod // use nullish coalescing for safety
 
     let lookup = {
-        m: Number(values[1][0]),
-        C: Number(values[1][1]),
-        M: Number(values[1][2]),
-    };
+        m: Number(diceArr[0]),
+        C: Number(diceArr[1]),
+        M: Number(diceArr[2]),
+};
     let damageBase = eval(weapon.damage.replace("m","+"+lookup["m"]).replace("C","+"+lookup["C"]).replace("M","+"+lookup["M"]))
     //console.log(eval(damage_test))
     let criticalMod = values[1].filter(value => value==10).length
     criticalMod = criticalMod > 1 ? criticalMod : 1;
-    let weaponKindBonus = Number(getProperty(actor.system, `danio.${weapon.kind}`))
+    let weaponKindBonus = Number(foundry.utils.getProperty(actor.system, `danio.${weapon.kind}`))
     //damage.terms[0] = new NumericTerm({number: Array.from(damageBase.term).map((value) => lookup[value]).reduce((sum, value) => sum += value)});
     let damageTotal = (Number(damageBase) + weaponKindBonus) * Number(criticalMod);
 
@@ -92,41 +95,46 @@ export async function _onAttackRoll(actor, weapon) {
         ]),
         config: CONFIG.hitos
     };
-    let html = await renderTemplate(template, dialogData);
+    let html = await foundry.applications.handlebars.renderTemplate(template, dialogData);
     ChatMessage.create({
         content: html,
         speaker: {alias: actor.name},
-        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-        rollMode: game.settings.get("core", "rollMode"),
-        roll: values[0]
+        rolls: [values[0]],
+        rollMode: game.settings.get("core", "rollMode")        
     });
 }
 
 export async function _onStatusRoll(actor, status) {
-    let values = await _rolld10(getProperty(actor.system, `${status}.value`));
-    let statusLabel = getProperty(actor.system, `${status}.label`)
+    let statValue, statLabel;
+    // For atributos, get value from actor.system.atributos
+if (actor.system.atributos && status in actor.system.atributos) {
+  statValue = actor.system.atributos[status]?.value ?? 0;
+  statLabel = actor.system.atributos[status]?.label ?? status;
+} else {
+  // For standard statuses like aguante, enterza, etc.
+  statValue = foundry.utils.getProperty(actor.system, `${status}.value`);
+  statLabel = foundry.utils.getProperty(actor.system, `${status}.label`) ?? status;
+}
+    let values = await _rolld10(statValue); // Use array, not destructuring
     let template = "systems/hitos/templates/chat/chat-roll.html";
-
     let dialogData = {
-        title: game.i18n.localize(statusLabel),
+        title: game.i18n.localize(statLabel),
         total: values[2],
         damage: null,
         dices: values[1],
-        actor: actor._id,
-        mods: Number(getProperty(actor.system, `${status}.value`)),
+        actor: actor.id,
+        mods: Number(statValue),
         modsTooltip: _formatModsTooltip([
-            {value: Number(getProperty(actor.system, `${status}.value`)), key: statusLabel.replace("Hitos.","")}
+            {value: Number(statValue), key: statLabel.replace("Hitos.", "")}
         ]),
-        data: actor.system,
-        config: CONFIG.hitos,
+        config: CONFIG.hitos
     };
-    let html = await renderTemplate(template, dialogData);
+    let html = await foundry.applications.handlebars.renderTemplate(template, dialogData);
     ChatMessage.create({
         content: html,
         speaker: {alias: actor.name},
-        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-        rollMode: game.settings.get("core", "rollMode"),
-        roll: values[0]
+        rolls: [values[0]], // <<< USE ARRAY STYLE
+        rollMode: game.settings.get("core", "rollMode")
     });
 }
 
@@ -135,13 +143,21 @@ export async function _onCheckRoll(actor, valor, habilidadNombre) {
     let corduraMod = game.settings.get("hitos", "mentalHealthEnabled")? Number(actor.system.estabilidadMental.mod) : 0;
     let resistenciaMod = Number(actor.system.resistencia.mod);
     let template = "systems/hitos/templates/chat/roll-dialog.html";
+    
+    // ------- NEW CODE: build atributosOptions -------
+    const atributosOptions = Object.entries(actor.system.atributos).map(([key, atributo]) => ({
+      value: atributo.value,
+      label: game.i18n.localize(atributo.label)
+    }));
+    // ----------------------------------------------
     let dialogData = {
         formula: "",
-        data: actor.system,
+        atributosOptions,
+        selectedAtributo: atributosOptions[0]?.value,
         config: CONFIG.hitos,
     };
     console.log(dialogData)
-    let html = await renderTemplate(template, dialogData);
+    let html = await foundry.applications.handlebars.renderTemplate(template, dialogData);
     return new Promise((resolve) => {
         new Dialog({
             title: "Tirada",
@@ -173,16 +189,14 @@ export async function _onCheckRoll(actor, valor, habilidadNombre) {
                                 {value: corduraMod, key: "EstabilidadMental"},
                                 {value: resistenciaMod, key: "Resistencia"}
                             ]),
-                            data: actor.system,
                             config: CONFIG.hitos,
                         };
-                        html = await renderTemplate(template, dialogData);
+                        html = await foundry.applications.handlebars.renderTemplate(template, dialogData);
                         ChatMessage.create({
                             content: html,
                             speaker: {alias: actor.name},
-                            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-                            rollMode: game.settings.get("core", "rollMode"),
-                            roll: values[0]
+                            rolls: [values[0]],
+                            rollMode: game.settings.get("core", "rollMode")                            
                         });
                     },
                 },
@@ -193,14 +207,19 @@ export async function _onCheckRoll(actor, valor, habilidadNombre) {
     });
 }
 
-async function _rolld10(valor) {
+export async function _rolld10(valor) {
     let d10Roll = await new Roll("1d10+1d10+1d10").evaluate();
-    let d10s = d10Roll.result.split(" + ").sort((a, b) => a - b);
+    let results = d10Roll.dice.map(die => die.results.map(r => r.result)).flat();
+    let d10s = results.sort((a, b) => a - b);
+    if (d10s.length < 3) {
+        console.error("Error: Expected 3 dice, got", d10s.length, d10s);
+        return [d10Roll, d10s, null];
+    }
     let result = Number(d10s[1]) + Number(valor);
     return [d10Roll, d10s, result];
 }
 
-function _formatModsTooltip(data) {
+export function _formatModsTooltip(data) {
     return data.filter(({value}) => value !== 0).map(({value, key}) => {
         return game.i18n.localize("Hitos." + key) + ": " + value;
     });

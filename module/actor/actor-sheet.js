@@ -1,15 +1,15 @@
-import { _onCheckRoll, _onInitRoll, _onAttackRoll, _onStatusRoll, _onDramaRoll} from '../dice.js';
+import { _onCheckRoll, _onInitRoll, _onAttackRoll, _onStatusRoll, _onDramaRoll, _rolld10, _formatModsTooltip} from '../dice.js';
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
-export class HitosActorSheet extends ActorSheet {
+export class HitosActorSheet extends foundry.appv1.sheets.ActorSheet {
   constructor(...args) {
     super(...args);
   }
   /** @override */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["hitos", "sheet", "actor"],
       template: "systems/hitos/templates/actor/actor-sheet.html",
       width: 740,
@@ -35,8 +35,8 @@ export class HitosActorSheet extends ActorSheet {
   /* -------------------------------------------- */
   async _enrichTextFields(data, fieldNameArr) {
     for (let t = 0; t < fieldNameArr.length; t++) {
-      if (hasProperty(data, fieldNameArr[t])) {
-        setProperty(data, fieldNameArr[t], await TextEditor.enrichHTML(getProperty(data, fieldNameArr[t]), { async: true }));
+      if (foundry.utils.hasProperty(data, fieldNameArr[t])) {
+        setProperty(data, fieldNameArr[t], await TextEditor.enrichHTML(foundry.utils.getProperty(data, fieldNameArr[t]), { async: true }));
       }
     };
   }
@@ -113,16 +113,23 @@ export class HitosActorSheet extends ActorSheet {
     html.find(".rollable-check").click((ev) => {
       ev.preventDefault();
       let habilidad = ev.currentTarget.dataset.habilidad;
-      let habilidadValor = getProperty(
+      let habilidadValor = foundry.utils.getProperty(
         this.actor.system,
         `habilidades.${habilidad}.value`
       );
-      let habilidadNombre = getProperty(
+      let habilidadNombre = foundry.utils.getProperty(
         this.actor.system,
         `habilidades.${habilidad}.label`
       );
       var value = $(ev.currentTarget).attr('contenteditable');
       if (value !== 'true') {_onCheckRoll(this.actor,habilidadValor,habilidadNombre);}
+    });
+    
+    //This new section makes Atributos rollable on their own
+    html.find(".rollable-atributo").click((ev) => {
+      ev.preventDefault();
+      let key = ev.currentTarget.dataset.atributo;
+       _onStatusRoll(this.actor, key);
     });
 
     html.find(".rollable-init").click((ev) => {
@@ -164,7 +171,7 @@ export class HitosActorSheet extends ActorSheet {
     html.find(".item-toggle").click(ev => {
       ev.preventDefault();
       let armor = this.actor.items.get(ev.currentTarget.dataset.itemid);
-      armor.update({data: {equipped: !armor.system.equipped}});
+      armor.update({system: {equipped: !armor.system.equipped}});
       //armor.equipped = (armor.equipped === false ? true : false);
       this.actor._calculateRD(this.actor)
     })

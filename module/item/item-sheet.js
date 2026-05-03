@@ -2,7 +2,7 @@
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
  */
-export class HitosItemSheet extends ItemSheet {
+export class HitosItemSheet extends foundry.appv1.sheets.ItemSheet {
   constructor(...args) {
     super(...args);
 
@@ -13,7 +13,7 @@ export class HitosItemSheet extends ItemSheet {
   }
   /** @override */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["hitos", "sheet", "item"],
       width: 500,
       height: 400,
